@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* === COLORS === */
+  --color-background: #0A0A0A;
+  --color-surface: #1A1A1A;
+  --color-surface-soft: #2A2A2A;
+  --color-gold: #C9A84C;
+  --color-gold-soft: #A67C52;
+  --color-blue-dark: #1A2332;
+  --color-ice: #F5F0EB;
+  --color-muted: #6B6B6B;
+  --color-muted-light: #999999;
+  --color-red-accent: #8B2500;
+  --color-foreground: #F5F0EB;
+
+  /* === FONTS === */
+  --font-display: var(--font-playfair-display), Georgia, serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+
+  /* === FONT SIZES === */
+  --font-size-display-xl: 4rem;
+  --font-size-display-lg: 3rem;
+  --font-size-display-md: 2.5rem;
+  --font-size-display-sm: 2rem;
+  --font-size-heading-lg: 1.5rem;
+  --font-size-heading-md: 1.25rem;
+  --font-size-body-lg: 1.125rem;
+  --font-size-body-md: 1rem;
+  --font-size-body-sm: 0.875rem;
+  --font-size-caption: 0.75rem;
+}
+
+/* === BASE STYLES === */
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-soft);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-soft);
+}
+
+/* === SELECTION === */
+::selection {
+  background-color: rgba(201, 168, 76, 0.3);
+  color: var(--color-ice);
+}
+
+/* === FOCUS === */
+*:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* === SMOOTH SCROLL === */
+html {
+  scroll-behavior: smooth;
+}
+
+/* === GOLDEN GRADIENT TEXT === */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #C9A84C 0%, #A67C52 50%, #C9A84C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === GOLDEN BORDER GRADIENT === */
+.border-gradient-gold {
+  border-image: linear-gradient(90deg, transparent 0%, #C9A84C 50%, transparent 100%) 1;
+}
+
+/* === BODY SCROLL LOCK === */
+body.menu-open {
+  overflow: hidden;
+}
