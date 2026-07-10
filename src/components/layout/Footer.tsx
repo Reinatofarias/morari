@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { SITE_NAME, CRP, NAV_LINKS, WHATSAPP_URL, INSTAGRAM_URL, SERVICES } from '@/lib/constants';
 
 export function Footer() {
@@ -9,13 +10,13 @@ export function Footer() {
           {/* Brand Column */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center">
-                <span className="font-display text-gold font-bold text-lg">M</span>
-              </div>
-              <div>
-                <p className="font-display text-ice font-semibold">{SITE_NAME}</p>
-                <p className="text-muted text-xs uppercase tracking-wider">Psicólogo para homens</p>
-              </div>
+              <Image
+                src="/assets/branding/Logo Horizontal-nobg.png"
+                alt="Dr. Matheus Morari"
+                width={150}
+                height={38}
+                className="h-8 w-auto object-contain"
+              />
             </div>
             <p className="text-muted-light text-sm italic font-display">
               &ldquo;Não é sucesso se você perder sua família.&rdquo;

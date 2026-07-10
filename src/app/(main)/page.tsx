@@ -8,6 +8,7 @@ import { PainCard } from '@/components/cards/PainCard';
 import { PathCard } from '@/components/cards/PathCard';
 import { GoldenDivider } from '@/components/ui/GoldenDivider';
 import { PAIN_POINTS, METHOD_STEPS, HOUSE_ROOMS } from '@/lib/constants';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Dr. Matheus Morari — Psicólogo para Homens que Lideram',
@@ -26,6 +27,7 @@ export default function HomePage() {
         primaryCTA={{ label: 'Iniciar Caminho de Resolução', href: '/caminho-de-resolucao' }}
         secondaryCTA={{ label: 'Conhecer os atendimentos', href: '/atendimentos' }}
         variant="home"
+        image="/assets/images/Hero-nobg.png"
       />
 
       {/* 2. Diagnóstico da dor */}
@@ -115,20 +117,19 @@ export default function HomePage() {
       <section className="py-20 md:py-28 bg-blue-dark/30">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Photo placeholder */}
+            {/* Photo */}
             <div className="relative">
-              <div className="aspect-[3/4] rounded-2xl bg-gradient-to-br from-surface to-surface-soft overflow-hidden border border-surface-soft">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mx-auto mb-4">
-                      <span className="font-display text-gold text-3xl font-bold">MM</span>
-                    </div>
-                    <p className="text-muted text-sm">Foto do Dr. Matheus</p>
-                  </div>
-                </div>
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-surface-soft relative">
+                <Image
+                  src="/assets/images/Foto 1.jpeg"
+                  alt="Dr. Matheus Morari"
+                  fill
+                  className="object-cover object-top select-none"
+                  sizes="(max-w-768px) 100vw, 450px"
+                />
               </div>
               {/* Golden accent */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-gold/20 rounded-2xl" />
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-gold/20 rounded-2xl -z-10" />
             </div>
 
             {/* Text */}

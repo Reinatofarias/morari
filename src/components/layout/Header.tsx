@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { NAV_LINKS } from '@/lib/constants';
 import { MobileMenu } from './MobileMenu';
 import { ConversionButton } from '../ui/ConversionButton';
+import Image from 'next/image';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,13 +33,14 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-              <span className="font-display text-gold font-bold text-lg">M</span>
-            </div>
-            <div className="hidden sm:block">
-              <p className="font-display text-ice text-sm font-semibold tracking-wide">Dr. Matheus Morari</p>
-              <p className="text-muted text-[10px] uppercase tracking-[0.15em]">Psicólogo para homens</p>
-            </div>
+            <Image
+              src="/assets/branding/Logo Horizontal-nobg.png"
+              alt="Dr. Matheus Morari"
+              width={160}
+              height={40}
+              className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}
