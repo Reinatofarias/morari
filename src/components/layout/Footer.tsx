@@ -9,13 +9,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
+            <div className="relative h-16 w-56 overflow-visible">
               <Image
                 src="/assets/branding/logo-horizontal-nobg.png"
                 alt="Dr. Matheus Morari"
-                width={200}
-                height={50}
-                className="h-12 w-auto object-contain"
+                width={430}
+                height={242}
+                className="absolute left-1/2 top-1/2 h-36 w-auto -translate-x-1/2 -translate-y-1/2 object-contain"
               />
             </div>
             <p className="text-muted-light text-sm italic font-display">

@@ -30,15 +30,18 @@ export function Header() {
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-20 lg:h-24 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link
+            href="/"
+            className="relative block h-14 w-48 shrink-0 overflow-visible sm:h-16 sm:w-60 lg:h-20 lg:w-72 group"
+          >
             <Image
               src="/assets/branding/logo-horizontal-nobg.png"
               alt="Dr. Matheus Morari"
-              width={260}
-              height={65}
-              className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              width={520}
+              height={293}
+              className="absolute left-1/2 top-1/2 h-32 w-auto -translate-x-1/2 -translate-y-1/2 object-contain transition-transform duration-300 group-hover:scale-[1.02] sm:h-40 lg:h-44"
               priority
               loading="eager"
             />
