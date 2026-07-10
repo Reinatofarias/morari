@@ -19,7 +19,6 @@ export default function VSLPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/92 to-background" />
         <div className="relative mx-auto flex min-h-[calc(100vh-8rem)] max-w-4xl flex-col items-center justify-center text-center">
-          <p className="mb-5 text-xs uppercase tracking-[0.2em] text-gold">Video Sales Letter</p>
           <h1 className="mb-8 max-w-3xl font-display text-3xl font-bold leading-tight text-ice sm:text-5xl">
             Uma conversa direta para homens que precisam recuperar governo interno.
           </h1>

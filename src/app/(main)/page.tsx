@@ -138,9 +138,6 @@ export default function HomePage() {
 
             {/* Text */}
             <div>
-              <p className="text-gold text-xs uppercase tracking-[0.2em] font-medium mb-4">
-                Sobre
-              </p>
               <h2 className="font-display font-bold text-ice text-2xl sm:text-3xl leading-tight mb-4">
                 Eu não ajudo homens a parecerem fortes.{' '}
                 <span className="text-gold">Eu os ajudo a voltarem a ter governo.</span>

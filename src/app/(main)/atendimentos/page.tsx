@@ -45,7 +45,6 @@ export default function AtendimentosPage() {
       {/* Formato */}
       <section className="py-20 bg-surface/50">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-gold text-xs uppercase tracking-[0.2em] font-medium mb-4">Formato</p>
           <h2 className="font-display font-bold text-ice text-2xl sm:text-3xl mb-6">Como funciona</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10">
             <div className="text-center">

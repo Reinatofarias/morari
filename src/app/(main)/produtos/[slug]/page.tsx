@@ -63,9 +63,6 @@ export default async function ProductSlugPage({ params }: Props) {
             />
           </div>
           <div className="lg:col-span-7">
-            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-gold">
-              {product.type}
-            </p>
             <h1 className="mb-6 font-display text-3xl font-bold leading-tight text-ice sm:text-4xl md:text-5xl">
               {product.title}
             </h1>

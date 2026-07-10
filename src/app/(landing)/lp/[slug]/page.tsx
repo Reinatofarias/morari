@@ -179,9 +179,6 @@ export default async function ProductLandingPage({ params }: Props) {
 
         <div className="relative mx-auto flex min-h-[calc(88vh-12rem)] max-w-6xl items-center">
           <div className="max-w-3xl">
-            <p className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-gold">
-              {product.type}
-            </p>
             <h1 className="mb-6 font-display text-4xl font-bold leading-tight text-ice sm:text-5xl md:text-6xl">
               {product.title}
             </h1>
@@ -213,9 +210,6 @@ export default async function ProductLandingPage({ params }: Props) {
       <section className="border-y border-surface-soft bg-surface/40 py-16">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-gold">
-              Para quem é
-            </p>
             <h2 className="font-display text-3xl font-bold leading-tight text-ice">
               Este produto foi criado para um momento específico.
             </h2>
@@ -235,9 +229,6 @@ export default async function ProductLandingPage({ params }: Props) {
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5">
             <div className="sticky top-24 rounded-lg border border-gold/20 bg-surface p-6">
-              <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-gold">
-                Próximo passo
-              </p>
               <p className="mb-6 text-lg leading-relaxed text-ice">
                 {copy.nextStep}
               </p>
@@ -251,9 +242,6 @@ export default async function ProductLandingPage({ params }: Props) {
           </div>
 
           <div className="lg:col-span-7">
-            <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-gold">
-              O que você organiza
-            </p>
             <h2 className="mb-8 font-display text-3xl font-bold leading-tight text-ice">
               A proposta não é acumular informação. É ganhar clareza para agir.
             </h2>

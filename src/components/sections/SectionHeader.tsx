@@ -13,7 +13,6 @@ interface SectionHeaderProps {
 }
 
 export function SectionHeader({
-  label,
   title,
   highlightWord,
   description,
@@ -36,11 +35,6 @@ export function SectionHeader({
       {...fadeInUp}
       className={`mb-12 ${alignment === 'center' ? 'text-center' : ''}`}
     >
-      {label && (
-        <p className="text-gold text-xs uppercase tracking-[0.2em] font-medium mb-4">
-          {label}
-        </p>
-      )}
       <h2 className="font-display font-bold text-ice text-2xl sm:text-3xl md:text-display-sm leading-tight mb-4">
         {renderTitle()}
       </h2>
