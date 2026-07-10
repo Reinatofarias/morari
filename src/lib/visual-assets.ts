@@ -6,112 +6,128 @@ export type VisualAsset = {
 
 export const portraitAssets = {
   heroConcept: {
-    src: '/assets/images/hero-editorial.jpeg',
-    alt: 'Retrato conceitual de um homem em perfil, representando pressao interna e crise silenciosa',
+    src: '/assets/images/f8.jpeg',
+    alt: 'Retrato de Matheus Morari em ambiente editorial, representando liderança e presença',
     position: 'center',
   },
   heroCutout: {
     src: '/assets/images/hero-cutout.png',
-    alt: 'Retrato conceitual de um homem em perfil sobre fundo escuro',
+    alt: 'Retrato de Matheus Morari sobre fundo escuro',
     position: 'center bottom',
   },
   library: {
-    src: '/assets/images/matheus-library.jpeg',
-    alt: 'Dr. Matheus Morari sentado em ambiente de biblioteca com atmosfera editorial',
+    src: '/assets/images/f8.jpeg',
+    alt: 'Dr. Matheus Morari em seu consultório / biblioteca',
     position: 'center',
   },
   profileSide: {
-    src: '/assets/images/matheus-side.jpeg',
-    alt: 'Dr. Matheus Morari em retrato lateral, sentado em poltrona de couro',
+    src: '/assets/images/f7.jpeg',
+    alt: 'Dr. Matheus Morari atendendo em consultório premium',
     position: 'center',
   },
   profileDesk: {
-    src: '/assets/images/matheus-desk.jpeg',
-    alt: 'Dr. Matheus Morari em retrato profissional com fundo escuro',
+    src: '/assets/images/f8.jpeg',
+    alt: 'Dr. Matheus Morari em retrato profissional',
     position: 'center top',
   },
 } satisfies Record<string, VisualAsset>;
 
 export const articleCovers: Record<string, VisualAsset> = {
   ansiedade: {
-    src: portraitAssets.heroConcept.src,
-    alt: 'Composicao editorial sobre ansiedade silenciosa em homens que lideram',
+    src: '/assets/images/f3.jpeg',
+    alt: 'Composição editorial sobre ansiedade silenciosa em homens que lideram',
     position: 'center',
   },
   esgotamento: {
-    src: portraitAssets.profileSide.src,
-    alt: 'Retrato sobrio representando esgotamento e pressao acumulada',
+    src: '/assets/images/f4.jpeg',
+    alt: 'Retrato sóbrio representando esgotamento e pressão acumulada',
     position: 'center',
   },
   lideranca: {
-    src: portraitAssets.library.src,
-    alt: 'Ambiente de biblioteca representando lideranca, responsabilidade e decisao',
+    src: '/assets/images/f2.jpeg',
+    alt: 'Ambiente de biblioteca representando liderança, responsabilidade e decisão',
     position: 'center',
   },
   padroes: {
-    src: portraitAssets.profileDesk.src,
-    alt: 'Retrato profissional representando padroes familiares e autopercepcao',
-    position: 'center top',
+    src: '/assets/images/f1.jpeg',
+    alt: 'Representação de padrões familiares e autopercepção',
+    position: 'center',
   },
   mentalidade: {
-    src: portraitAssets.profileSide.src,
-    alt: 'Retrato contemplativo representando resistencia masculina ao acompanhamento psicologico',
+    src: '/assets/images/f5.jpeg',
+    alt: 'Retrato contemplativo representando mentalidade masculina',
     position: 'center',
   },
   autodominio: {
-    src: portraitAssets.profileDesk.src,
-    alt: 'Retrato sobrio representando autodominio emocional e governo interno',
+    src: '/assets/images/f6.jpeg',
+    alt: 'Retrato sóbrio representando autodomínio emocional e governo interno',
     position: 'center top',
   },
 };
 
 export const productCovers: Record<string, VisualAsset> = {
-  ansiedade: {
-    src: portraitAssets.heroConcept.src,
-    alt: 'Capa editorial do curso sobre ansiedade em homens que lideram',
+  'codigo-da-paz-conjugal': {
+    src: '/assets/images/f1.jpeg',
+    alt: 'Capa de O Código da Paz Conjugal',
     position: 'center',
   },
-  esgotamento: {
-    src: portraitAssets.profileSide.src,
-    alt: 'Capa editorial do guia sobre sinais de esgotamento',
+  'programa-de-inteligencia-emocional-para-homens': {
+    src: '/assets/images/f2.jpeg',
+    alt: 'Capa do Programa de Inteligência Emocional para Homens',
     position: 'center',
   },
-  lideranca: {
-    src: portraitAssets.library.src,
-    alt: 'Capa editorial do programa Lideranca Integral',
+  'mapa-da-ansiedade-masculina': {
+    src: '/assets/images/f3.jpeg',
+    alt: 'Capa do Mapa da Ansiedade Masculina',
+    position: 'center',
+  },
+  'engrenagem-fantasma': {
+    src: '/assets/images/f4.jpeg',
+    alt: 'Capa de A Engrenagem Fantasma',
+    position: 'center',
+  },
+  'codigo-h': {
+    src: '/assets/images/f5.jpeg',
+    alt: 'Capa de O Código H',
+    position: 'center',
+  },
+  'mini-curso-de-saude-mental': {
+    src: '/assets/images/f6.jpeg',
+    alt: 'Capa do Mini Curso de Saúde Mental',
     position: 'center',
   },
 };
 
 export const roomVisuals: Record<string, VisualAsset> = {
   '/atendimentos': {
-    src: portraitAssets.profileSide.src,
-    alt: 'Consultorio simbolico para atendimentos psicologicos',
+    src: '/assets/images/f7.jpeg',
+    alt: 'Consultório para atendimentos psicológicos especializados',
     position: 'center',
   },
   '/conteudos': {
-    src: portraitAssets.library.src,
-    alt: 'Biblioteca editorial para conteudos sobre saude emocional masculina',
+    src: '/assets/images/f8.jpeg',
+    alt: 'Biblioteca editorial para conteúdos sobre saúde emocional masculina',
     position: 'center',
   },
   '/produtos': {
-    src: portraitAssets.heroConcept.src,
-    alt: 'Galeria de produtos digitais sobre ansiedade, lideranca e autodominio',
+    src: '/assets/images/f3.jpeg',
+    alt: 'Galeria de produtos digitais sobre ansiedade, liderança e autodomínio',
     position: 'center',
   },
   '/formacao': {
-    src: portraitAssets.profileDesk.src,
-    alt: 'Escritorio de credenciais e formacao profissional',
+    src: '/assets/images/f8.jpeg',
+    alt: 'Escritório de credenciais e formação profissional do Dr. Matheus Morari',
     position: 'center top',
   },
   '/duvidas': {
-    src: portraitAssets.profileSide.src,
-    alt: 'Ambiente sobrio para perguntas frequentes sobre atendimento',
+    src: '/assets/images/f7.jpeg',
+    alt: 'Ambiente sóbrio para perguntas frequentes sobre atendimento',
     position: 'center',
   },
   '/caminho-de-resolucao': {
-    src: portraitAssets.heroConcept.src,
-    alt: 'Caminho simbolico para resolucao emocional e primeiro passo',
+    src: '/assets/images/f8.jpeg',
+    alt: 'Caminho simbólico para resolução emocional e primeiro passo',
     position: 'center',
   },
 };
+

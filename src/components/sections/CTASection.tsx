@@ -20,18 +20,24 @@ export function CTASection({
   variant = 'default',
 }: CTASectionProps) {
   const variants = {
-    default: 'bg-surface',
-    dark: 'bg-blue-dark/50',
-    gold: 'bg-surface border border-gold/20',
+    default: 'bg-surface border-y border-surface-soft/40 relative overflow-hidden',
+    dark: 'bg-gradient-to-b from-surface via-background to-background border-t border-surface-soft/40 relative overflow-hidden',
+    gold: 'bg-surface border border-gold/20 relative overflow-hidden rounded-2xl max-w-5xl mx-auto my-16',
   };
 
   return (
-    <section className={`py-20 ${variants[variant]}`}>
+    <section className={`py-20 md:py-28 relative ${variants[variant]}`}>
+      {/* Visual background elements */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gold/[0.02] rounded-full blur-[120px] pointer-events-none -z-10" />
+      {variant === 'gold' && (
+        <div className="absolute inset-0 bg-gradient-to-tr from-gold/[0.01] to-transparent pointer-events-none" />
+      )}
+      
       <motion.div
         {...fadeInUp}
-        className="max-w-3xl mx-auto px-6 text-center"
+        className="max-w-3xl mx-auto px-6 text-center relative z-10"
       >
-        <h2 className="font-display font-bold text-ice text-2xl sm:text-3xl md:text-4xl leading-tight mb-6">
+        <h2 className="font-display font-bold text-ice text-2xl sm:text-3xl md:text-display-sm leading-[1.2] mb-6">
           {headline}
         </h2>
         {description && (

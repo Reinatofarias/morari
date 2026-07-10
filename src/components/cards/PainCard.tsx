@@ -20,14 +20,17 @@ export function PainCard({ icon, title, description }: PainCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-30px' }}
       transition={{ duration: 0.5 }}
-      className="group p-5 rounded-xl bg-surface border border-surface-soft hover:border-gold/25 transition-all duration-300"
+      className="group p-6 rounded-xl bg-surface border border-surface-soft/80 hover:border-gold/30 hover:bg-surface/80 hover:shadow-[0_0_30px_rgba(201,168,76,0.03)] transition-all duration-500"
     >
       <div className="flex items-start gap-4">
-        <div className="w-10 h-10 rounded-lg bg-red-accent/10 flex items-center justify-center shrink-0 group-hover:bg-gold/10 transition-colors">
-          <IconComponent size={20} className="text-red-accent/70 group-hover:text-gold transition-colors" />
+        <div className="w-10 h-10 rounded-lg bg-red-accent/10 flex items-center justify-center shrink-0 group-hover:bg-gold/15 transition-all duration-300">
+          <IconComponent 
+            size={20} 
+            className="text-red-accent/70 group-hover:text-gold group-hover:scale-110 transition-all duration-300" 
+          />
         </div>
         <div>
-          <h3 className="font-display font-semibold text-ice text-base">{title}</h3>
+          <h3 className="font-display font-semibold text-ice text-base group-hover:text-gold transition-colors duration-300">{title}</h3>
           {description && (
             <p className="text-muted text-sm mt-1 leading-relaxed">{description}</p>
           )}

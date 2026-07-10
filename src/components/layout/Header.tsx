@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { NAV_LINKS } from '@/lib/constants';
+import { NAV_LINKS, ATENDIMENTOS_SUB_LINKS } from '@/lib/constants';
 import { MobileMenu } from './MobileMenu';
 import { ConversionButton } from '../ui/ConversionButton';
 import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -49,15 +50,40 @@ export function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-muted-light text-sm hover:text-gold transition-colors duration-300"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              if ('hasDropdown' in link && link.hasDropdown) {
+                return (
+                  <div key={link.href} className="relative group py-2">
+                    <button className="flex items-center gap-1 text-muted-light text-sm hover:text-gold transition-colors duration-300 cursor-pointer">
+                      {link.label}
+                      <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300 text-muted" />
+                    </button>
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-64 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 transform scale-95 group-hover:scale-100 z-50">
+                      <div className="bg-surface/95 backdrop-blur-xl border border-surface-soft/80 rounded-xl p-3 shadow-2xl shadow-black/80">
+                        {ATENDIMENTOS_SUB_LINKS.map((sublink) => (
+                          <Link
+                            key={sublink.href}
+                            href={sublink.href}
+                            className="block px-4 py-2.5 rounded-lg text-sm text-muted-light hover:text-gold hover:bg-gold/[0.03] transition-all duration-200"
+                          >
+                            {sublink.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-muted-light text-sm hover:text-gold transition-colors duration-300"
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop CTA + Mobile Hamburger */}

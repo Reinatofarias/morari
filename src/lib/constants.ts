@@ -10,13 +10,22 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICo
 export const INSTAGRAM_URL = 'https://instagram.com/dr.matheusmorari';
 export const CRP = 'CRP XX/XXXXX';
 
+// Navigation sublinks for dropdowns
+export const ATENDIMENTOS_SUB_LINKS = [
+  { label: 'Visão Geral', href: '/atendimentos' },
+  { label: 'Psicologia para Homens', href: '/atendimentos/psicologia-para-homens' },
+  { label: 'Psicologia Sistêmica', href: '/atendimentos/psicologia-sistemica' },
+  { label: 'Hipnoterapia', href: '/atendimentos/hipnoterapia' },
+] as const;
+
 // Navigation links
 export const NAV_LINKS = [
-  { label: 'Atendimentos', href: '/atendimentos' },
+  { label: 'Atendimentos', href: '/atendimentos', hasDropdown: true },
   { label: 'Serviços', href: '/servicos' },
   { label: 'Conteúdos', href: '/conteudos' },
   { label: 'Produtos', href: '/produtos' },
   { label: 'Sobre', href: '/sobre' },
+  { label: 'Formação', href: '/formacao' },
   { label: 'Dúvidas', href: '/duvidas' },
 ] as const;
 
