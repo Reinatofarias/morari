@@ -59,7 +59,7 @@ export function HeroSection({
           /* Split Layout with Image */
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Text Column */}
-            <div className="lg:col-span-7 text-left space-y-6">
+            <div className="order-2 lg:order-1 lg:col-span-7 text-left space-y-6">
               {/* Label */}
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
@@ -129,7 +129,7 @@ export function HeroSection({
             </div>
 
             {/* Image Column */}
-            <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
+            <div className="order-1 lg:order-2 lg:col-span-5 relative flex justify-center lg:justify-end">
               {/* Background circular subtle glow behind headshot */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-gold/[0.04] rounded-full blur-[60px] z-0" />
               
@@ -146,7 +146,7 @@ export function HeroSection({
                   sizes="(max-w-768px) 100vw, 420px"
                 />
                 {/* Dark vignette blending bottom of cut-out into the background */}
-                <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-background via-background/95 via-40% to-transparent z-20 pointer-events-none" />
               </motion.div>
             </div>
           </div>
