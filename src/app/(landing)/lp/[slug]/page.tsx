@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { CheckCircle2 } from 'lucide-react';
 import { ConversionButton } from '@/components/ui/ConversionButton';
+import { EditorialImage } from '@/components/ui/EditorialImage';
 import { getProduct, PRODUCTS, type ProductSlug } from '@/lib/products';
 
 type Props = {
@@ -163,50 +163,59 @@ export default async function ProductLandingPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <section className="relative min-h-[88vh] overflow-hidden px-6 py-24">
-        <Image
-          src={product.coverAsset.src}
-          alt={product.coverAsset.alt}
-          fill
-          priority
-          loading="eager"
-          sizes="100vw"
-          className="object-cover opacity-[0.34]"
-          style={{ objectPosition: product.coverAsset.position ?? 'center' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      {/* Hero Section Refinado */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden px-6 py-20 lg:py-32 bg-background border-b border-surface-soft/30">
+        {/* Efeitos de Glow */}
+        <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-gold/[0.02] rounded-full blur-[130px] z-0" />
+        <div className="absolute bottom-1/4 -left-1/4 w-[500px] h-[500px] bg-blue-dark/15 rounded-full blur-[110px] z-0" />
 
-        <div className="relative mx-auto flex min-h-[calc(88vh-12rem)] max-w-6xl items-center">
-          <div className="max-w-3xl">
-            <h1 className="mb-6 font-display text-4xl font-bold leading-tight text-ice sm:text-5xl md:text-6xl">
-              {product.title}
-            </h1>
-            <p className="mb-5 max-w-2xl text-xl leading-relaxed text-ice/90">
-              {copy.lead}
-            </p>
-            <p className="mb-8 max-w-2xl text-base leading-relaxed text-muted-light sm:text-lg">
-              {copy.promise}
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <ConversionButton
-                label="Iniciar Caminho de Resolução"
-                href="/caminho-de-resolucao"
-                size="lg"
-                eventName={`lp_${product.slug}_primary`}
-              />
-              <ConversionButton
-                label="Ver catálogo"
-                href="/produtos"
-                variant="secondary"
-                size="lg"
-                eventName={`lp_${product.slug}_catalogo`}
-              />
+        <div className="relative z-10 mx-auto w-full max-w-6xl">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">
+            {/* Coluna de Texto */}
+            <div className="lg:col-span-7 text-left space-y-6 order-2 lg:order-1">
+              <h1 className="font-display text-4xl font-bold leading-[1.1] text-ice sm:text-5xl md:text-6xl tracking-tight">
+                {product.title}
+              </h1>
+              <p className="max-w-2xl text-xl leading-relaxed text-gold font-display font-medium">
+                {copy.lead}
+              </p>
+              <p className="max-w-2xl text-base leading-relaxed text-muted-light sm:text-lg">
+                {copy.promise}
+              </p>
+              <div className="flex flex-col gap-4 sm:flex-row pt-4">
+                <ConversionButton
+                  label="Iniciar Caminho de Resolução"
+                  href="/caminho-de-resolucao"
+                  size="lg"
+                  eventName={`lp_${product.slug}_primary`}
+                />
+                <ConversionButton
+                  label="Ver catálogo"
+                  href="/produtos"
+                  variant="secondary"
+                  size="lg"
+                  eventName={`lp_${product.slug}_catalogo`}
+                />
+              </div>
+            </div>
+
+            {/* Coluna da Imagem */}
+            <div className="lg:col-span-5 relative flex justify-center lg:justify-end order-1 lg:order-2">
+              <div className="absolute inset-6 bg-gold/[0.03] blur-[70px] z-0" />
+              <div className="relative w-full max-w-[360px]">
+                <EditorialImage
+                  asset={product.coverAsset}
+                  aspect="aspect-[3/4]"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 360px"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Seção "Para quem é" */}
       <section className="border-y border-surface-soft bg-surface/40 py-16">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -225,6 +234,7 @@ export default async function ProductLandingPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Seção de Conteúdo e Próximo Passo */}
       <section className="py-20">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5">
