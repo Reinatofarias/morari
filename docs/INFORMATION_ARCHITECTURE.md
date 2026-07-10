@@ -30,12 +30,24 @@ graph TD
     PROD --> PROD4["/produtos/engrenagem-fantasma"]
     PROD --> PROD5["/produtos/codigo-h"]
     PROD --> PROD6["/produtos/mini-curso-de-saude-mental"]
+    PROD --> LPP1["/lp/codigo-da-paz-conjugal"]
+    PROD --> LPP2["/lp/programa-de-inteligencia-emocional-para-homens"]
+    PROD --> LPP3["/lp/mapa-da-ansiedade-masculina"]
+    PROD --> LPP4["/lp/engrenagem-fantasma"]
+    PROD --> LPP5["/lp/codigo-h"]
+    PROD --> LPP6["/lp/mini-curso-de-saude-mental"]
 
     CONT --> CONT1["/conteudos/[slug]"]
 
     CDR --> OBR["/obrigado  Pós-conversão"]
 
-    LP["/lp/[slug]  Landing Pages"] --> OBR
+    LPP1 --> CDR
+    LPP2 --> CDR
+    LPP3 --> CDR
+    LPP4 --> CDR
+    LPP5 --> CDR
+    LPP6 --> CDR
+    LP["/lp/[slug]  Landing Pages de Produto"] --> CDR
     VSL["/vsl/[slug]  Video Sales"] --> OBR
 ```
 
@@ -131,8 +143,8 @@ Busca "psicólogo para meu marido"
 ```
 Home/Bio/Conteúdo
     → /produtos
-        → /produtos/mapa-da-ansiedade-masculina
-            → CTA: Link externo para checkout
+        → /lp/mapa-da-ansiedade-masculina
+            → CTA: /caminho-de-resolucao
 ```
 
 ---
@@ -236,14 +248,14 @@ P1 (Essencial — Semana 1):
 
 P2 (Importante — Semana 2):
 ├── /servicos
-├── /produtos + 6 páginas de produtos
+├── /produtos + 6 páginas de produtos + 6 LPs de produtos
 ├── /formacao
 └── /duvidas
 
 P3 (Complementar — Semana 3):
 ├── /conteudos + /conteudos/[slug]
 ├── /obrigado
-├── /lp/[slug]
+├── /lp/[slug] para campanhas futuras
 └── /vsl/[slug]
 ```
 

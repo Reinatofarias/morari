@@ -90,11 +90,10 @@ export default async function ProductSlugPage({ params }: Props) {
       <CTASection
         headline="Quer entender se este produto faz sentido para o seu momento?"
         description="O Caminho de Resolução ajuda a identificar o próximo passo mais adequado."
-        primaryCTA={{ label: 'Iniciar Caminho de Resolução', href: '/caminho-de-resolucao' }}
-        secondaryCTA={{ label: 'Ver todos os produtos', href: '/produtos' }}
+        primaryCTA={{ label: 'Ver página do produto', href: `/lp/${product.slug}` }}
+        secondaryCTA={{ label: 'Iniciar Caminho de Resolução', href: '/caminho-de-resolucao' }}
         variant="dark"
       />
     </>
   );
 }
-

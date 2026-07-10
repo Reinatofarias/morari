@@ -79,7 +79,7 @@ export function ProductCard({ title, description, type, status, price, href, cov
             )}
             {status === 'active' && (
               <span className="inline-flex items-center gap-2 text-gold text-sm font-medium group-hover:gap-3 transition-all">
-                Ver detalhes <ArrowRight size={16} />
+                Ver página <ArrowRight size={16} />
               </span>
             )}
           </div>

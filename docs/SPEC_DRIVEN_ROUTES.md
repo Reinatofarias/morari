@@ -75,7 +75,7 @@ Converter tráfego do Instagram. Curta, bonita, objetiva.
 ### Botões (ordem)
 1. "Iniciar Caminho de Resolução" → `/caminho-de-resolucao`
 2. "Conhecer atendimentos" → `/atendimentos`
-3. "Mapa da Ansiedade Masculina" → `/produtos/mapa-da-ansiedade-masculina`
+3. "Mapa da Ansiedade Masculina" → `/lp/mapa-da-ansiedade-masculina`
 4. "Conteúdos para homens que lideram" → `/conteudos`
 5. "Falar no WhatsApp" → link WhatsApp
 
@@ -239,7 +239,7 @@ Página sobre hipnoterapia aplicada com responsabilidade.
 ## 8. `/produtos` — Hub de Produtos
 
 ### Intenção
-Organizar produtos digitais e direcionar para ofertas.
+Organizar produtos digitais e direcionar para as LPs de cada oferta.
 
 ### Headline
 **"Nem todo homem precisa começar por um atendimento individual."**
@@ -281,7 +281,7 @@ Páginas de produto para as ofertas oficiais do Dr. Matheus Morari.
 3. Headline/título
 4. Descrição
 5. Destaques do produto
-6. CTA para Caminho de Resolução
+6. CTA para LP do produto e Caminho de Resolução
 
 ---
 
@@ -480,16 +480,25 @@ Confirmar conversão. Definir expectativa. Oferecer próximo passo.
 
 ---
 
-## 19. `/lp/[slug]` — Landing Pages Dinâmicas
+## 19. `/lp/[slug]` — Landing Pages de Produto
 
 ### Intenção
-Estrutura para futuras landing pages de campanhas.
+Criar uma LP própria para cada produto oficial, com layout limpo de campanha e foco em identificação, clareza da oferta e conversão para o Caminho de Resolução.
+
+### Produtos e slugs
+1. O Código da Paz Conjugal → `/lp/codigo-da-paz-conjugal`
+2. Programa de Inteligência Emocional para Homens → `/lp/programa-de-inteligencia-emocional-para-homens`
+3. Mapa da Ansiedade Masculina → `/lp/mapa-da-ansiedade-masculina`
+4. A Engrenagem Fantasma → `/lp/engrenagem-fantasma`
+5. O Código H → `/lp/codigo-h`
+6. Mini Curso de Saúde Mental → `/lp/mini-curso-de-saude-mental`
 
 ### Implementação
 - Layout limpo sem header/footer completo
-- Slug dinâmico
-- Conteúdo pode vir do Supabase ou ser estático
-- Template com hero, seções, CTA e formulário
+- Slug dinâmico gerado a partir do catálogo oficial em `src/lib/products.ts`
+- Conteúdo específico por produto
+- Template com hero editorial, seção "Para quem é", outcomes, resumo e CTAs
+- CTA primário para `/caminho-de-resolucao`
 
 ---
 

@@ -170,7 +170,7 @@ export function generateMetadata(page: PageConfig): Metadata {
 
 ### 5.2 Indexação
 - **Sitemap**: Gerado automaticamente via `next-sitemap` ou App Router
-- **Robots.txt**: Configurado para permitir indexação (exceto `/obrigado`, `/lp/*`, `/vsl/*`)
+- **Robots.txt**: Configurado para permitir indexação das páginas públicas, incluindo LPs de produto (exceto `/obrigado` e `/vsl/*`)
 - **Canonical URLs**: Definidas em todas as páginas
 - **Hreflang**: Não necessário (site em PT-BR apenas)
 

@@ -32,7 +32,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     image: product.coverImage,
   }));
 
-  return [...staticRoutes, ...productRoutes].map((route) => ({
+  const productLandingRoutes = PRODUCTS.map((product) => ({
+    path: `/lp/${product.slug}`,
+    priority: 0.9,
+    changeFrequency: 'monthly' as const,
+    image: product.coverImage,
+  }));
+
+  return [...staticRoutes, ...productRoutes, ...productLandingRoutes].map((route) => ({
     url: `${SITE_URL}${route.path}`,
     lastModified,
     changeFrequency: route.changeFrequency,

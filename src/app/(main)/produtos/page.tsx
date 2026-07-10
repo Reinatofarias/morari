@@ -31,7 +31,7 @@ export default function ProdutosPage() {
                 description={product.description}
                 type={product.type}
                 status={product.status}
-                href={`/produtos/${product.slug}`}
+                href={`/lp/${product.slug}`}
                 coverImage={product.coverImage}
               />
             ))}

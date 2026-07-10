@@ -88,7 +88,7 @@ Anúncio Meta/Google → /caminho-de-resolucao (ou LP específica) → Formulár
 
 **Estratégia**:
 - Anúncios com copy de identificação de dor
-- Landing pages dedicadas (`/lp/[campanha]`)
+- Landing pages dedicadas por produto (`/lp/[slug]`)
 - Retargeting para visitantes que não converteram
 
 **KPIs**:
@@ -132,8 +132,9 @@ Anúncio Meta/Google → /caminho-de-resolucao (ou LP específica) → Formulár
 | `/caminho-de-resolucao` | "Começar meu caminho" (formulário) | — |
 | `/atendimentos` | "Entender qual atendimento faz sentido" | "Falar no WhatsApp" |
 | `/atendimentos/*` | "Iniciar Caminho de Resolução" | "Falar no WhatsApp" |
-| `/produtos` | "Ver produto" (por card) | "Iniciar Caminho" |
-| `/produtos/*` | CTA de compra (link externo) | "Falar no WhatsApp" |
+| `/produtos` | "Ver página" (por card) | "Iniciar Caminho" |
+| `/produtos/*` | "Ver página do produto" | "Iniciar Caminho" |
+| `/lp/*` | "Iniciar Caminho de Resolução" | "Ver catálogo" |
 | `/conteudos` | "Ler artigo" (por card) | "Caminho de Resolução" |
 | `/conteudos/*` | "Iniciar Caminho de Resolução" | "Conhecer atendimentos" |
 | `/sobre` | "Conhecer atendimentos" | "Caminho de Resolução" |

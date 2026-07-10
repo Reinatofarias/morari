@@ -6,9 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/obrigado', '/lp/', '/vsl/'],
+      disallow: ['/api/', '/obrigado', '/vsl/'],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
-

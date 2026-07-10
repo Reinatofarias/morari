@@ -14,7 +14,7 @@ export default function BioPage() {
   const links = [
     { label: 'Iniciar Caminho de Resolução', href: '/caminho-de-resolucao', variant: 'primary' as const },
     { label: 'Conhecer atendimentos', href: '/atendimentos', variant: 'secondary' as const },
-    { label: 'Mapa da Ansiedade Masculina', href: '/produtos/mapa-da-ansiedade-masculina', variant: 'secondary' as const },
+    { label: 'Mapa da Ansiedade Masculina', href: '/lp/mapa-da-ansiedade-masculina', variant: 'secondary' as const },
     { label: 'Conteúdos para homens que lideram', href: '/conteudos', variant: 'secondary' as const },
     { label: 'Falar no WhatsApp', href: WHATSAPP_URL, variant: 'secondary' as const },
   ];
