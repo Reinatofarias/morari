@@ -13,9 +13,9 @@ export function Footer() {
               <Image
                 src="/assets/branding/Logo Horizontal-nobg.png"
                 alt="Dr. Matheus Morari"
-                width={150}
-                height={38}
-                className="h-8 w-auto object-contain"
+                width={200}
+                height={50}
+                className="h-12 w-auto object-contain"
               />
             </div>
             <p className="text-muted-light text-sm italic font-display">
