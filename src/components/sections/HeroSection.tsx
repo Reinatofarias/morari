@@ -66,16 +66,6 @@ export function HeroSection({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Text Column */}
             <div className="order-2 lg:order-1 lg:col-span-7 text-left space-y-6">
-              {/* Label */}
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="font-display text-sm text-gold/90 sm:text-base"
-              >
-                Matheus Morari, psicólogo clínico
-              </motion.p>
-
               {/* Headline */}
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
@@ -172,15 +162,6 @@ export function HeroSection({
         ) : (
           /* Centered Layout */
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="font-display text-sm text-gold/90 sm:text-base"
-            >
-              Matheus Morari, psicólogo clínico
-            </motion.p>
-
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
