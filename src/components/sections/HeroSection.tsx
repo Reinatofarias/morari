@@ -71,9 +71,9 @@ export function HeroSection({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-gold text-xs uppercase tracking-[0.2em] font-medium"
+                className="font-display text-sm text-gold/90 sm:text-base"
               >
-                Dr. Matheus Morari — Psicólogo
+                Matheus Morari, psicólogo clínico
               </motion.p>
 
               {/* Headline */}
@@ -176,9 +176,9 @@ export function HeroSection({
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-gold text-xs uppercase tracking-[0.2em] font-medium"
+              className="font-display text-sm text-gold/90 sm:text-base"
             >
-              Dr. Matheus Morari — Psicólogo
+              Matheus Morari, psicólogo clínico
             </motion.p>
 
             <motion.h1
