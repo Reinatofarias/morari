@@ -435,7 +435,7 @@ interface FAQAccordionProps {
 **Visual**: Fundo surface, borda sutil, ícone + dourado no aberto
 **Animação**: Height animate com Framer Motion
 
-**Onde**: `/duvidas`, `/produtos/curso-ansiedade`
+**Onde**: `/duvidas`, `/produtos/[slug]`
 
 ---
 

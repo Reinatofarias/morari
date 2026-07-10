@@ -24,8 +24,12 @@ graph TD
     ATEND --> ATEND2["/atendimentos/psicologia-sistemica"]
     ATEND --> ATEND3["/atendimentos/hipnoterapia"]
 
-    PROD --> PROD1["/produtos/curso-ansiedade"]
-    PROD --> PROD2["/produtos/[slug]"]
+    PROD --> PROD1["/produtos/codigo-da-paz-conjugal"]
+    PROD --> PROD2["/produtos/programa-de-inteligencia-emocional-para-homens"]
+    PROD --> PROD3["/produtos/mapa-da-ansiedade-masculina"]
+    PROD --> PROD4["/produtos/engrenagem-fantasma"]
+    PROD --> PROD5["/produtos/codigo-h"]
+    PROD --> PROD6["/produtos/mini-curso-de-saude-mental"]
 
     CONT --> CONT1["/conteudos/[slug]"]
 
@@ -127,7 +131,7 @@ Busca "psicólogo para meu marido"
 ```
 Home/Bio/Conteúdo
     → /produtos
-        → /produtos/curso-ansiedade
+        → /produtos/mapa-da-ansiedade-masculina
             → CTA: Link externo para checkout
 ```
 
@@ -232,7 +236,7 @@ P1 (Essencial — Semana 1):
 
 P2 (Importante — Semana 2):
 ├── /servicos
-├── /produtos + /produtos/curso-ansiedade
+├── /produtos + 6 páginas de produtos
 ├── /formacao
 └── /duvidas
 

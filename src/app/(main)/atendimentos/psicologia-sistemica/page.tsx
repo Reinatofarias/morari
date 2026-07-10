@@ -4,6 +4,7 @@ import { CTASection } from '@/components/sections/CTASection';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { SectionHeader } from '@/components/sections/SectionHeader';
 import { Check } from 'lucide-react';
+import { portraitAssets } from '@/lib/visual-assets';
 
 export const metadata: Metadata = {
   title: 'Psicologia Sistêmica',
@@ -18,6 +19,10 @@ export default function PsicologiaSistemicaPage() {
         highlightWord="repete sem perceber"
         subheadline="Psicologia sistêmica para entender os padrões familiares que você carrega — e como eles afetam sua liderança, seu casamento e sua saúde emocional."
         variant="page"
+        image={portraitAssets.library.src}
+        imageAlt={portraitAssets.library.alt}
+        imagePosition={portraitAssets.library.position}
+        imagePresentation="editorial"
       />
       <div className="py-4 max-w-6xl mx-auto px-6">
         <Breadcrumb items={[{ label: 'Atendimentos', href: '/atendimentos' }, { label: 'Psicologia Sistêmica' }]} />

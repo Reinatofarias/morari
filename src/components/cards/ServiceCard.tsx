@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 interface ServiceCardProps {
   title: string;
@@ -14,8 +15,9 @@ interface ServiceCardProps {
 }
 
 export function ServiceCard({ title, description, href, icon, tags }: ServiceCardProps) {
+  const icons = LucideIcons as unknown as Record<string, LucideIcon>;
   const IconComponent = icon
-    ? (LucideIcons as any)[icon] || LucideIcons.Briefcase
+    ? icons[icon] || LucideIcons.Briefcase
     : LucideIcons.Briefcase;
 
   return (

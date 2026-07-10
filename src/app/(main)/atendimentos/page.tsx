@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { ServiceCard } from '@/components/cards/ServiceCard';
 import { SERVICES } from '@/lib/constants';
+import { portraitAssets } from '@/lib/visual-assets';
 
 export const metadata: Metadata = {
   title: 'Atendimentos',
@@ -18,6 +19,10 @@ export default function AtendimentosPage() {
         highlightWord="no automático"
         subheadline="Um espaço técnico, profundo e direto para trabalhar ansiedade, esgotamento, padrões emocionais, conflitos internos e reconstrução de autodomínio."
         variant="page"
+        image={portraitAssets.profileSide.src}
+        imageAlt={portraitAssets.profileSide.alt}
+        imagePosition={portraitAssets.profileSide.position}
+        imagePresentation="editorial"
       />
 
       <section className="py-20">

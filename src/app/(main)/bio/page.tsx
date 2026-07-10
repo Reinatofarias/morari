@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { ConversionButton } from '@/components/ui/ConversionButton';
 import { WHATSAPP_URL } from '@/lib/constants';
+import { portraitAssets } from '@/lib/visual-assets';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Links — Dr. Matheus Morari',
@@ -12,7 +14,7 @@ export default function BioPage() {
   const links = [
     { label: 'Iniciar Caminho de Resolução', href: '/caminho-de-resolucao', variant: 'primary' as const },
     { label: 'Conhecer atendimentos', href: '/atendimentos', variant: 'secondary' as const },
-    { label: 'Curso sobre ansiedade', href: '/produtos/curso-ansiedade', variant: 'secondary' as const },
+    { label: 'Mapa da Ansiedade Masculina', href: '/produtos/mapa-da-ansiedade-masculina', variant: 'secondary' as const },
     { label: 'Conteúdos para homens que lideram', href: '/conteudos', variant: 'secondary' as const },
     { label: 'Falar no WhatsApp', href: WHATSAPP_URL, variant: 'secondary' as const },
   ];
@@ -22,8 +24,17 @@ export default function BioPage() {
       <div className="max-w-md w-full text-center space-y-8">
         {/* Avatar */}
         <div className="flex flex-col items-center gap-4">
-          <div className="w-24 h-24 rounded-full bg-gold/10 border-2 border-gold/30 flex items-center justify-center">
-            <span className="font-display text-gold text-3xl font-bold">MM</span>
+          <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-gold/30 bg-surface">
+            <Image
+              src={portraitAssets.profileDesk.src}
+              alt={portraitAssets.profileDesk.alt}
+              fill
+              priority
+              sizes="112px"
+              className="object-cover"
+              style={{ objectPosition: portraitAssets.profileDesk.position }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/55 to-transparent" />
           </div>
           <div>
             <h1 className="font-display font-bold text-ice text-xl">Dr. Matheus Morari</h1>

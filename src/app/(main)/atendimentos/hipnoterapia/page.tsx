@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { SectionHeader } from '@/components/sections/SectionHeader';
+import { portraitAssets } from '@/lib/visual-assets';
 
 export const metadata: Metadata = {
   title: 'Hipnoterapia',
@@ -17,6 +18,10 @@ export default function HipnoterapiaPage() {
         highlightWord="insiste em esconder"
         subheadline="Um recurso técnico, regulamentado e ético para acessar padrões emocionais profundos que a conversa consciente, sozinha, não alcança."
         variant="page"
+        image={portraitAssets.profileSide.src}
+        imageAlt={portraitAssets.profileSide.alt}
+        imagePosition={portraitAssets.profileSide.position}
+        imagePresentation="editorial"
       />
       <div className="py-4 max-w-6xl mx-auto px-6">
         <Breadcrumb items={[{ label: 'Atendimentos', href: '/atendimentos' }, { label: 'Hipnoterapia' }]} />

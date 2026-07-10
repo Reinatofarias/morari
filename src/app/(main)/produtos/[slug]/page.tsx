@@ -1,12 +1,100 @@
-export default function ProductSlugPage() {
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { CTASection } from '@/components/sections/CTASection';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
+import { EditorialImage } from '@/components/ui/EditorialImage';
+import { getProduct, PRODUCTS } from '@/lib/products';
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export function generateStaticParams() {
+  return PRODUCTS.map((product) => ({ slug: product.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const product = getProduct(slug);
+
+  if (!product) {
+    return {
+      title: 'Produto não encontrado',
+      robots: { index: false },
+    };
+  }
+
+  return {
+    title: product.title,
+    description: product.description,
+    openGraph: {
+      title: product.title,
+      description: product.description,
+      images: [product.coverImage],
+      type: 'website',
+    },
+  };
+}
+
+export default async function ProductSlugPage({ params }: Props) {
+  const { slug } = await params;
+  const product = getProduct(slug);
+
+  if (!product) {
+    notFound();
+  }
+
   return (
-    <section className="pt-32 pb-20">
-      <div className="max-w-3xl mx-auto px-6 text-center">
-        <p className="text-gold text-xs uppercase tracking-[0.2em] font-medium mb-4">Produto</p>
-        <h1 className="font-display font-bold text-ice text-3xl mb-6">Produto em preparação</h1>
-        <p className="text-muted-light leading-relaxed mb-8">Este produto está sendo desenvolvido. Em breve estará disponível.</p>
-        <a href="/produtos" className="text-gold text-sm font-medium underline underline-offset-4">← Voltar para produtos</a>
-      </div>
-    </section>
+    <>
+      <section className="pt-32 pb-8">
+        <div className="mx-auto max-w-6xl px-6">
+          <Breadcrumb items={[{ label: 'Produtos', href: '/produtos' }, { label: product.title }]} />
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <EditorialImage
+              asset={product.coverAsset}
+              aspect="aspect-[4/5]"
+              priority
+              sizes="(max-width: 1024px) 100vw, 420px"
+            />
+          </div>
+          <div className="lg:col-span-7">
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-gold">
+              {product.type}
+            </p>
+            <h1 className="mb-6 font-display text-3xl font-bold leading-tight text-ice sm:text-4xl md:text-5xl">
+              {product.title}
+            </h1>
+            <p className="mb-8 max-w-2xl text-lg leading-relaxed text-muted-light">
+              {product.description}
+            </p>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {product.highlights.map((highlight, index) => (
+                <div key={highlight} className="rounded-lg border border-surface-soft bg-surface p-4">
+                  <span className="mb-3 block font-display text-lg font-bold text-gold">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <p className="text-sm leading-relaxed text-muted-light">{highlight}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <CTASection
+        headline="Quer entender se este produto faz sentido para o seu momento?"
+        description="O Caminho de Resolução ajuda a identificar o próximo passo mais adequado."
+        primaryCTA={{ label: 'Iniciar Caminho de Resolução', href: '/caminho-de-resolucao' }}
+        secondaryCTA={{ label: 'Ver todos os produtos', href: '/produtos' }}
+        variant="dark"
+      />
+    </>
   );
 }
+

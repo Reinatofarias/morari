@@ -33,7 +33,7 @@ export function generatePageMetadata(config: SEOConfig): Metadata {
       type: config.ogType || 'website',
       images: [
         {
-          url: config.ogImage || `${SITE_URL}/og-default.jpg`,
+          url: config.ogImage || `${SITE_URL}/opengraph-image`,
           width: 1200,
           height: 630,
           alt: config.title,

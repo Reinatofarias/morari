@@ -8,6 +8,7 @@ import { PainCard } from '@/components/cards/PainCard';
 import { PathCard } from '@/components/cards/PathCard';
 import { GoldenDivider } from '@/components/ui/GoldenDivider';
 import { PAIN_POINTS, METHOD_STEPS, HOUSE_ROOMS } from '@/lib/constants';
+import { portraitAssets } from '@/lib/visual-assets';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
@@ -27,7 +28,10 @@ export default function HomePage() {
         primaryCTA={{ label: 'Iniciar Caminho de Resolução', href: '/caminho-de-resolucao' }}
         secondaryCTA={{ label: 'Conhecer os atendimentos', href: '/atendimentos' }}
         variant="home"
-        image="/assets/images/Hero-nobg.png"
+        image={portraitAssets.heroCutout.src}
+        imageAlt={portraitAssets.heroCutout.alt}
+        imagePosition={portraitAssets.heroCutout.position}
+        imagePresentation="cutout"
       />
 
       {/* 2. Diagnóstico da dor */}
@@ -121,11 +125,11 @@ export default function HomePage() {
             <div className="relative">
               <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-surface-soft relative">
                 <Image
-                  src="/assets/images/Foto 1.jpeg"
-                  alt="Dr. Matheus Morari"
+                  src={portraitAssets.library.src}
+                  alt={portraitAssets.library.alt}
                   fill
                   className="object-cover object-top select-none"
-                  sizes="(max-w-768px) 100vw, 450px"
+                  sizes="(max-width: 768px) 100vw, 450px"
                 />
               </div>
               {/* Golden accent */}

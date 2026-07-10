@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 interface PainCardProps {
   icon: string;
@@ -10,7 +11,8 @@ interface PainCardProps {
 }
 
 export function PainCard({ icon, title, description }: PainCardProps) {
-  const IconComponent = (LucideIcons as any)[icon] || LucideIcons.AlertCircle;
+  const icons = LucideIcons as unknown as Record<string, LucideIcon>;
+  const IconComponent = icons[icon] || LucideIcons.AlertCircle;
 
   return (
     <motion.div

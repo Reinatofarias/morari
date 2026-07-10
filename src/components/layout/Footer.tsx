@@ -11,7 +11,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <Image
-                src="/assets/branding/Logo Horizontal-nobg.png"
+                src="/assets/branding/logo-horizontal-nobg.png"
                 alt="Dr. Matheus Morari"
                 width={200}
                 height={50}
@@ -93,6 +93,22 @@ export function Footer() {
               Legal
             </h4>
             <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/privacidade"
+                  className="text-muted-light text-sm hover:text-gold transition-colors"
+                >
+                  Privacidade
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/termos"
+                  className="text-muted-light text-sm hover:text-gold transition-colors"
+                >
+                  Termos de uso
+                </Link>
+              </li>
               <li>
                 <span className="text-muted text-sm">{CRP}</span>
               </li>

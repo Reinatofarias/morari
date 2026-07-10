@@ -75,7 +75,7 @@ Converter tráfego do Instagram. Curta, bonita, objetiva.
 ### Botões (ordem)
 1. "Iniciar Caminho de Resolução" → `/caminho-de-resolucao`
 2. "Conhecer atendimentos" → `/atendimentos`
-3. "Curso sobre ansiedade" → `/produtos/curso-ansiedade`
+3. "Mapa da Ansiedade Masculina" → `/produtos/mapa-da-ansiedade-masculina`
 4. "Conteúdos para homens que lideram" → `/conteudos`
 5. "Falar no WhatsApp" → link WhatsApp
 
@@ -262,27 +262,26 @@ Organizar produtos digitais e direcionar para ofertas.
 
 ---
 
-## 9. `/produtos/curso-ansiedade`
+## 9. `/produtos/[slug]` — Produtos oficiais
 
 ### Intenção
-Página de produto/curso sobre ansiedade.
+Páginas de produto para as ofertas oficiais do Dr. Matheus Morari.
 
-### Headline
-**"A ansiedade não é o problema. É o sinal de que algo dentro de você não está sendo governado."**
+### Produtos e slugs
+1. O Código da Paz Conjugal → `/produtos/codigo-da-paz-conjugal`
+2. Programa de Inteligência Emocional para Homens → `/produtos/programa-de-inteligencia-emocional-para-homens`
+3. Mapa da Ansiedade Masculina → `/produtos/mapa-da-ansiedade-masculina`
+4. A Engrenagem Fantasma → `/produtos/engrenagem-fantasma`
+5. O Código H → `/produtos/codigo-h`
+6. Mini Curso de Saúde Mental → `/produtos/mini-curso-de-saude-mental`
 
 ### Seções
-1. Hero com headline + visual
-2. Para quem é
-3. O que você vai aprender
-4. Módulos / Conteúdo
-5. Resultado esperado (sem prometer)
-6. Sobre o autor
-7. Garantia / FAQ
-8. CTA de compra
-
-### SEO
-- **Title**: "Curso Ansiedade em Homens — Dr. Matheus Morari"
-- **Description**: "Curso sobre ansiedade para homens que lideram. Entenda o que está por trás da sua ansiedade e recupere o governo emocional."
+1. Breadcrumb
+2. Visual editorial do produto
+3. Headline/título
+4. Descrição
+5. Destaques do produto
+6. CTA para Caminho de Resolução
 
 ---
 

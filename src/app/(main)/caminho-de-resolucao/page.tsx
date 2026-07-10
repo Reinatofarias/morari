@@ -4,6 +4,7 @@ import { SectionHeader } from '@/components/sections/SectionHeader';
 import { PainCard } from '@/components/cards/PainCard';
 import { LeadForm } from '@/components/forms/LeadForm';
 import { Check } from 'lucide-react';
+import { portraitAssets } from '@/lib/visual-assets';
 
 export const metadata: Metadata = {
   title: 'Caminho de Resolução',
@@ -44,6 +45,10 @@ export default function CaminhoDeResolucaoPage() {
         highlightWord="te quebrando"
         subheadline="O Caminho de Resolução é o primeiro passo para homens que carregam pressão demais, se sentem emocionalmente no limite e precisam entender o que está acontecendo antes que o colapso cobre a conta."
         variant="page"
+        image={portraitAssets.heroConcept.src}
+        imageAlt={portraitAssets.heroConcept.alt}
+        imagePosition={portraitAssets.heroConcept.position}
+        imagePresentation="editorial"
       />
 
       {/* O que é */}

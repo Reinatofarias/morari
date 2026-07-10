@@ -5,6 +5,7 @@ import { CTASection } from '@/components/sections/CTASection';
 import { PainCard } from '@/components/cards/PainCard';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { Check } from 'lucide-react';
+import { portraitAssets } from '@/lib/visual-assets';
 
 export const metadata: Metadata = {
   title: 'Psicólogo para Homens',
@@ -28,6 +29,10 @@ export default function PsicologiaParaHomensPage() {
         highlightWord="no automático"
         subheadline="Atendimento psicológico especializado para homens que lideram, carregam pressão e precisam recuperar governo emocional sem abandonar suas responsabilidades."
         variant="page"
+        image={portraitAssets.profileDesk.src}
+        imageAlt={portraitAssets.profileDesk.alt}
+        imagePosition={portraitAssets.profileDesk.position}
+        imagePresentation="editorial"
       />
 
       <section className="py-4">

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 interface PathCardProps {
   step: number;
@@ -11,7 +12,8 @@ interface PathCardProps {
 }
 
 export function PathCard({ step, title, description, icon }: PathCardProps) {
-  const IconComponent = (LucideIcons as any)[icon] || LucideIcons.ArrowRight;
+  const icons = LucideIcons as unknown as Record<string, LucideIcon>;
+  const IconComponent = icons[icon] || LucideIcons.ArrowRight;
 
   return (
     <motion.div

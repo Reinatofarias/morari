@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { fadeInUp, fadeIn, scaleIn } from '@/lib/animations';
+import { scaleIn } from '@/lib/animations';
 import { GoldenDivider } from '../ui/GoldenDivider';
 import { ConversionButton } from '../ui/ConversionButton';
 import Image from 'next/image';
@@ -14,6 +14,9 @@ interface HeroSectionProps {
   secondaryCTA?: { label: string; href: string };
   variant?: 'home' | 'page' | 'minimal';
   image?: string;
+  imageAlt?: string;
+  imagePosition?: string;
+  imagePresentation?: 'cutout' | 'editorial';
 }
 
 export function HeroSection({
@@ -24,6 +27,9 @@ export function HeroSection({
   secondaryCTA,
   variant = 'home',
   image,
+  imageAlt = 'Dr. Matheus Morari',
+  imagePosition = 'center',
+  imagePresentation = 'cutout',
 }: HeroSectionProps) {
   const renderHeadline = () => {
     if (!highlightWord) {
@@ -130,23 +136,36 @@ export function HeroSection({
 
             {/* Image Column */}
             <div className="order-1 lg:order-2 lg:col-span-5 relative flex justify-center lg:justify-end">
-              {/* Background circular subtle glow behind headshot */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-gold/[0.04] rounded-full blur-[60px] z-0" />
+              <div className="absolute inset-6 bg-gold/[0.04] blur-[70px] z-0" />
               
               <motion.div
                 {...scaleIn}
-                className="relative w-full max-w-[420px] aspect-[4/5] z-10"
+                className={`relative w-full max-w-[420px] aspect-[4/5] z-10 ${
+                  imagePresentation === 'editorial'
+                    ? 'overflow-hidden rounded-lg border border-surface-soft bg-surface shadow-2xl shadow-background/40'
+                    : ''
+                }`}
               >
                 <Image
                   src={image}
-                  alt="Dr. Matheus Morari"
+                  alt={imageAlt}
                   fill
                   priority
-                  className="object-contain object-bottom select-none"
-                  sizes="(max-w-768px) 100vw, 420px"
+                  loading="eager"
+                  className={`select-none ${
+                    imagePresentation === 'editorial' ? 'object-cover' : 'object-contain object-bottom'
+                  }`}
+                  style={{ objectPosition: imagePosition }}
+                  sizes="(max-width: 768px) 100vw, 420px"
                 />
-                {/* Dark vignette blending bottom of cut-out into the background */}
-                <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-background via-background/95 via-40% to-transparent z-20 pointer-events-none" />
+                {imagePresentation === 'editorial' ? (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent z-20 pointer-events-none" />
+                    <div className="absolute inset-0 ring-1 ring-inset ring-gold/10 z-20 pointer-events-none" />
+                  </>
+                ) : (
+                  <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-background via-background/95 via-40% to-transparent z-20 pointer-events-none" />
+                )}
               </motion.div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { SectionHeader } from '@/components/sections/SectionHeader';
 import { GoldenDivider } from '@/components/ui/GoldenDivider';
+import { portraitAssets } from '@/lib/visual-assets';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
@@ -18,6 +19,10 @@ export default function SobrePage() {
         highlightWord="ter governo"
         subheadline="Psicólogo clínico com formação em psicologia sistêmica e hipnoterapia. Trabalho com homens que lideram — e que precisam de mais que resiliência."
         variant="page"
+        image={portraitAssets.profileDesk.src}
+        imageAlt={portraitAssets.profileDesk.alt}
+        imagePosition={portraitAssets.profileDesk.position}
+        imagePresentation="editorial"
       />
 
       <section className="py-20">
@@ -42,11 +47,11 @@ export default function SobrePage() {
             <div className="md:col-span-5 relative flex justify-center">
               <div className="w-full max-w-[340px] aspect-[4/5] rounded-2xl overflow-hidden border border-surface-soft relative">
                 <Image
-                  src="/assets/images/Foto 2.jpeg"
-                  alt="Dr. Matheus Morari"
+                  src={portraitAssets.profileSide.src}
+                  alt={portraitAssets.profileSide.alt}
                   fill
                   className="object-cover object-top select-none"
-                  sizes="(max-w-768px) 100vw, 340px"
+                  sizes="(max-width: 768px) 100vw, 340px"
                 />
               </div>
               <div className="absolute -bottom-3 -right-3 md:-right-4 w-20 h-20 border-2 border-gold/20 rounded-2xl -z-10" />
@@ -80,11 +85,11 @@ export default function SobrePage() {
             <div className="md:col-span-5 relative flex justify-center order-last md:order-first">
               <div className="w-full max-w-[340px] aspect-[4/5] rounded-2xl overflow-hidden border border-surface-soft relative">
                 <Image
-                  src="/assets/images/Foto 3.jpeg"
-                  alt="Consultório Dr. Matheus"
+                  src={portraitAssets.profileDesk.src}
+                  alt={portraitAssets.profileDesk.alt}
                   fill
                   className="object-cover object-top select-none"
-                  sizes="(max-w-768px) 100vw, 340px"
+                  sizes="(max-width: 768px) 100vw, 340px"
                 />
               </div>
               <div className="absolute -top-3 -left-3 md:-left-4 w-20 h-20 border-2 border-gold/20 rounded-2xl -z-10" />

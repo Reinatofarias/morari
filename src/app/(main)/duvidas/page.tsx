@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
-import { SectionHeader } from '@/components/sections/SectionHeader';
+import { VisualPageIntro } from '@/components/sections/VisualPageIntro';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { CTASection } from '@/components/sections/CTASection';
 import { FAQ_ITEMS } from '@/lib/constants';
 import { faqPageSchema } from '@/lib/seo';
+import { portraitAssets } from '@/lib/visual-assets';
 
 export const metadata: Metadata = {
   title: 'Dúvidas Frequentes',
@@ -13,16 +14,17 @@ export const metadata: Metadata = {
 export default function DuvidasPage() {
   return (
     <>
-      <section className="pt-32 pb-20">
+      <VisualPageIntro
+        label="FAQ"
+        title="Perguntas que homens sérios fazem antes de começar."
+        highlightWord="homens sérios"
+        description="Respostas diretas, éticas e sem promessa de cura rápida."
+        asset={portraitAssets.profileSide}
+      />
+
+      <section className="pb-20">
         <div className="max-w-3xl mx-auto px-6">
-          <SectionHeader
-            label="FAQ"
-            title="Perguntas que homens sérios fazem antes de começar."
-            highlightWord="homens sérios"
-            description="Respostas diretas, éticas e sem promessa de cura rápida."
-            alignment="center"
-          />
-          <div className="mt-12">
+          <div>
             <FAQAccordion items={FAQ_ITEMS.map(f => ({ question: f.question, answer: f.answer }))} />
           </div>
         </div>

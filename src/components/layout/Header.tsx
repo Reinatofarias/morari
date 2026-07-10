@@ -34,12 +34,13 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <Image
-              src="/assets/branding/Logo Horizontal-nobg.png"
+              src="/assets/branding/logo-horizontal-nobg.png"
               alt="Dr. Matheus Morari"
               width={260}
               height={65}
               className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               priority
+              loading="eager"
             />
           </Link>
 

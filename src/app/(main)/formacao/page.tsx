@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
-import { SectionHeader } from '@/components/sections/SectionHeader';
 import { CTASection } from '@/components/sections/CTASection';
+import { VisualPageIntro } from '@/components/sections/VisualPageIntro';
 import { GoldenDivider } from '@/components/ui/GoldenDivider';
+import { portraitAssets } from '@/lib/visual-assets';
 import { GraduationCap, Award, Briefcase, BookOpen } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -20,17 +21,17 @@ const formacoes = [
 export default function FormacaoPage() {
   return (
     <>
-      <section className="pt-32 pb-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <SectionHeader
-            label="Formação"
-            title="Formação, experiência e compromisso com a verdade clínica."
-            highlightWord="verdade clínica"
-            description="Credenciais técnicas que sustentam um trabalho sério. Sem autopromoção exagerada — apenas os fatos."
-            alignment="center"
-          />
+      <VisualPageIntro
+        label="Formação"
+        title="Formação, experiência e compromisso com a verdade clínica."
+        highlightWord="verdade clínica"
+        description="Credenciais técnicas que sustentam um trabalho sério. Sem autopromoção exagerada — apenas os fatos."
+        asset={portraitAssets.profileDesk}
+      />
 
-          <div className="space-y-4 mt-12">
+      <section className="pb-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="space-y-4">
             {formacoes.map((item, i) => {
               const Icon = item.icon;
               return (
