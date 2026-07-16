@@ -33,13 +33,19 @@ export default function SobrePage() {
             <div className="md:col-span-7 space-y-4">
               <SectionHeader label="Quem sou" title="Matheus Morari" />
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Sou o filho mais novo de um casal oriundo do interior de São Paulo, filho de um policial e de uma professora. Cresci em uma família que valoriza profundamente a ordem, o estudo, a conduta, a disciplina e a busca constante por entregar mais do que se espera.
+                Quem sou eu sou uma pergunta comum, mas responder não é simples, e podemos ter vários óticas e áreas diferente para essa resposta. Sou o filho mais novo de um casal ainda casado, oriundo do interior de São Paulo, filho de um policial e uma professora, em uma família que valoriza ordem, estudo, conduta e disciplina, busca por resolução e entregar mais do que se espera. Também sou neto de uma policial e dona de casa, e de um policial/advogado e costureira/professora, influenciado por essas figuras em minha personalidade.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Como filho, busco honrar minha origem; como marido, levo meu casamento e minha mulher com total seriedade; e como pai, priorizo a educação do meu filho pelo exemplo real. Minha fé católica é o centro da minha vida, consagrado a Nossa Senhora, servindo como canal para apaziguar corações em conflito.
+                Assumo papéis importantes: como filho, busco honrar minha origem; como marido, levo a sério meu casamento e minha mulher; como pai, priorizo a educação pelo exemplo. Profissionalmente, sou apaixonado, buscando me destacar e ajudar os outros. Sou um amigo presente, embora às vezes não envie muitas mensagens. A fé católica é central em minha vida, assim como minha prática de jiu-jitsu(Faixa preta) e meus valores de família, honra, estudo, honestidade, religiosidade e integridade de uma entrega resolutiva.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                No âmbito pessoal e físico, sou um homem de 1,90m, com mais de 100kg, cabelos pretos, barba e óculos. Pratico Jiu-jitsu (faixa preta), toco saxofone, gosto de cozinhar e sou neurodivergente (diagnósticos de autismo, TDAH e Altas Habilidades / Superdotação - AH/SD). Esse conjunto de características me permite pensar fora da caixa, gerenciar crises e desenhar soluções com alta conscienciosidade e assertividade técnica.
+                Meu comportamento é ser comunicativo, paciente, assertivo, ativo e bem equilibrado emocionalmente. Temperamento sanguíneo, perfil dominante estável, personalidade de baixo neuroticismo e alta conscienciosidade. Neurodivergente autista, TDAH, AH/SD
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                Fisicamente, sou um homem branco de 1,90m, 100+kg, com barba, cabelos pretos e óculos. Possuo habilidades como cozinhar, lutar, comunicar-me, tocar saxofone, resolver problemas, lidar com crise, pensar fora da caixa.
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                No entanto, reconheço que tenho meu lado ruim, conhecido apenas por aqueles que convivem comigo. Mas, acima de tudo, sou um filho de Deus, consagrado a Nossa Senhora, e minha missão é ser um canal de amor para apaziguar corações em conflito e promover a cura.
               </p>
             </div>
             <div className="md:col-span-5 relative flex justify-center mt-6 md:mt-0">
@@ -76,13 +82,43 @@ export default function SobrePage() {
             <div className="md:col-span-7 space-y-4">
               <SectionHeader label="Vocação" title="Como me tornei psicólogo" />
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                No final do ensino médio, meu caminho parecia definido. Eu possuo uma forte característica de antecipação e busca de cenários, de forma que não sofria com crises vocacionais. Desde criança meu sonho era fazer Medicina Veterinária e toda a minha família concordava com a escolha de estudar na UNIR, em Rolim de Moura.
+                Não sei você mais eu gosto de história, e vou revelar agora a minha história que me fez chegar aqui, o que me fez escolher psicologia. E me torno o profissional que sou hoje, e essa história norteia todo a minha atuação. Presta atenção.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                No entanto, durante as férias do meio do ano, ocorreu uma reviravolta. Em uma tarde, enquanto confeccionava terços e rezava em meu quarto, veio um clarão em minha mente com a palavra **PSICOLOGIA**. Questionando aquela mudança repentina, senti um chamado direto: *&ldquo;Quero você cuidando de gente, dos meus filhos, e não de animais.&rdquo;*
+                Eu estava no 3° ano do ensino médio, estudando na escola de manhã e a tarde.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Compreendi aquilo como uma missão. O significado de psicologia (&ldquo;estudo da alma&rdquo;) encaixava-se perfeitamente na minha atuação de escuta, orientação e acolhimento com amigos e jovens da igreja. Assumi a responsabilidade pelo chamado. Corri — e corro até hoje — atrás da melhor técnica e do aperfeiçoamento constante para cumprir essa missão de ajudar pessoas a se encontrarem de dentro para fora.
+                No início do ano, tudo estava definido, como sempre, tenho a característica de antecipação, de buscar vivenciar as situações antes que elas ocorram, por isso não estava em crise vocacional, sofrendo para escolher qual curso fazer.
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                Seria aquele que desde criança já dizia, que seria e brincava como tal, seria medicina veterinária. Como morava em Rolim seria na UNIR. E todos na família já sabiam e concordavam.
+              </p>
+              <p className="font-display font-semibold text-gold text-base sm:text-lg">
+                Porém ocorreu uma reviravolta
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                Durante o período de férias no meio do ano, tudo mudou.
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                Em um dia de tarde, enquanto estava confeccionando terços, e ao mesmo tempo rezando em meu quarto, me veio como um estalar de dedos, um &ldquo;clarão&rdquo;, a palavra **PSIOCOLOGIA**, como se alguém falace comigo, na mesma hora tive dúvida, pois não gosto de ficar mudando de opinião e dificilmente volto atrás de algo que já disse, ainda mais se disse pra todo mundo.
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                Me questionei, mas psicologia? E fui rebatido na mesma hora, Deus respondeu, quero você cuidando de gente, dos meus filhos, e não de animais.
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                Com isso entendi que seria uma missão, e isso me trouxe um conforto e aceitação imediata, como se sempre tivesse sido minha opção. E tudo fez sentido, pois a palavra psicologia significa estudo da alma. Isso também fortaleceu meu momento atual que estava muito ativo na igreja com os jovens e amigos próximos da escola os quais muitos eu orientava e acolhia suas questões, e me sentia no dever de ajuda-los a serem melhores.
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                A partir desse dia iniciou minha formação, pois eu deveria ser o melhor possível, dar tudo de mim, pois foi um chamado de Deus, então comecei a estudar sobre psicologia e me integrar sobre esse universo, para honrar minha missão e saber unir todos os dons que Deus me deu, com a ciência e o profissional.
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                Me inscrevi para participar de um evento acadêmico, que o curso de psicologia, que tinha cidade está organizando, fui me impetiquei e tudo ficou calado. Já comecei a estuda o que eu podia e conseguia referente a essas áreas de atuação.
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
+                Muitos estranharam, alguns não apoiaram de início, mas continuei mesmo assim pois essa vocação foi plantada e cultivado, por Deus e assim continua. Tomei posse, me responsabilizei e corri e corro até hoje atrás da técnica e de todo aperfeiçoamento possível, para ser o melhor.
+              </p>
+              <p className="text-muted-light leading-relaxed text-sm sm:text-base font-medium text-ice">
+                E hoje posso ajudar as pessoas a ter uma vida melhor e a elevar suas potencialidades, a se encontrarem consigo, tendo mais saúde, qualidade de vida, melhores relacionamentos, sendo mais plenas, capacitadas e felizes, como psicólogo clínico, prestando serviço de psicoterapia e de muitas outras formas, de atuar, ajudando as pessoas a transformas suas vidas de dentro para fora.
               </p>
             </div>
           </div>
