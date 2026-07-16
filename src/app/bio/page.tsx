@@ -75,30 +75,15 @@ export default function BioLandingPage() {
    ================================================== */
 function BioHero() {
   return (
-    <div className="flex flex-col items-center text-center space-y-4 max-w-md">
-      <div className="relative h-28 w-28 overflow-hidden rounded-full border border-gold/30 bg-surface shadow-2xl">
-        <Image
-          src={portraitAssets.profileDesk.src}
-          alt="Dr. Matheus Morari"
-          fill
-          priority
-          sizes="112px"
-          className="object-cover object-top select-none"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-      </div>
-      <div className="space-y-1">
-        <h1 className="font-display font-black text-ice text-2xl tracking-tight uppercase">Matheus Morari</h1>
-        <p className="text-gold text-[10px] font-bold uppercase tracking-[0.2em]">Psicólogo Sistêmico</p>
-      </div>
-      <div className="space-y-2 pt-2">
-        <h2 className="font-display font-bold text-ice text-lg leading-snug">
-          Psicologia para homens que lideram.
-        </h2>
-        <p className="text-muted-light text-xs leading-relaxed max-w-xs mx-auto">
-          Autodomínio, sanidade e presença para homens que carregam pressão em silêncio.
-        </p>
-      </div>
+    <div className="w-full flex justify-center">
+      <Image
+        src="/assets/images/Hero.png"
+        alt="Dr. Matheus Morari — Psicólogo Sistêmico"
+        width={800}
+        height={320}
+        className="w-full h-auto max-w-md select-none"
+        priority
+      />
     </div>
   );
 }
