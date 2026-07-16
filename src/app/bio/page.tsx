@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { matheusProducts, BioProduct } from '@/data/matheusBio';
-import { WHATSAPP_URL, CRP } from '@/lib/constants';
+import { CRP } from '@/lib/constants';
 import { portraitAssets } from '@/lib/visual-assets';
-import { ArrowRight, MessageSquare, ShieldAlert, Sparkles, User, HelpCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Links e Vitrine | Dr. Matheus Morari',
@@ -46,33 +46,20 @@ export default function BioLandingPage() {
           <ProductGrid products={matheusProducts} />
         </div>
 
-        {/* Banners Adicionais Divider */}
-        <div className="w-full h-px bg-surface-soft/60" />
-
-        {/* 4. BANNERS ADICIONAIS DE CONVERSÃO */}
-        <div className="w-full space-y-4">
-          <FeaturedBanner
-            title="PSICOLOGIA PARA HOMENS QUE LIDERAM."
-            subtitle="Ansiedade, esgotamento, família, autodomínio e padrões emocionais."
-            ctaLabel="Conhecer atendimentos"
+        {/* 4. BANNER DE ATENDIMENTO */}
+        <div className="w-full pt-4">
+          <Link
             href="/atendimentos"
-            icon={User}
-          />
-          <FeaturedBanner
-            title="NÃO É SUCESSO SE VOCÊ PERDER SUA CASA."
-            subtitle="O preço invisível da ausência emocional."
-            ctaLabel="Começar por aqui"
-            href="/caminho-de-resolucao"
-            icon={ShieldAlert}
-          />
-          <FeaturedBanner
-            title="ANTES DE AGUENTAR MAIS UMA FASE SOZINHO, CONVERSE."
-            subtitle="Dê o primeiro passo com clareza e responsabilidade."
-            ctaLabel="Falar no WhatsApp"
-            href={WHATSAPP_URL}
-            icon={MessageSquare}
-            highlight
-          />
+            className="w-full block relative overflow-hidden group hover:scale-[1.01] transition-all duration-300 rounded-2xl shadow-xl"
+          >
+            <Image
+              src="/assets/images/Atendimentos.png"
+              alt="Atendimentos Clínicos"
+              width={800}
+              height={360}
+              className="w-full h-auto rounded-2xl border border-surface-soft/60 group-hover:border-gold/40 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-300"
+            />
+          </Link>
         </div>
 
         {/* 5. FOOTER MINIMAL */}
@@ -247,59 +234,7 @@ function ProductBannerCard({ product }: ProductBannerCardProps) {
   );
 }
 
-/* ==================================================
-   SUBCOMPONENT: FEATURED BANNER
-   ================================================== */
-interface FeaturedBannerProps {
-  title: string;
-  subtitle: string;
-  ctaLabel: string;
-  href: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  highlight?: boolean;
-}
 
-function FeaturedBanner({
-  title,
-  subtitle,
-  ctaLabel,
-  href,
-  icon: Icon,
-  highlight = false,
-}: FeaturedBannerProps) {
-  return (
-    <Link
-      href={href}
-      className={`w-full p-5 rounded-2xl border flex items-center justify-between gap-6 transition-all duration-300 hover:scale-[1.01] hover:shadow-xl cursor-pointer group text-left ${
-        highlight
-          ? 'bg-gold/5 border-gold/30 hover:border-gold/50'
-          : 'bg-surface/30 border-surface-soft hover:bg-surface hover:border-gold/20'
-      }`}
-    >
-      <div className="flex gap-4 items-start">
-        <div className={`p-2.5 rounded-xl border shrink-0 mt-0.5 ${
-          highlight
-            ? 'bg-gold/10 border-gold/20 text-gold'
-            : 'bg-surface-soft/60 border-surface-soft text-muted-light group-hover:text-gold transition-colors'
-        }`}>
-          <Icon size={18} />
-        </div>
-        <div className="space-y-1">
-          <h4 className="font-display font-bold text-ice text-sm sm:text-base leading-tight tracking-wide group-hover:text-gold transition-colors">
-            {title}
-          </h4>
-          <p className="text-muted text-xs leading-relaxed max-w-md">
-            {subtitle}
-          </p>
-        </div>
-      </div>
-
-      <div className="shrink-0 flex h-8 w-8 items-center justify-center rounded-full border border-surface-soft text-muted group-hover:border-gold/30 group-hover:text-gold group-hover:bg-gold/5 transition-all">
-        <ArrowRight size={14} />
-      </div>
-    </Link>
-  );
-}
 
 /* ==================================================
    SUBCOMPONENT: FOOTER MINIMAL

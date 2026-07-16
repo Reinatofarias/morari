@@ -35,7 +35,7 @@ export const matheusProducts: BioProduct[] = [
     title: "Mapa da Ansiedade Masculina",
     description: "Material para identificar como a ansiedade aparece em homens: controle, irritação, aceleração mental e dificuldade de desligar.",
     href: "/lp/mapa-da-ansiedade-masculina",
-    image: "/assets/images/f3.jpeg",
+    image: "/assets/images/Mapa de Ansiedade.png",
     ctaLabel: "Ver página",
     highlight: false,
     category: "ansiedade"
@@ -44,7 +44,7 @@ export const matheusProducts: BioProduct[] = [
     badge: "MATERIAL",
     title: "A Engrenagem Fantasma",
     description: "Produto sobre os mecanismos invisíveis que mantêm homens presos aos mesmos padrões emocionais.",
-    href: "/lp/a-engrenagem-fantasma",
+    href: "/lp/engrenagem-fantasma",
     image: "/assets/images/Engrenagem Fantasma.png",
     ctaLabel: "Ver página",
     highlight: false,
@@ -65,7 +65,7 @@ export const matheusProducts: BioProduct[] = [
     title: "Mini Curso de Saúde Mental",
     description: "Mini curso introdutório sobre saúde mental masculina, sinais de alerta e caminhos responsáveis de cuidado.",
     href: "/lp/mini-curso-de-saude-mental",
-    image: "/assets/images/f6.jpeg",
+    image: "/assets/images/Mini curso de Saúde Mental.png",
     ctaLabel: "Ver página",
     highlight: false,
     category: "saude-mental"
