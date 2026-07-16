@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { CheckCircle2 } from 'lucide-react';
 import { ConversionButton } from '@/components/ui/ConversionButton';
 import { EditorialImage } from '@/components/ui/EditorialImage';
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { getProduct, PRODUCTS, type ProductSlug } from '@/lib/products';
 
 type Props = {
@@ -233,6 +234,13 @@ export default async function ProductLandingPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Depoimentos de Membros e Alunos dos Programas */}
+      <TestimonialsSection
+        limit={3}
+        title="Histórias de Alunos e Membros dos Programas"
+        subtitle="Confira o relato de homens que aplicaram os princípios de nossos programas e materiais em sua rotina diária."
+      />
 
       {/* Seção de Conteúdo e Próximo Passo */}
       <section className="py-20">

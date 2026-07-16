@@ -10,6 +10,7 @@ import { GoldenDivider } from '@/components/ui/GoldenDivider';
 import { PAIN_POINTS, METHOD_STEPS, HOUSE_ROOMS } from '@/lib/constants';
 import { portraitAssets } from '@/lib/visual-assets';
 import Image from 'next/image';
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 
 export const metadata: Metadata = {
   title: 'Dr. Matheus Morari — Psicólogo para Homens que Lideram',
@@ -173,6 +174,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* 7.5. Depoimentos / Histórias de Transformação */}
+      <TestimonialsSection limit={3} />
 
       {/* 8. CTA final */}
       <CTASection

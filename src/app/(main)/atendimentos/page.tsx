@@ -4,6 +4,7 @@ import { CTASection } from '@/components/sections/CTASection';
 import { ServiceCard } from '@/components/cards/ServiceCard';
 import { SERVICES } from '@/lib/constants';
 import { portraitAssets } from '@/lib/visual-assets';
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 
 export const metadata: Metadata = {
   title: 'Atendimentos',
@@ -71,6 +72,9 @@ export default function AtendimentosPage() {
           </div>
         </div>
       </section>
+
+      {/* Depoimentos / Histórias de Transformação */}
+      <TestimonialsSection limit={3} />
 
       <CTASection
         headline="Entender qual atendimento faz sentido para mim."
