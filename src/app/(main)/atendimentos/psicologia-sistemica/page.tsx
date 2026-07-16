@@ -50,7 +50,7 @@ export default function PsicologiaSistemicaPage() {
               Fundamentos Teóricos e Autores Principais
             </h3>
             <p className="text-muted-light text-sm leading-relaxed">
-              A abordagem sistêmica integra contribuições de pesquisadores como **Gregory Bateson** (cibernética e comunicação), **Don Jackson e Jay Haley** (dinâmicas familiares), **Paul Watzlawick** (pragmática da comunicação), **Virginia Satir** (comunicação congruente), **Mara Selvini Palazzoli** (paradoxo e prescrição), **Murray Bowen** (diferenciação do self e transgeracionalidade), **Monica McGoldrick** (ciclo de vida familiar), e seus sucessores que expandiram e refinaram esses conceitos de forma clínica e ética.
+              A abordagem sistêmica integra contribuições de pesquisadores como **Gregory Bateson** (cibernética e comunicação), **Don Jackson e Jay Haley** (dinâmicas familiares), **Paul Watzlawick** (pragmática da comunicação), **Virginia Satir** (comunicação congruente), **Mara Selvini Palazzoli** (paradoxo e prescrição), **Murray Bowen** (diferenciação do self e transgeracionalidade), **Monica McGoldrick** (ciclo de vida familiar), e seus sucessores — **Michael Kerr, Philip Guerin, Stefano Cirillo** e outros — que expandiram e refinaram esses conceitos de forma clínica e ética.
             </p>
           </div>
         </div>
@@ -167,6 +167,14 @@ export default function PsicologiaSistemicaPage() {
               {
                 title: 'Diferenciação Fortalecida',
                 desc: 'Desenvolver a autonomia e a voz individual do homem dentro das amarras de lealdade familiar, permitindo que ele lidere sem repetir.'
+              },
+              {
+                title: 'Metacomunicação',
+                desc: 'Desenvolver a capacidade de falar sobre a própria comunicação e desvelar dinâmicas relacionais implícitas.'
+              },
+              {
+                title: 'Prescrição Paradoxal',
+                desc: 'Utilizar a lógica intrínseca e as forças do próprio sistema familiar para prescrever ou instigar a mudança comportamental.'
               },
               {
                 title: 'Ressignificação Geracional',

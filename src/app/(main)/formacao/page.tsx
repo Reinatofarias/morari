@@ -3,7 +3,7 @@ import { CTASection } from '@/components/sections/CTASection';
 import { VisualPageIntro } from '@/components/sections/VisualPageIntro';
 import { GoldenDivider } from '@/components/ui/GoldenDivider';
 import { portraitAssets } from '@/lib/visual-assets';
-import { GraduationCap, Award, Briefcase, BookOpen, Compass, Check } from 'lucide-react';
+import { GraduationCap, Award, Check } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Formação',
@@ -22,175 +22,43 @@ export default function FormacaoPage() {
       />
 
       <section className="pb-24">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            
-            {/* 1. Formação Acadêmica & Pós-Graduações */}
-            <div className="p-6 rounded-xl bg-surface border border-surface-soft/60 space-y-4">
-              <div className="flex items-center gap-3 text-gold">
-                <GraduationCap size={24} />
-                <h3 className="font-display font-bold text-ice text-lg">Formação Acadêmica & Pós-Graduações</h3>
-              </div>
-              <ul className="space-y-4 mt-4">
-                <li className="flex gap-3">
-                  <Check size={16} className="text-gold shrink-0 mt-1" />
-                  <div>
-                    <strong className="text-ice text-sm sm:text-base">Bacharel em Psicologia e Psicólogo Clínico</strong>
-                    <p className="text-muted text-xs sm:text-sm">Faculdade FAROL de Rolim de Moura – RO.</p>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <Check size={16} className="text-gold shrink-0 mt-1" />
-                  <div>
-                    <strong className="text-ice text-sm sm:text-base">Pós-Graduação em Terapia Sistêmica Familiar</strong>
-                    <p className="text-muted text-xs sm:text-sm">Abordagem individual, casal e família. Instituto Logos, ministrado pela Drª Marizete Rodrigues.</p>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <Check size={16} className="text-gold shrink-0 mt-1" />
-                  <div>
-                    <strong className="text-ice text-sm sm:text-base">Pós-Graduação em Neuropsicologia com Ênfase em Avaliações</strong>
-                    <p className="text-muted text-xs sm:text-sm">FAMEESP — Faculdade Metropolitana do Estado de São Paulo.</p>
-                  </div>
-                </li>
-              </ul>
+        <div className="max-w-4xl mx-auto px-6">
+          
+          <div className="w-full p-6 sm:p-10 rounded-xl bg-surface border border-surface-soft/60 space-y-6">
+            <div className="flex items-center gap-3 text-gold">
+              <GraduationCap size={24} />
+              <h3 className="font-display font-bold text-ice text-lg">Currículo Profissional</h3>
             </div>
-
-            {/* 2. Atuação & Supervisão */}
-            <div className="p-6 rounded-xl bg-surface border border-surface-soft/60 space-y-4">
-              <div className="flex items-center gap-3 text-gold">
-                <Briefcase size={22} />
-                <h3 className="font-display font-bold text-ice text-lg">Supervisão & Atuação Técnica</h3>
-              </div>
-              <ul className="space-y-4 mt-4">
-                <li className="flex gap-3">
-                  <Check size={16} className="text-gold shrink-0 mt-1" />
-                  <div>
-                    <strong className="text-ice text-sm sm:text-base">Supervisor de Especialização</strong>
-                    <p className="text-muted text-xs sm:text-sm">Supervisor de curso de especialização em terapia sistêmica individual, casal e familiar.</p>
-                  </div>
+            <ul className="space-y-4">
+              {[
+                'Bacharel em Psicologia e psicólogo - pela faculdade FAROL de Rolim de Moura – RO',
+                'Pós Graduado em Terapia Sistêmica Familiar, individual, casal e família - pelo instituto logos, ministrado pela Drª Marizete Rodrigues.',
+                'Pós Graduado em Neuropsicologia com Ênfase em Avaliações - FAMEESP - Faculdade Metropolitana do Estado de São Paulo',
+                'Supervisor de curso de especialização em terapia sistêmica individual casal e familiar',
+                'Supervisor Clínico e de práticas terapêuticas.',
+                'Curso Ser Terapeuta de casal - Ministrado pela Psi. Tatiana Perez.',
+                'Curso de hipnose clínica - com Alberto Deliso\'la',
+                'Cursos de hipnose na prática – com Olimar Teser',
+                'Curso de hipnose como tratar vícios - com Alberto Deliso\'la',
+                'Cursos de hipnose clássica - com Alberto Deliso\'la',
+                'Curso de extensão em psicoterapia do luto morte súbita e ou violenta - pelo CIAP educacional, Cacoal - RO - Ministrado pela Psi. Elione Figueredo de Arruda.',
+                'Curso de extensão em apego, luto e separação - pelo CIAP educacional, Cacoal - RO - Ministrado pela Psi. Elione Figueredo de Arruda.',
+                'Curso de psicologia, religião e saúde mental - pelo Instituto de Psicologia e Logoterapia, ministrado pelo Psi.Dr Alberto Nery.',
+                'Curso genograma na prática - Instituto Logos Drª Marizete Rodrigues',
+                'Curso terapia de casal com problemas sexual - Instituto Logos Drª Marizete Rodrigues',
+                'Curso de capacitação em Treino de habilidades sociais - ministrado por Edlei Tibo Passos.',
+                'Curso básico do teste de personalidade, palográfico - Ministrado pelo Psicólogo Vinicius Santana Soares.',
+                'Workshop sexualidade, diversidade e gênero - pelo CIAP educacional, Cacoal - RO - Ministrado pelo Dr Aneron de Avíla Canais.',
+                'Curso produtividade e performasse – conquer',
+                'Curso Formação em liderança – conquer',
+                'Curso inteligência  emocional 4.0 -conquer'
+              ].map((item, idx) => (
+                <li key={idx} className="flex gap-3 items-start border-b border-surface-soft/30 pb-3 last:border-b-0 last:pb-0">
+                  <Check size={16} className="text-gold shrink-0 mt-1.5" />
+                  <span className="text-muted-light text-sm sm:text-base leading-relaxed">{item}</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check size={16} className="text-gold shrink-0 mt-1" />
-                  <div>
-                    <strong className="text-ice text-sm sm:text-base">Supervisor Clínico</strong>
-                    <p className="text-muted text-xs sm:text-sm">Orientador e supervisor clínico de práticas terapêuticas sistêmicas de outros profissionais.</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {/* 3. Cursos de Especialização e Extensão */}
-            <div className="p-6 rounded-xl bg-surface border border-surface-soft/60 space-y-4 lg:col-span-2">
-              <div className="flex items-center gap-3 text-gold">
-                <BookOpen size={22} />
-                <h3 className="font-display font-bold text-ice text-lg">Cursos de Extensão e Especializações Clínicas</h3>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                {/* Terapia de Casal */}
-                <div className="space-y-3">
-                  <h4 className="font-display font-semibold text-gold text-sm uppercase tracking-wider">Terapia de Casal & Relações</h4>
-                  <ul className="space-y-3">
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Curso Ser Terapeuta de Casal (Psi. Tatiana Perez)</span>
-                    </li>
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Curso Genograma na Prática (Inst. Logos — Drª Marizete Rodrigues)</span>
-                    </li>
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Terapia de Casal com Problema Sexual (Inst. Logos — Drª Marizete Rodrigues)</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Hipnose Clínica */}
-                <div className="space-y-3">
-                  <h4 className="font-display font-semibold text-gold text-sm uppercase tracking-wider">Hipnose Clínica</h4>
-                  <ul className="space-y-3">
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Curso de Hipnose Clínica e Clássica (Alberto Dell'Isola)</span>
-                    </li>
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Cursos de Hipnose na Prática (Olimar Teser)</span>
-                    </li>
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Curso Hipnose: Como Tratar Vícios (Alberto Dell'Isola)</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Luto e Apego */}
-                <div className="space-y-3">
-                  <h4 className="font-display font-semibold text-gold text-sm uppercase tracking-wider">Luto, Apego & Saúde Mental</h4>
-                  <ul className="space-y-3">
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Extensão em Psicoterapia do Luto (CIAP / Psi. Elione F. Arruda)</span>
-                    </li>
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Extensão em Apego, Luto e Separação (CIAP / Psi. Elione F. Arruda)</span>
-                    </li>
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Psicologia, Religião e Saúde Mental (Inst. de Psicologia e Logoterapia)</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Prática Geral */}
-                <div className="space-y-3">
-                  <h4 className="font-display font-semibold text-gold text-sm uppercase tracking-wider">Habilidades Sociais & Avaliação</h4>
-                  <ul className="space-y-3">
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Capacitação em Treino de Habilidades Sociais (Edlei Tibo Passos)</span>
-                    </li>
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Curso Básico do Teste de Personalidade Palográfico (Psi. Vinicius S. Soares)</span>
-                    </li>
-                    <li className="text-sm text-muted-light flex gap-2">
-                      <span className="text-gold">•</span>
-                      <span>Workshop Sexualidade, Diversidade e Gênero (CIAP / Dr. Aneron A. Canais)</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* 4. Desenvolvimento & Liderança (Escola Conquer) */}
-            <div className="p-6 rounded-xl bg-surface border border-surface-soft/60 space-y-4 lg:col-span-2">
-              <div className="flex items-center gap-3 text-gold">
-                <Compass size={22} />
-                <h3 className="font-display font-bold text-ice text-lg">Desenvolvimento Profissional & Liderança (Escola Conquer)</h3>
-              </div>
-              <p className="text-muted text-sm max-w-2xl">
-                Cursos executivos focados nas habilidades cruciais para o ecossistema empresarial e gestão de pessoas:
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-                <div className="p-4 rounded-lg bg-background/50 border border-surface-soft/40">
-                  <span className="text-gold text-xs font-semibold uppercase tracking-wider">Liderança</span>
-                  <h4 className="font-display font-bold text-ice mt-1">Formação em Liderança</h4>
-                </div>
-                <div className="p-4 rounded-lg bg-background/50 border border-surface-soft/40">
-                  <span className="text-gold text-xs font-semibold uppercase tracking-wider">Inteligência</span>
-                  <h4 className="font-display font-bold text-ice mt-1">Inteligência Emocional 4.0</h4>
-                </div>
-                <div className="p-4 rounded-lg bg-background/50 border border-surface-soft/40">
-                  <span className="text-gold text-xs font-semibold uppercase tracking-wider">Eficiência</span>
-                  <h4 className="font-display font-bold text-ice mt-1">Produtividade & Performance</h4>
-                </div>
-              </div>
-            </div>
-
+              ))}
+            </ul>
           </div>
 
           <GoldenDivider width="100%" alignment="center" animated={false} className="my-16" />
@@ -205,6 +73,7 @@ export default function FormacaoPage() {
               Registro profissional ativo sob responsabilidade do Conselho Regional de Psicologia (CRP). Toda a conduta e os atendimentos realizados (individuais, conjugais ou familiares) seguem rigorosamente as determinações éticas do Código de Ética Profissional do Psicólogo (CEPP / CFP), resguardando o sigilo absoluto, a responsabilidade técnica e o rigor científico.
             </p>
           </div>
+
         </div>
       </section>
 

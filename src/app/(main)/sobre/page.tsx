@@ -130,13 +130,13 @@ export default function SobrePage() {
             <SectionHeader label="Foco Clínico" title="Por que trabalho com homens que lideram" />
             <div className="space-y-4 text-muted-light leading-relaxed text-sm sm:text-base">
               <p>
-                Homens em posição de liderança — empresários, diretores, gestores — são treinados a vida toda para resolver problemas, tomar decisões rápidas, suportar pressão e performar. Mas raramente alguém os ensina a governar o que sentem. E quando o peso interno acumulado ultrapassa o limite físico e emocional, o colapso não avisa. Ele simplesmente cobra.
-              </p>
-              <p className="border-l-2 border-gold pl-4 italic text-ice">
-                &ldquo;Creio que o homem é o pilar da casa, a força de sustentação, de provisão e de proteção. Só que essa força não pode ser de fachada — parecer bem visto de fora, mas por dentro oco e quebrando. A verdadeira força é construída de dentro para fora. Quando o homem cai, não cai sozinho: toda a sua família paga o preço e é danificada. Fortifico homens para que possam reparar e proteger suas famílias (esposas e filhos) e, de forma saudável, os seus negócios.&rdquo;
+                Porque homens em posição de liderança são treinados para resolver, decidir, aguentar e performar. Mas ninguém os ensina a governar o que sentem. E quando o peso interno ultrapassa a capacidade de suportar, o colapso não avisa. Ele simplesmente cobra.
               </p>
               <p>
-                Por trás da fachada de controle inabalável, existe alguém que precisa de um espaço seguro onde não precise performar ou fingir. Onde possa ser honesto com as próprias falhas e dores, para então começar a reconstruir com fundamento real.
+                Eu escolhi trabalhar com esses homens porque sei que, por trás da fachada de controle, existe alguém que precisa de um espaço onde não precise performar. Onde possa ser honesto. Onde possa começar a reconstruir.
+              </p>
+              <p className="border-l-2 border-gold pl-4 italic text-ice">
+                [Creio que o homem é  o pilar da casa, é a força de  sustentação, de provisão e proteção, só que essa força não pode ser de fachada, parecer bem visto de fora, mas por dentro oco quebrando, a verdadeira força é de dentro para fora, quando o homem cai, não é só ele mas  toda sua família paga  o preço e é danificada, fortifico homens para buscar reparar e proteger famílias (filhos e esposas) e também o negócio)]
               </p>
             </div>
           </div>
