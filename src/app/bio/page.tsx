@@ -172,7 +172,7 @@ interface ProductGridProps {
 
 function ProductGrid({ products }: ProductGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-4">
+    <div className="flex flex-col gap-5 w-full mt-4">
       {products.map((product) => (
         <ProductBannerCard key={product.href} product={product} />
       ))}
@@ -188,39 +188,37 @@ function ProductBannerCard({ product }: ProductBannerCardProps) {
   return (
     <Link
       href={product.href}
-      className="group flex flex-col rounded-2xl border border-surface-soft bg-surface/40 hover:bg-surface hover:border-gold/30 hover:shadow-2xl hover:shadow-gold/[0.02] hover:scale-[1.01] transition-all duration-300 overflow-hidden cursor-pointer"
+      className="w-full relative rounded-2xl border border-surface-soft bg-surface/40 overflow-hidden group hover:border-gold/30 hover:bg-surface hover:shadow-2xl hover:shadow-gold/[0.01] hover:scale-[1.01] transition-all duration-300 flex items-stretch min-h-[150px] cursor-pointer"
     >
-      {/* Upper image with overlay */}
-      <div className="relative h-44 w-full bg-black overflow-hidden shrink-0 border-b border-surface-soft/40">
+      {/* Gradient overlay to blend image on the right */}
+      <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/90 to-transparent z-10 pointer-events-none" />
+
+      {/* Product Image peeking on the right */}
+      <div className="absolute right-0 top-0 bottom-0 w-[40%] md:w-1/2 h-full z-0 opacity-40 md:opacity-60 transition-transform duration-500 group-hover:scale-102">
         <Image
           src={product.image}
           alt={product.title}
           fill
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-103"
-          sizes="(max-width: 768px) 100vw, 360px"
+          className="object-cover object-top"
+          sizes="(max-width: 768px) 150px, 400px"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90 z-10" />
-        
-        {/* Category Badge */}
-        <div className="absolute top-4 left-4 z-20">
-          <span className="rounded-md bg-background/80 border border-surface-soft/60 px-2 py-0.5 text-[9px] font-semibold text-gold tracking-wider uppercase backdrop-blur-sm">
-            {product.badge}
-          </span>
-        </div>
       </div>
 
-      {/* Description Info */}
-      <div className="p-5 flex flex-col justify-between flex-grow space-y-4">
-        <div className="space-y-1.5 text-left">
-          <h4 className="font-display font-bold text-ice text-base group-hover:text-gold transition-colors">
+      {/* Info details on the left */}
+      <div className="relative z-20 p-6 flex flex-col justify-between items-start space-y-4 max-w-[65%] md:max-w-[70%] text-left">
+        <div className="space-y-2">
+          <span className="inline-block rounded-md bg-gold/10 border border-gold/20 px-2 py-0.5 text-[9px] font-semibold tracking-wider text-gold uppercase">
+            {product.badge}
+          </span>
+          <h4 className="font-display font-black text-ice text-base sm:text-lg leading-tight tracking-wide group-hover:text-gold transition-colors">
             {product.title}
           </h4>
-          <p className="text-muted text-xs leading-relaxed line-clamp-2">
+          <p className="text-muted text-xs leading-relaxed line-clamp-2 md:line-clamp-none">
             {product.description}
           </p>
         </div>
 
-        <div className="flex items-center justify-start text-gold text-xs font-semibold uppercase gap-1 group-hover:translate-x-0.5 transition-all">
+        <div className="flex items-center justify-start text-gold text-xs font-semibold uppercase gap-1 group-hover:translate-x-1 transition-all">
           <span>{product.ctaLabel}</span>
           <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
         </div>
