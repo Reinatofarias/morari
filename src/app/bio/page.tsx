@@ -27,25 +27,21 @@ export default function BioLandingPage() {
           0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.15; }
           50% { transform: translate(-40px, 40px) scale(1.1); opacity: 0.25; }
         }
-        @keyframes float-topo {
-          0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
-          50% { transform: translateY(-15px) scale(1.03) rotate(0.5deg); }
-        }
       `}} />
 
       {/* 2. BACKGROUND ELEMENTS */}
       
-      {/* A. Silhouette Portrait Backdrop (blurred and dark) */}
-      <div className="absolute inset-0 pointer-events-none select-none z-0 opacity-[0.06] overflow-hidden">
+      {/* A. Subtle Background Image Backdrop */}
+      <div className="absolute inset-0 pointer-events-none select-none z-0 opacity-[0.04] overflow-hidden">
         <Image
-          src={portraitAssets.profileSide.src}
-          alt="Backdrop Portrait Silhouette"
+          src="/assets/images/Background.jpeg"
+          alt="Backdrop Portrait"
           fill
-          className="object-cover object-center blur-[40px] scale-[1.05] grayscale"
+          className="object-cover object-center blur-[6px] scale-[1.03] grayscale"
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-background/50" />
+        <div className="absolute inset-0 bg-background/60" />
       </div>
 
       {/* B. Dynamic Pulsing Orbiting Glows */}
@@ -60,41 +56,23 @@ export default function BioLandingPage() {
 
       {/* C. SVG Noise/Grain Overlay */}
       <div 
-        className="absolute inset-0 opacity-[0.025] pointer-events-none select-none z-[2]"
+        className="absolute inset-0 opacity-[0.02] pointer-events-none select-none z-[2]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* D. Geometric Dot Grid */}
+      {/* D. Geometric Line Grid Overlay */}
       <div 
-        className="absolute inset-0 opacity-[0.02] pointer-events-none select-none z-[3]"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none select-none z-[3]"
         style={{
-          backgroundImage: `radial-gradient(circle, rgba(212,175,55,0.3) 1px, transparent 1px)`,
-          backgroundSize: '28px 28px',
+          backgroundImage: `
+            linear-gradient(to right, rgba(212,175,55,0.12) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(212,175,55,0.12) 1px, transparent 1px)
+          `,
+          backgroundSize: '45px 45px',
         }}
       />
-
-      {/* E. Fluid Topography Gradient Waves */}
-      <svg 
-        className="absolute inset-0 w-full h-full opacity-[0.045] pointer-events-none select-none z-[4] blur-[1px]" 
-        style={{ animation: 'float-topo 22s ease-in-out infinite' }}
-        xmlns="http://www.w3.org/2000/svg" 
-        viewBox="0 0 1440 900" 
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.8" />
-            <stop offset="50%" stopColor="#C5A028" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#8A7322" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <path d="M-100,200 C300,100 600,400 900,200 C1200,0 1300,300 1600,100" fill="none" stroke="url(#gold-grad)" strokeWidth="2" strokeDasharray="6,6" />
-        <path d="M-100,450 C400,250 500,650 1000,350 C1300,150 1400,500 1600,300" fill="none" stroke="url(#gold-grad)" strokeWidth="1.5" />
-        <path d="M-100,700 C200,600 700,800 1100,550 C1300,400 1400,750 1600,600" fill="none" stroke="url(#gold-grad)" strokeWidth="2.5" />
-        <path d="M-100,100 C300,300 500,-100 800,150 C1100,400 1200,100 1600,250" fill="none" stroke="url(#gold-grad)" strokeWidth="1" strokeDasharray="3,3" />
-      </svg>
 
       {/* 3. MAIN CONTAINER - Floating Glass Panel */}
       <div className="max-w-lg w-full space-y-10 z-10 flex flex-col items-center bg-surface/5 backdrop-blur-lg border border-surface-soft/40 p-6 sm:p-10 rounded-3xl shadow-[0_24px_50px_-12px_rgba(0,0,0,0.8)]">
