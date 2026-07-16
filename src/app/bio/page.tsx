@@ -36,7 +36,7 @@ export default function BioLandingPage() {
       {/* 2. BACKGROUND ELEMENTS */}
       
       {/* A. Silhouette Portrait Backdrop (blurred and dark) */}
-      <div className="absolute inset-0 pointer-events-none select-none z-[-16] opacity-[0.06] overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none select-none z-0 opacity-[0.06] overflow-hidden">
         <Image
           src={portraitAssets.profileSide.src}
           alt="Backdrop Portrait Silhouette"
@@ -50,17 +50,17 @@ export default function BioLandingPage() {
 
       {/* B. Dynamic Pulsing Orbiting Glows */}
       <div 
-        className="absolute top-[-100px] left-1/3 w-[600px] h-[600px] bg-gold rounded-full blur-[140px] pointer-events-none -z-10" 
+        className="absolute top-[-100px] left-1/3 w-[600px] h-[600px] bg-gold rounded-full blur-[140px] pointer-events-none z-[1]" 
         style={{ animation: 'orbit-gold 12s ease-in-out infinite' }}
       />
       <div 
-        className="absolute bottom-[100px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-blue-dark rounded-full blur-[165px] pointer-events-none -z-10" 
+        className="absolute bottom-[100px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-blue-dark rounded-full blur-[165px] pointer-events-none z-[1]" 
         style={{ animation: 'orbit-blue 16s ease-in-out infinite' }}
       />
 
       {/* C. SVG Noise/Grain Overlay */}
       <div 
-        className="absolute inset-0 opacity-[0.025] pointer-events-none select-none z-[-12]"
+        className="absolute inset-0 opacity-[0.025] pointer-events-none select-none z-[2]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
@@ -68,7 +68,7 @@ export default function BioLandingPage() {
 
       {/* D. Geometric Dot Grid */}
       <div 
-        className="absolute inset-0 opacity-[0.02] pointer-events-none select-none z-[-14]"
+        className="absolute inset-0 opacity-[0.02] pointer-events-none select-none z-[3]"
         style={{
           backgroundImage: `radial-gradient(circle, rgba(212,175,55,0.3) 1px, transparent 1px)`,
           backgroundSize: '28px 28px',
@@ -77,7 +77,7 @@ export default function BioLandingPage() {
 
       {/* E. Fluid Topography Gradient Waves */}
       <svg 
-        className="absolute inset-0 w-full h-full opacity-[0.045] pointer-events-none select-none z-[-13] blur-[1px]" 
+        className="absolute inset-0 w-full h-full opacity-[0.045] pointer-events-none select-none z-[4] blur-[1px]" 
         style={{ animation: 'float-topo 22s ease-in-out infinite' }}
         xmlns="http://www.w3.org/2000/svg" 
         viewBox="0 0 1440 900" 
