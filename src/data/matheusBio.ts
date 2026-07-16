@@ -15,7 +15,7 @@ export const matheusProducts: BioProduct[] = [
     title: "O Código da Paz Conjugal",
     description: "Produto para homens que precisam reconstruir presença, comunicação e responsabilidade dentro do casamento.",
     href: "/lp/codigo-da-paz-conjugal",
-    image: "/assets/images/f1.jpeg",
+    image: "/assets/images/Código da Paz Conjugal.png",
     ctaLabel: "Ver página",
     highlight: true,
     category: "casamento"
@@ -25,7 +25,7 @@ export const matheusProducts: BioProduct[] = [
     title: "Programa de Inteligência Emocional para Homens",
     description: "Programa para homens que lideram e precisam transformar pressão interna em governo emocional prático.",
     href: "/lp/programa-de-inteligencia-emocional-para-homens",
-    image: "/assets/images/f2.jpeg",
+    image: "/assets/images/Programa de Inteligencia Emocional masculina.png",
     ctaLabel: "Ver página",
     highlight: true,
     category: "lideranca"
@@ -45,7 +45,7 @@ export const matheusProducts: BioProduct[] = [
     title: "A Engrenagem Fantasma",
     description: "Produto sobre os mecanismos invisíveis que mantêm homens presos aos mesmos padrões emocionais.",
     href: "/lp/a-engrenagem-fantasma",
-    image: "/assets/images/f4.jpeg",
+    image: "/assets/images/Engrenagem Fantasma.png",
     ctaLabel: "Ver página",
     highlight: false,
     category: "padroes"
@@ -55,7 +55,7 @@ export const matheusProducts: BioProduct[] = [
     title: "O Código H",
     description: "Produto de entrada para homens que querem entender identidade, responsabilidade e saúde emocional masculina sem autoajuda rasa.",
     href: "/lp/codigo-h",
-    image: "/assets/images/f5.jpeg",
+    image: "/assets/images/Código H.png",
     ctaLabel: "Ver página",
     highlight: false,
     category: "identidade"

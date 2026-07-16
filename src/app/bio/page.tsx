@@ -185,6 +185,26 @@ interface ProductBannerCardProps {
 }
 
 function ProductBannerCard({ product }: ProductBannerCardProps) {
+  const isCustomGraphic = product.image.toLowerCase().endsWith('.png');
+
+  if (isCustomGraphic) {
+    return (
+      <Link
+        href={product.href}
+        className="w-full block relative overflow-hidden group hover:scale-[1.01] transition-all duration-300 rounded-2xl shadow-xl"
+      >
+        <Image
+          src={product.image}
+          alt={product.title}
+          width={800}
+          height={360}
+          className="w-full h-auto rounded-2xl border border-surface-soft/60 group-hover:border-gold/40 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-300"
+          priority={product.highlight}
+        />
+      </Link>
+    );
+  }
+
   return (
     <Link
       href={product.href}
