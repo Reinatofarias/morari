@@ -31,23 +31,8 @@ export default function BioLandingPage() {
           <div className="h-px flex-1 bg-surface-soft/60" />
         </div>
 
-        {/* 2. BANNER PRINCIPAL */}
-        <MainBanner />
-
-        {/* 3. SEÇÃO DE PRODUTOS */}
-        <div className="w-full space-y-6">
-          <div className="text-center space-y-2 max-w-xl mx-auto">
-            <h3 className="font-display font-bold text-ice text-xl sm:text-2xl tracking-tight">Produtos e Materiais</h3>
-            <p className="text-muted text-xs sm:text-sm leading-relaxed">
-              Caminhos práticos para homens que querem entender o que carregam antes que o peso cobres caro demais.
-            </p>
-          </div>
-          
-          <ProductGrid products={matheusProducts} />
-        </div>
-
-        {/* 4. BANNER DE ATENDIMENTO */}
-        <div className="w-full pt-4">
+        {/* 2. BANNER DE ATENDIMENTO */}
+        <div className="w-full">
           <Link
             href="/atendimentos"
             className="w-full block relative overflow-hidden group hover:scale-[1.01] transition-all duration-300 rounded-2xl shadow-xl"
@@ -60,6 +45,21 @@ export default function BioLandingPage() {
               className="w-full h-auto rounded-2xl border border-surface-soft/60 group-hover:border-gold/40 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-300"
             />
           </Link>
+        </div>
+
+        {/* 3. BANNER PRINCIPAL (DIAGNÓSTICO) */}
+        <MainBanner />
+
+        {/* 4. SEÇÃO DE PRODUTOS */}
+        <div className="w-full space-y-6">
+          <div className="text-center space-y-2 max-w-xl mx-auto">
+            <h3 className="font-display font-bold text-ice text-xl sm:text-2xl tracking-tight">Produtos e Materiais</h3>
+            <p className="text-muted text-xs sm:text-sm leading-relaxed">
+              Caminhos práticos para homens que querem entender o que carregam antes que o peso cobres caro demais.
+            </p>
+          </div>
+          
+          <ProductGrid products={matheusProducts} />
         </div>
 
         {/* 5. FOOTER MINIMAL */}
