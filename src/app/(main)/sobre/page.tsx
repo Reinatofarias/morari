@@ -33,19 +33,13 @@ export default function SobrePage() {
             <div className="md:col-span-7 space-y-4">
               <SectionHeader label="Quem sou" title="Matheus Morari" />
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Quem sou eu sou uma pergunta comum, mas responder não é simples, e podemos ter vários óticas e áreas diferente para essa resposta. Sou o filho mais novo de um casal ainda casado, oriundo do interior de São Paulo, filho de um policial e uma professora, em uma família que valoriza ordem, estudo, conduta e disciplina, busca por resolução e entregar mais do que se espera. Também sou neto de uma policial e dona de casa, e de um policial/advogado e costureira/professora, influenciado por essas figuras em minha personalidade.
+                Responder a &ldquo;Quem sou eu&rdquo; exige olhar por múltiplos ângulos. Sou o filho mais novo de um casal oriundo do interior de São Paulo — de um pai policial e uma mãe professora. Cresci sob a influência de figuras fortes de ordem, disciplina, conduta ética e a busca constante por entregar mais do que o esperado.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Assumo papéis importantes: como filho, busco honrar minha origem; como marido, levo a sério meu casamento e minha mulher; como pai, priorizo a educação pelo exemplo. Profissionalmente, sou apaixonado, buscando me destacar e ajudar os outros. Sou um amigo presente, embora às vezes não envie muitas mensagens. A fé católica é central em minha vida, assim como minha prática de jiu-jitsu(Faixa preta) e meus valores de família, honra, estudo, honestidade, religiosidade e integridade de uma entrega resolutiva.
+                Levo meus papéis com máxima seriedade: como filho, honro minhas origens; como marido, zelo pelo meu casamento; como pai, educo pelo exemplo diário. Minha fé católica e consagração a Nossa Senhora são a base da minha missão de vida, assim como a disciplina do jiu-jitsu, esporte no qual sou faixa preta.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Meu comportamento é ser comunicativo, paciente, assertivo, ativo e bem equilibrado emocionalmente. Temperamento sanguíneo, perfil dominante estável, personalidade de baixo neuroticismo e alta conscienciosidade. Neurodivergente autista, TDAH, AH/SD
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Fisicamente, sou um homem branco de 1,90m, 100+kg, com barba, cabelos pretos e óculos. Possuo habilidades como cozinhar, lutar, comunicar-me, tocar saxofone, resolver problemas, lidar com crise, pensar fora da caixa.
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                No entanto, reconheço que tenho meu lado ruim, conhecido apenas por aqueles que convivem comigo. Mas, acima de tudo, sou um filho de Deus, consagrado a Nossa Senhora, e minha missão é ser um canal de amor para apaziguar corações em conflito e promover a cura.
+                No aspecto prático, sou um homem de 1,90m e mais de 100kg, com barba, cabelos pretos e óculos. O fato de ser neurodivergente (diagnósticos de autismo, TDAH e AH/SD — Altas Habilidades / Superdotação) molda a minha forma de pensar: confere-me a capacidade de gerenciar crises, resolver problemas complexos com assertividade e pensar fora da caixa. Reúno dons práticos que vão da comunicação estratégica e da música (saxofone) à habilidade de lidar com momentos de forte pressão emocional, mantendo o autodomínio para apaziguar corações em conflito e promover a cura.
               </p>
             </div>
             <div className="md:col-span-5 relative flex justify-center mt-6 md:mt-0">
@@ -82,43 +76,13 @@ export default function SobrePage() {
             <div className="md:col-span-7 space-y-4">
               <SectionHeader label="Vocação" title="Como me tornei psicólogo" />
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Não sei você mais eu gosto de história, e vou revelar agora a minha história que me fez chegar aqui, o que me fez escolher psicologia. E me torno o profissional que sou hoje, e essa história norteia todo a minha atuação. Presta atenção.
+                Não há como compreender meu trabalho sem conhecer a história da minha escolha profissional. No terceiro ano do ensino médio, eu já me preparava para cursar Medicina Veterinária na UNIR em Rolim de Moura, seguindo um sonho de infância que contava com o apoio de toda a família.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Eu estava no 3° ano do ensino médio, estudando na escola de manhã e a tarde.
+                A reviravolta aconteceu nas férias do meio do ano. Em uma tarde, enquanto confeccionava terços e rezava em meu quarto, veio um clarão em minha mente com a palavra **Psicologia**. Sendo alguém com forte perfil de antecipação e de opiniões firmes, questionei aquela mudança súbita. A resposta que se fez presente em meu íntimo foi clara: o chamado divino era para cuidar de pessoas, *&ldquo;cuidar de gente e dos filhos de Deus&rdquo;*, e não de animais.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                No início do ano, tudo estava definido, como sempre, tenho a característica de antecipação, de buscar vivenciar as situações antes que elas ocorram, por isso não estava em crise vocacional, sofrendo para escolher qual curso fazer.
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Seria aquele que desde criança já dizia, que seria e brincava como tal, seria medicina veterinária. Como morava em Rolim seria na UNIR. E todos na família já sabiam e concordavam.
-              </p>
-              <p className="font-display font-semibold text-gold text-base sm:text-lg">
-                Porém ocorreu uma reviravolta
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Durante o período de férias no meio do ano, tudo mudou.
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Em um dia de tarde, enquanto estava confeccionando terços, e ao mesmo tempo rezando em meu quarto, me veio como um estalar de dedos, um &ldquo;clarão&rdquo;, a palavra **PSIOCOLOGIA**, como se alguém falace comigo, na mesma hora tive dúvida, pois não gosto de ficar mudando de opinião e dificilmente volto atrás de algo que já disse, ainda mais se disse pra todo mundo.
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Me questionei, mas psicologia? E fui rebatido na mesma hora, Deus respondeu, quero você cuidando de gente, dos meus filhos, e não de animais.
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Com isso entendi que seria uma missão, e isso me trouxe um conforto e aceitação imediata, como se sempre tivesse sido minha opção. E tudo fez sentido, pois a palavra psicologia significa estudo da alma. Isso também fortaleceu meu momento atual que estava muito ativo na igreja com os jovens e amigos próximos da escola os quais muitos eu orientava e acolhia suas questões, e me sentia no dever de ajuda-los a serem melhores.
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                A partir desse dia iniciou minha formação, pois eu deveria ser o melhor possível, dar tudo de mim, pois foi um chamado de Deus, então comecei a estudar sobre psicologia e me integrar sobre esse universo, para honrar minha missão e saber unir todos os dons que Deus me deu, com a ciência e o profissional.
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Me inscrevi para participar de um evento acadêmico, que o curso de psicologia, que tinha cidade está organizando, fui me impetiquei e tudo ficou calado. Já comecei a estuda o que eu podia e conseguia referente a essas áreas de atuação.
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                Muitos estranharam, alguns não apoiaram de início, mas continuei mesmo assim pois essa vocação foi plantada e cultivado, por Deus e assim continua. Tomei posse, me responsabilizei e corri e corro até hoje atrás da técnica e de todo aperfeiçoamento possível, para ser o melhor.
-              </p>
-              <p className="text-muted-light leading-relaxed text-sm sm:text-base font-medium text-ice">
-                E hoje posso ajudar as pessoas a ter uma vida melhor e a elevar suas potencialidades, a se encontrarem consigo, tendo mais saúde, qualidade de vida, melhores relacionamentos, sendo mais plenas, capacitadas e felizes, como psicólogo clínico, prestando serviço de psicoterapia e de muitas outras formas, de atuar, ajudando as pessoas a transformas suas vidas de dentro para fora.
+                Aquilo ressoou imediatamente como uma missão de vida. O significado da psicologia (&ldquo;o estudo da alma&rdquo;) traduzia a inclinação que eu já tinha de orientar, ouvir e acolher os jovens da igreja e meus colegas de escola. Desde então, tomei posse dessa vocação. Busquei a melhor técnica, me responsabilizei e corro atrás do aperfeiçoamento contínuo para unir dons pessoais, rigor científico e ética clínica, ajudando pessoas a se reconstruírem de dentro para fora.
               </p>
             </div>
           </div>
@@ -130,13 +94,13 @@ export default function SobrePage() {
             <SectionHeader label="Foco Clínico" title="Por que trabalho com homens que lideram" />
             <div className="space-y-4 text-muted-light leading-relaxed text-sm sm:text-base">
               <p>
-                Porque homens em posição de liderança são treinados para resolver, decidir, aguentar e performar. Mas ninguém os ensina a governar o que sentem. E quando o peso interno ultrapassa a capacidade de suportar, o colapso não avisa. Ele simplesmente cobra.
+                Homens em posição de liderança — empresários, diretores, gestores — são condicionados a resolver, decidir, aguentar pressões e performar o tempo todo. Mas raramente alguém os ensina a governar suas próprias emoções. Quando o peso interno acumulado ultrapassa os limites suportáveis, o colapso não avisa; ele simplesmente cobra o seu preço.
+              </p>
+              <p className="border-l-2 border-gold pl-4 italic text-ice bg-background/30 py-4 pr-4">
+                &ldquo;Creio que o homem é o pilar da casa, a força de sustentação, de provisão e proteção. Só que essa força não pode ser de fachada — parecer bem visto de fora, mas por dentro oco e quebrando. A verdadeira força é construída de dentro para fora. Quando o homem cai, não cai sozinho: toda a sua família paga o preço e é danificada. Fortifico homens para buscar reparar e proteger suas famílias (filhos e esposas) e também os seus negócios.&rdquo;
               </p>
               <p>
-                Eu escolhi trabalhar com esses homens porque sei que, por trás da fachada de controle, existe alguém que precisa de um espaço onde não precise performar. Onde possa ser honesto. Onde possa começar a reconstruir.
-              </p>
-              <p className="border-l-2 border-gold pl-4 italic text-ice">
-                [Creio que o homem é  o pilar da casa, é a força de  sustentação, de provisão e proteção, só que essa força não pode ser de fachada, parecer bem visto de fora, mas por dentro oco quebrando, a verdadeira força é de dentro para fora, quando o homem cai, não é só ele mas  toda sua família paga  o preço e é danificada, fortifico homens para buscar reparar e proteger famílias (filhos e esposas) e também o negócio)]
+                Por trás da fachada de controle inabalável, existe alguém que precisa de um espaço seguro onde não precise performar ou fingir. Onde possa ser honesto com as próprias falhas e dores, para então começar a reconstruir com fundamento real.
               </p>
             </div>
           </div>
