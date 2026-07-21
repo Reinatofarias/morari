@@ -3,7 +3,7 @@ export const SITE_NAME = 'Dr. Matheus Morari';
 export const SITE_DESCRIPTION = 'Psicólogo para homens que lideram';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://matheusmorari.com.br';
 
-export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5500000000000';
+export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5569984024809';
 export const WHATSAPP_MESSAGE = 'Olá, vim pelo site e gostaria de saber mais sobre o atendimento.';
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
