@@ -66,17 +66,17 @@ export default function CapturaPage() {
   };
 
   return (
-    <main className="min-h-screen text-foreground flex flex-col justify-between selection:bg-gold/30 selection:text-ice relative overflow-hidden bg-background">
+    <main className="min-h-screen text-foreground flex flex-col justify-between selection:bg-gold/30 selection:text-ice relative overflow-hidden">
       {/* Background Image of Matheus with luxury dark overlay */}
-      <div className="absolute inset-0 -z-10 w-full h-full">
+      <div className="absolute inset-0 -z-10 w-full h-full bg-background">
         <Image
           src={portraitAssets.library.src}
           alt="Matheus Morari Background"
           fill
-          className="object-cover object-center filter grayscale opacity-[0.08]"
+          className="object-cover object-center filter grayscale opacity-[0.09]"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/90 to-background z-0" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/90 to-background z-0" />
       </div>
 
       {/* Glow effects for premium dark mood */}
@@ -84,9 +84,9 @@ export default function CapturaPage() {
       <div className="absolute bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-blue-dark/20 rounded-full blur-[130px] pointer-events-none -z-10" />
 
       {/* Header */}
-      <header className="py-4 border-b border-surface-soft/20 bg-background/50 backdrop-blur-sm sticky top-0 z-40">
+      <header className="py-5 border-b border-surface-soft/20 bg-background/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-6 flex items-center justify-between">
-          <div className="relative h-8 w-32 sm:h-10 sm:w-40">
+          <div className="relative h-12 w-48 sm:h-16 sm:w-60">
             <Image
               src="/assets/branding/logo-horizontal-nobg.png"
               alt="Dr. Matheus Morari"
