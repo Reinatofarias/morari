@@ -11,12 +11,13 @@ import Image from 'next/image';
 export default function CapturaPage() {
   const [nome, setNome] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [perfil, setPerfil] = useState('');
   const [desafio, setDesafio] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!nome.trim() || !whatsapp.trim()) return;
+    if (!nome.trim() || !whatsapp.trim() || !perfil) return;
 
     setStatus('loading');
 
@@ -24,6 +25,7 @@ export default function CapturaPage() {
     const payload = {
       nome: nome.trim(),
       whatsapp: whatsapp.trim(),
+      perfil: perfil,
       desafio: desafio.trim() || 'Não especificado',
       timestamp: new Date().toISOString(),
       source: 'landing_page_captura',
@@ -49,7 +51,7 @@ export default function CapturaPage() {
       setStatus('success');
 
       // Pre-filled WhatsApp message redirect
-      const rawMsg = `Olá Dr. Matheus, acabei de preencher o diagnóstico no site e quero garantir minha sessão de triagem. Meu nome é ${nome.trim()} e meu maior desafio hoje é: ${desafio.trim() || 'Melhorar governo interno'}.`;
+      const rawMsg = `Olá Dr. Matheus, acabei de preencher o diagnóstico no site e quero garantir minha sessão de triagem. Meu nome é ${nome.trim()}, atuo como ${perfil} e meu maior desafio hoje é: ${desafio.trim() || 'Melhorar governo interno'}.`;
       const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
       
       // Delay slightly to show success message before redirect
@@ -64,17 +66,17 @@ export default function CapturaPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background text-foreground flex flex-col justify-between selection:bg-gold/30 selection:text-ice relative">
+    <main className="min-h-screen text-foreground flex flex-col justify-between selection:bg-gold/30 selection:text-ice relative overflow-hidden bg-background">
       {/* Background Image of Matheus with luxury dark overlay */}
-      <div className="fixed inset-0 -z-20 w-full h-full">
+      <div className="absolute inset-0 -z-10 w-full h-full">
         <Image
           src={portraitAssets.library.src}
           alt="Matheus Morari Background"
           fill
-          className="object-cover object-center filter grayscale opacity-10"
+          className="object-cover object-center filter grayscale opacity-[0.08]"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background z-0" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/90 to-background z-0" />
       </div>
 
       {/* Glow effects for premium dark mood */}
@@ -82,10 +84,16 @@ export default function CapturaPage() {
       <div className="absolute bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-blue-dark/20 rounded-full blur-[130px] pointer-events-none -z-10" />
 
       {/* Header */}
-      <header className="py-6 border-b border-surface-soft/20 bg-background/50 backdrop-blur-sm sticky top-0 z-40">
+      <header className="py-4 border-b border-surface-soft/20 bg-background/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-6 flex items-center justify-between">
-          <div className="font-display font-bold text-ice tracking-wider text-sm sm:text-base">
-            DR. MATHEUS MORARI
+          <div className="relative h-8 w-32 sm:h-10 sm:w-40">
+            <Image
+              src="/assets/branding/logo-horizontal-nobg.png"
+              alt="Dr. Matheus Morari"
+              fill
+              className="object-contain object-left"
+              priority
+            />
           </div>
           <div className="text-[10px] sm:text-xs text-muted-light font-semibold uppercase tracking-wider flex items-center gap-1.5 border border-surface-soft px-3 py-1 rounded bg-surface/40">
             <Lock size={12} className="text-gold" />
@@ -176,6 +184,35 @@ export default function CapturaPage() {
                 <span className="text-[10px] text-muted block">
                   Utilize o formato com DDD. Ex: (69) 998402480
                 </span>
+              </div>
+
+              {/* Input: Perfil / Ocupação */}
+              <div className="space-y-1.5">
+                <label htmlFor="perfil" className="text-xs font-semibold uppercase tracking-wider text-muted-light block">
+                  Qual o seu perfil / ocupação?
+                </label>
+                <div className="relative">
+                  <select
+                    id="perfil"
+                    required
+                    value={perfil}
+                    onChange={(e) => setPerfil(e.target.value)}
+                    className="w-full bg-background border border-surface-soft rounded-lg px-4 py-3 text-ice text-sm focus:border-gold focus:outline-none transition-all appearance-none cursor-pointer"
+                    disabled={status === 'loading'}
+                  >
+                    <option value="" disabled className="text-muted">Selecione uma opção...</option>
+                    <option value="Empreendedor" className="bg-surface text-ice">Empreendedor</option>
+                    <option value="Profissional Liberal" className="bg-surface text-ice">Profissional Liberal (Médico, Advogado, etc.)</option>
+                    <option value="Diretor / Gestor / Executivo" className="bg-surface text-ice">Diretor / Gestor / Executivo</option>
+                    <option value="Outro" className="bg-surface text-ice">Outro cargo de responsabilidade</option>
+                  </select>
+                  {/* Custom Arrow Accent */}
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gold">
+                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                    </svg>
+                  </div>
+                </div>
               </div>
 
               {/* Input Qualificadora: Desafio */}
