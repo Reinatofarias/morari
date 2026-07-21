@@ -6,6 +6,7 @@ import { YouTubeEmbed } from '@/components/ui/YouTubeEmbed';
 import { portraitAssets } from '@/lib/visual-assets';
 import { WHATSAPP_NUMBER } from '@/lib/constants';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function CapturaPage() {
   const [nome, setNome] = useState('');
@@ -63,7 +64,19 @@ export default function CapturaPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background text-foreground flex flex-col justify-between selection:bg-gold/30 selection:text-ice">
+    <main className="min-h-screen bg-background text-foreground flex flex-col justify-between selection:bg-gold/30 selection:text-ice relative">
+      {/* Background Image of Matheus with luxury dark overlay */}
+      <div className="fixed inset-0 -z-20 w-full h-full">
+        <Image
+          src={portraitAssets.library.src}
+          alt="Matheus Morari Background"
+          fill
+          className="object-cover object-center filter grayscale opacity-10"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background z-0" />
+      </div>
+
       {/* Glow effects for premium dark mood */}
       <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-gold/[0.015] rounded-full blur-[130px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-blue-dark/20 rounded-full blur-[130px] pointer-events-none -z-10" />
@@ -85,9 +98,6 @@ export default function CapturaPage() {
       <section className="flex-1 max-w-4xl mx-auto w-full px-6 py-12 md:py-16 space-y-12">
         {/* Copy - Hormozi Style Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <span className="text-[10px] font-bold text-gold tracking-widest uppercase bg-gold/10 px-3 py-1 rounded border border-gold/20">
-            Diagnóstico Confidencial para Homens que Lideram
-          </span>
           <h1 className="font-display font-bold text-ice text-3xl sm:text-4xl md:text-[2.75rem] leading-[1.1] tracking-tight">
             Você está vencendo fora, mas <span className="text-gold">perdendo o governo</span> de si mesmo?
           </h1>
@@ -107,10 +117,6 @@ export default function CapturaPage() {
 
         {/* The Action Card - Form */}
         <div className="max-w-xl mx-auto bg-surface border border-surface-soft/60 rounded-2xl p-6 sm:p-8 shadow-2xl relative">
-          <div className="absolute top-0 right-8 -translate-y-1/2 bg-gold/10 border border-gold/20 text-gold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded backdrop-blur-sm flex items-center gap-1">
-            <Sparkles size={10} />
-            Sem Spam
-          </div>
 
           <div className="text-center space-y-2 mb-6">
             <h3 className="font-display font-bold text-ice text-xl">
