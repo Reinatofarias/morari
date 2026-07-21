@@ -9,8 +9,8 @@ import { PathCard } from '@/components/cards/PathCard';
 import { GoldenDivider } from '@/components/ui/GoldenDivider';
 import { PAIN_POINTS, METHOD_STEPS, HOUSE_ROOMS } from '@/lib/constants';
 import { portraitAssets } from '@/lib/visual-assets';
-import Image from 'next/image';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
+import { AboutVideoTrigger } from '@/components/ui/AboutVideoTrigger';
 
 export const metadata: Metadata = {
   title: 'Dr. Matheus Morari — Psicólogo para Homens que Lideram',
@@ -122,19 +122,14 @@ export default function HomePage() {
       <section className="py-20 md:py-28 bg-blue-dark/30">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Photo */}
+            {/* Photo / Video Trigger */}
             <div className="relative">
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-surface-soft relative">
-                <Image
-                  src={portraitAssets.library.src}
-                  alt={portraitAssets.library.alt}
-                  fill
-                  className="object-cover object-top select-none"
-                  sizes="(max-width: 768px) 100vw, 450px"
-                />
-              </div>
-              {/* Golden accent */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-gold/20 rounded-2xl -z-10" />
+              <AboutVideoTrigger
+                imageSrc={portraitAssets.library.src}
+                imageAlt={portraitAssets.library.alt}
+                videoId="4IUCI-JB4nY"
+                videoTitle="O que eu entrego, como atendo e o que eu espero de Você"
+              />
             </div>
 
             {/* Text */}

@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { SectionHeader } from '@/components/sections/SectionHeader';
 import { GoldenDivider } from '@/components/ui/GoldenDivider';
+import { YouTubeEmbed } from '@/components/ui/YouTubeEmbed';
 import { portraitAssets } from '@/lib/visual-assets';
 import Image from 'next/image';
 
@@ -53,6 +54,24 @@ export default function SobrePage() {
                 />
               </div>
               <div className="absolute -bottom-3 -right-3 md:-right-4 w-20 h-20 border-2 border-gold/20 rounded-2xl -z-10" />
+            </div>
+          </div>
+
+          <GoldenDivider width="100%" alignment="center" animated={false} />
+
+          {/* Vídeo de Apresentação */}
+          <div className="space-y-8 py-4">
+            <SectionHeader 
+              label="Apresentação" 
+              title="O que eu entrego, como atendo e o que eu espero de Você" 
+              alignment="center"
+            />
+            <div className="max-w-3xl mx-auto w-full">
+              <YouTubeEmbed 
+                videoId="4IUCI-JB4nY" 
+                thumbnailUrl={portraitAssets.profileDesk.src}
+                title="O que eu entrego, como atendo e o que eu espero de Você"
+              />
             </div>
           </div>
 
