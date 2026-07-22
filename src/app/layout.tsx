@@ -60,6 +60,20 @@ export default function RootLayout({
       className={`${playfairDisplay.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-10891395687"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-10891395687');`,
+          }}
+        />
+        {/* End Google tag (gtag.js) */}
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
