@@ -54,37 +54,58 @@ export default function CapturaPage() {
       });
     }
 
+    // Programmatically trigger a real anchor link click so GTM's "Clique - Apenas links" trigger fires
+    const triggerWaLinkClick = (url: string) => {
+      if (typeof window === 'undefined') return;
+
+      // Push to dataLayer
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: 'gtm.linkClick',
+        'gtm.elementUrl': url,
+        'gtm.element': { href: url },
+        click_url: url,
+        target_url: url,
+      });
+
+      // Create physical anchor element to satisfy GTM Link Click listener
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
+
     try {
       const webhookUrl = process.env.NEXT_PUBLIC_LEAD_WEBHOOK_URL;
       
       if (webhookUrl) {
-        const response = await fetch(webhookUrl, {
+        await fetch(webhookUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(payload),
-          mode: 'no-cors', // standard for webhook posts if CORS isn't configured on spreadsheet apps
+          mode: 'no-cors',
         });
-        console.log('Webhook triggered successfully', response);
-      } else {
-        console.warn('Webhook URL not configured. Simulating success.');
       }
 
       setStatus('success');
       
-      // Delay slightly to show success message before redirect
+      // Fire GTM link click listener & redirect
       setTimeout(() => {
-        window.location.href = waUrl;
-      }, 1000);
+        triggerWaLinkClick(waUrl);
+      }, 500);
 
     } catch (err) {
       console.error('Error submitting lead:', err);
-      // Still allow WhatsApp redirect on error so lead isn't lost
       setStatus('success');
       setTimeout(() => {
-        window.location.href = waUrl;
-      }, 1000);
+        triggerWaLinkClick(waUrl);
+      }, 500);
     }
   };
 
