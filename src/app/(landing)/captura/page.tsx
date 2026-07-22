@@ -23,13 +23,23 @@ export default function CapturaPage() {
 
     setStatus('loading');
 
-    // Data payload
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString('pt-BR') + ' ' + currentDate.toLocaleTimeString('pt-BR');
+
+    // Data payload with isolated variables requested for Make.com / Google Sheets automation
     const payload = {
+      Data: formattedDate,
       nome: nome.trim(),
-      whatsapp: whatsapp.trim(),
-      perfil: perfil,
-      desafio: desafio.trim() || 'Não especificado',
-      timestamp: new Date().toISOString(),
+      Número: whatsapp.trim(),
+      Profissão: perfil,
+      "Maior dor": desafio.trim() || 'Não especificado',
+
+      // Alternative key formats for flexibility
+      data: formattedDate,
+      numero: whatsapp.trim(),
+      profissao: perfil,
+      maior_dor: desafio.trim() || 'Não especificado',
+      timestamp: currentDate.toISOString(),
       source: 'landing_page_captura',
     };
 
@@ -80,18 +90,16 @@ export default function CapturaPage() {
     };
 
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_LEAD_WEBHOOK_URL;
+      const webhookUrl = process.env.NEXT_PUBLIC_LEAD_WEBHOOK_URL || 'https://hook.us2.make.com/v5sidsdvt1ccp5nd9w6mdi284ydxr416';
       
-      if (webhookUrl) {
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-          mode: 'no-cors',
-        });
-      }
+      await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        mode: 'no-cors',
+      });
 
       setStatus('success');
       
