@@ -14,6 +14,7 @@ export default function CapturaPage() {
   const [perfil, setPerfil] = useState('');
   const [desafio, setDesafio] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [redirectWaUrl, setRedirectWaUrl] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +31,27 @@ export default function CapturaPage() {
       timestamp: new Date().toISOString(),
       source: 'landing_page_captura',
     };
+
+    // Pre-filled WhatsApp message redirect URL with wa.me
+    const rawMsg = `Olá Dr. Matheus, acabei de preencher o diagnóstico no site e quero garantir minha sessão de triagem. Meu nome é ${nome.trim()}, atuo como ${perfil} e meu maior desafio hoje é: ${desafio.trim() || 'Melhorar governo interno'}.`;
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
+    setRedirectWaUrl(waUrl);
+
+    // Push GTM event with gtm.elementUrl set to wa.me for GTM Click URL triggers
+    if (typeof window !== 'undefined') {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: 'gtm.linkClick',
+        'gtm.elementUrl': waUrl,
+        click_url: waUrl,
+        target_url: waUrl,
+        link_url: waUrl,
+      });
+      (window as any).dataLayer.push({
+        event: 'whatsapp_lead_submit',
+        click_url: waUrl,
+      });
+    }
 
     try {
       const webhookUrl = process.env.NEXT_PUBLIC_LEAD_WEBHOOK_URL;
@@ -49,10 +71,6 @@ export default function CapturaPage() {
       }
 
       setStatus('success');
-
-      // Pre-filled WhatsApp message redirect
-      const rawMsg = `Olá Dr. Matheus, acabei de preencher o diagnóstico no site e quero garantir minha sessão de triagem. Meu nome é ${nome.trim()}, atuo como ${perfil} e meu maior desafio hoje é: ${desafio.trim() || 'Melhorar governo interno'}.`;
-      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
       
       // Delay slightly to show success message before redirect
       setTimeout(() => {
@@ -61,7 +79,11 @@ export default function CapturaPage() {
 
     } catch (err) {
       console.error('Error submitting lead:', err);
-      setStatus('error');
+      // Still allow WhatsApp redirect on error so lead isn't lost
+      setStatus('success');
+      setTimeout(() => {
+        window.location.href = waUrl;
+      }, 1000);
     }
   };
 
@@ -177,9 +199,19 @@ export default function CapturaPage() {
                   <h4 className="font-display font-bold text-ice text-lg">
                     Diagnóstico Concluído!
                   </h4>
-                  <p className="text-muted-light text-sm max-w-xs mx-auto">
+                  <p className="text-muted-light text-sm max-w-xs mx-auto mb-4">
                     Redirecionando você para o WhatsApp oficial em alguns instantes para iniciar sua triagem...
                   </p>
+
+                  <a
+                    href={redirectWaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-background font-semibold text-sm px-6 py-3 rounded-lg shadow-lg transition-all"
+                  >
+                    <span>ABRIR SEU WHATSAPP AGORA</span>
+                    <ArrowRight size={16} />
+                  </a>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
