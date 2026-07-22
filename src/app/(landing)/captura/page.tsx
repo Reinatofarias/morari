@@ -33,14 +33,6 @@ export default function CapturaPage() {
       Número: whatsapp.trim(),
       Profissão: perfil,
       "Maior dor": desafio.trim() || 'Não especificado',
-
-      // Alternative key formats for flexibility
-      data: formattedDate,
-      numero: whatsapp.trim(),
-      profissao: perfil,
-      maior_dor: desafio.trim() || 'Não especificado',
-      timestamp: currentDate.toISOString(),
-      source: 'landing_page_captura',
     };
 
     // Pre-filled WhatsApp message redirect URL with wa.me
@@ -98,7 +90,6 @@ export default function CapturaPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
-        mode: 'no-cors',
       });
 
       setStatus('success');
