@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ShieldCheck, Lock, ArrowRight, Loader2, Sparkles, CheckCircle2 } from 'lucide-react';
 import { YouTubeEmbed } from '@/components/ui/YouTubeEmbed';
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { portraitAssets } from '@/lib/visual-assets';
 import { WHATSAPP_NUMBER } from '@/lib/constants';
 import Link from 'next/link';
@@ -330,6 +331,11 @@ export default function CapturaPage() {
               )}
             </div>
           </div>
+        </div>
+
+        {/* Testimonials Section */}
+        <div className="pt-8 border-t border-surface-soft/40">
+          <TestimonialsSection limit={3} />
         </div>
 
         {/* Objection Handling / Why trust Section */}
