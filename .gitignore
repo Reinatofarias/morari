@@ -19,6 +19,7 @@
 
 # production
 /build
+/agenda/
 
 # misc
 .DS_Store

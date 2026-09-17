@@ -1,0 +1,1 @@
+DELETE FROM public.appointments WHERE name = 'Teste Tipo' AND whatsapp = '(69) 98402-4809';

@@ -13,6 +13,20 @@
   --color-muted-light: #999999;
   --color-red-accent: #8B2500;
   --color-foreground: #F5F0EB;
+  --color-card: #1A1A1A;
+  --color-card-foreground: #F5F0EB;
+  --color-primary: #C9A84C;
+  --color-primary-foreground: #0A0A0A;
+  --color-secondary: #2A2A2A;
+  --color-secondary-foreground: #F5F0EB;
+  --color-muted-foreground: #999999;
+  --color-accent: #2A2A2A;
+  --color-accent-foreground: #F5F0EB;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #F5F0EB;
+  --color-border: rgba(201, 168, 76, 0.18);
+  --color-input: rgba(245, 240, 235, 0.16);
+  --color-ring: #C9A84C;
 
   /* === FONTS === */
   --font-display: var(--font-playfair-display), Georgia, serif;
@@ -89,4 +103,28 @@ html {
 /* === BODY SCROLL LOCK === */
 body.menu-open {
   overflow: hidden;
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@utility step-in {
+  animation: step-in 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@utility soft-transition {
+  transition:
+    background-color 0.28s ease,
+    border-color 0.28s ease,
+    color 0.28s ease,
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
 }
