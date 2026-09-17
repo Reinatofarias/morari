@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
+  CalendarDays,
   LayoutDashboard,
   Zap,
   Globe,
@@ -14,7 +15,15 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
-const menuItems = [
+type AdminMenuItem = {
+  name: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  badge?: string;
+  prefetch?: boolean;
+};
+
+const menuItems: AdminMenuItem[] = [
   {
     name: 'Visão Geral',
     href: '/admin',
@@ -35,6 +44,13 @@ const menuItems = [
     name: 'Tráfego Meta',
     href: '/admin/meta',
     icon: Share2,
+  },
+  {
+    name: 'Agenda',
+    href: '/agenda/admin',
+    icon: CalendarDays,
+    badge: 'Admin',
+    prefetch: false,
   },
   {
     name: 'Configurações & APIs',
@@ -91,6 +107,7 @@ export function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={item.prefetch}
               className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${
                 isActive
                   ? 'bg-amber-500 text-slate-950 font-semibold shadow-md shadow-amber-500/20'
