@@ -8,13 +8,24 @@ function safeEqual(left: string, right: string) {
   return timingSafeEqual(a, b);
 }
 
+function cleanEnv(value: string | undefined) {
+  return value?.trim().replace(/^['"]|['"]$/g, '');
+}
+
+function classifyUnexpected(error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  if (/invalid url|failed to parse url/i.test(message)) return 'invalid_supabase_url';
+  if (/fetch failed|network|econnreset|etimedout|enotfound/i.test(message)) return 'supabase_connection_failed';
+  return 'unexpected_server_error';
+}
+
 export async function POST(request: Request) {
   try {
     const { password } = (await request.json().catch(() => ({}))) as { password?: string };
-    const expected = process.env.ADMIN_PANEL_PASSWORD;
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-    const email = process.env.ADMIN_PANEL_EMAIL ?? 'painel@matheusmorari.com.br';
+    const expected = cleanEnv(process.env.ADMIN_PANEL_PASSWORD);
+    const url = cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_URL);
+    const serviceKey = cleanEnv(process.env.SUPABASE_SERVICE_ROLE_KEY);
+    const email = cleanEnv(process.env.ADMIN_PANEL_EMAIL) ?? 'painel@matheusmorari.com.br';
 
     if (!expected || !url || !serviceKey) {
       return NextResponse.json({ ok: false, reason: 'missing_config' });
@@ -22,6 +33,12 @@ export async function POST(request: Request) {
 
     if (!password || !safeEqual(password, expected)) {
       return NextResponse.json({ ok: false, reason: 'wrong_password' });
+    }
+
+    try {
+      new URL(url);
+    } catch {
+      return NextResponse.json({ ok: false, reason: 'invalid_supabase_url' });
     }
 
     const supabase = createClient(url, serviceKey, {
@@ -69,6 +86,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, email, tokenHash: link.data.properties.hashed_token });
   } catch (error) {
     console.error('[agenda-admin-unlock] unexpected failure', error);
-    return NextResponse.json({ ok: false, reason: 'unexpected_server_error' });
+    return NextResponse.json({ ok: false, reason: classifyUnexpected(error) });
   }
 }

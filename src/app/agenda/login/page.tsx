@@ -35,6 +35,8 @@ export default function AgendaLoginPage() {
         const details: Record<string, string> = {
           missing_config: 'Configuracao incompleta na Vercel.',
           wrong_password: 'Senha incorreta.',
+          invalid_supabase_url: 'A URL do Supabase esta invalida na Vercel.',
+          supabase_connection_failed: 'A Vercel nao conseguiu conectar ao Supabase.',
           supabase_admin_key_invalid: 'A service role key do Supabase parece invalida ou de outro projeto.',
           agenda_schema_missing: 'As tabelas da agenda ainda nao existem no Supabase configurado.',
           create_role_failed: 'Nao foi possivel criar a permissao de admin no Supabase.',
