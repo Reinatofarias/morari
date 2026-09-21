@@ -27,20 +27,35 @@ export async function POST(request: Request) {
     auth: { autoRefreshToken: false, persistSession: false },
   });
 
-  const { data: existing } = await supabase.auth.admin.listUsers();
-  let user = existing.users.find((item) => item.email?.toLowerCase() === email.toLowerCase()) ?? null;
+  const existing = await supabase.auth.admin.listUsers();
+  if (existing.error) {
+    console.error('[agenda-admin-unlock] listUsers failed', existing.error.message);
+    return NextResponse.json({ ok: false, reason: 'supabase_admin_key_invalid' }, { status: 500 });
+  }
+
+  let user = existing.data.users.find((item) => item.email?.toLowerCase() === email.toLowerCase()) ?? null;
 
   if (!user) {
     const created = await supabase.auth.admin.createUser({ email, email_confirm: true });
     if (created.error || !created.data.user) {
-      return NextResponse.json({ ok: false, reason: created.error?.message ?? 'create_user_failed' }, { status: 500 });
+      console.error('[agenda-admin-unlock] createUser failed', created.error?.message);
+      return NextResponse.json({ ok: false, reason: 'create_user_failed' }, { status: 500 });
     }
     user = created.data.user;
   }
 
-  const role = await supabase.from('user_roles').upsert({ user_id: user.id, role: 'admin' }, { onConflict: 'user_id,role' });
+  const currentRole = await supabase.from('user_roles').select('id').eq('user_id', user.id).eq('role', 'admin').maybeSingle();
+  if (currentRole.error) {
+    console.error('[agenda-admin-unlock] read role failed', currentRole.error.message);
+    return NextResponse.json({ ok: false, reason: 'user_roles_unavailable' }, { status: 500 });
+  }
+
+  const role = currentRole.data
+    ? { error: null }
+    : await supabase.from('user_roles').insert({ user_id: user.id, role: 'admin' });
   if (role.error) {
-    return NextResponse.json({ ok: false, reason: role.error.message }, { status: 500 });
+    console.error('[agenda-admin-unlock] insert role failed', role.error.message);
+    return NextResponse.json({ ok: false, reason: 'create_role_failed' }, { status: 500 });
   }
 
   const link = await supabase.auth.admin.generateLink({
@@ -48,7 +63,8 @@ export async function POST(request: Request) {
     email,
   });
   if (link.error || !link.data.properties?.hashed_token) {
-    return NextResponse.json({ ok: false, reason: link.error?.message ?? 'magiclink_failed' }, { status: 500 });
+    console.error('[agenda-admin-unlock] generateLink failed', link.error?.message);
+    return NextResponse.json({ ok: false, reason: 'magiclink_failed' }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true, email, tokenHash: link.data.properties.hashed_token });

@@ -30,9 +30,17 @@ export default function AgendaLoginPage() {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ password }),
       });
-      const result = (await response.json()) as { ok?: boolean; tokenHash?: string };
+      const result = (await response.json()) as { ok?: boolean; tokenHash?: string; reason?: string };
       if (!response.ok || !result.ok || !result.tokenHash) {
-        setMessage('Senha incorreta ou configuracao incompleta.');
+        const details: Record<string, string> = {
+          missing_config: 'Configuracao incompleta na Vercel.',
+          supabase_admin_key_invalid: 'A service role key do Supabase parece invalida ou de outro projeto.',
+          user_roles_unavailable: 'A tabela user_roles nao esta acessivel no Supabase.',
+          create_role_failed: 'Nao foi possivel criar a permissao de admin no Supabase.',
+          create_user_failed: 'Nao foi possivel criar o usuario admin no Supabase.',
+          magiclink_failed: 'Nao foi possivel gerar a sessao de login no Supabase.',
+        };
+        setMessage(result.reason ? details[result.reason] ?? result.reason : 'Senha incorreta.');
         return;
       }
       const { error } = await getAgendaSupabase().auth.verifyOtp({
