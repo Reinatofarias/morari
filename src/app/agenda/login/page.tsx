@@ -34,11 +34,13 @@ export default function AgendaLoginPage() {
       if (!response.ok || !result.ok || !result.tokenHash) {
         const details: Record<string, string> = {
           missing_config: 'Configuracao incompleta na Vercel.',
+          wrong_password: 'Senha incorreta.',
           supabase_admin_key_invalid: 'A service role key do Supabase parece invalida ou de outro projeto.',
-          user_roles_unavailable: 'A tabela user_roles nao esta acessivel no Supabase.',
+          agenda_schema_missing: 'As tabelas da agenda ainda nao existem no Supabase configurado.',
           create_role_failed: 'Nao foi possivel criar a permissao de admin no Supabase.',
           create_user_failed: 'Nao foi possivel criar o usuario admin no Supabase.',
           magiclink_failed: 'Nao foi possivel gerar a sessao de login no Supabase.',
+          unexpected_server_error: 'Erro inesperado no servidor da agenda.',
         };
         setMessage(result.reason ? details[result.reason] ?? result.reason : 'Senha incorreta.');
         return;
