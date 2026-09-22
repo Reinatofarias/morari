@@ -30,8 +30,8 @@ export default function AgendaLoginPage() {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ password }),
       });
-      const result = (await response.json()) as { ok?: boolean; tokenHash?: string; reason?: string };
-      if (!response.ok || !result.ok || !result.tokenHash) {
+      const result = (await response.json()) as { ok?: boolean; email?: string; tempPassword?: string; tokenHash?: string; reason?: string };
+      if (!response.ok || !result.ok || (!result.tokenHash && (!result.email || !result.tempPassword))) {
         const details: Record<string, string> = {
           missing_config: 'Configuracao incompleta na Vercel.',
           wrong_password: 'Senha incorreta.',
@@ -42,15 +42,21 @@ export default function AgendaLoginPage() {
           create_role_failed: 'Nao foi possivel criar a permissao de admin no Supabase.',
           create_user_failed: 'Nao foi possivel criar o usuario admin no Supabase.',
           magiclink_failed: 'Nao foi possivel gerar a sessao de login no Supabase.',
+          temporary_password_failed: 'Nao foi possivel criar a sessao temporaria no Supabase.',
           unexpected_server_error: 'Erro inesperado no servidor da agenda.',
         };
         setMessage(result.reason ? details[result.reason] ?? result.reason : 'Senha incorreta.');
         return;
       }
-      const { error } = await getAgendaSupabase().auth.verifyOtp({
-        type: 'magiclink',
-        token_hash: result.tokenHash,
-      });
+      const { error } = result.email && result.tempPassword
+        ? await getAgendaSupabase().auth.signInWithPassword({
+            email: result.email,
+            password: result.tempPassword,
+          })
+        : await getAgendaSupabase().auth.verifyOtp({
+            type: 'magiclink',
+            token_hash: result.tokenHash!,
+          });
       if (error) throw new Error(error.message);
       router.replace('/agenda/admin');
       router.refresh();

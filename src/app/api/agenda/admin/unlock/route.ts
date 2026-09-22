@@ -1,4 +1,4 @@
-import { createHash, timingSafeEqual } from 'crypto';
+import { createHash, randomBytes, timingSafeEqual } from 'crypto';
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
@@ -74,16 +74,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: false, reason: 'create_role_failed' });
     }
 
-    const link = await supabase.auth.admin.generateLink({
-      type: 'magiclink',
-      email,
+    const tempPassword = randomBytes(32).toString('base64url');
+    const credentials = await supabase.auth.admin.updateUserById(user.id, {
+      email_confirm: true,
+      password: tempPassword,
     });
-    if (link.error || !link.data.properties?.hashed_token) {
-      console.error('[agenda-admin-unlock] generateLink failed', link.error?.message);
-      return NextResponse.json({ ok: false, reason: 'magiclink_failed' });
+    if (credentials.error) {
+      console.error('[agenda-admin-unlock] update temporary password failed', credentials.error.message);
+      return NextResponse.json({ ok: false, reason: 'temporary_password_failed' });
     }
 
-    return NextResponse.json({ ok: true, email, tokenHash: link.data.properties.hashed_token });
+    return NextResponse.json({ ok: true, email, tempPassword });
   } catch (error) {
     console.error('[agenda-admin-unlock] unexpected failure', error);
     return NextResponse.json({ ok: false, reason: classifyUnexpected(error) });
