@@ -31,6 +31,16 @@ async function adminJson<T>(url: string, init?: RequestInit): Promise<T> {
   return (await response.json()) as T;
 }
 
+async function jsonRequest<T>(url: string, init?: RequestInit): Promise<T> {
+  const response = await fetch(url, {
+    ...init,
+    headers: { 'content-type': 'application/json', ...(init?.headers ?? {}) },
+  });
+  const data = (await response.json().catch(() => ({}))) as T & { error?: string };
+  if (!response.ok) throw new BookingError(data.error ?? 'Operacao nao concluida.');
+  return data;
+}
+
 async function read<T>(run: () => Promise<T>): Promise<T> {
   try {
     return await run();
@@ -73,6 +83,11 @@ export async function fetchBookedTimes(date: string): Promise<string[]> {
   const { data, error } = await getAgendaSupabase().rpc('booked_times', { p_date: date });
   if (error) throw new BookingError(error.message);
   return ((data as string[] | null) ?? []).map(hhmm);
+}
+
+export async function fetchBookedTimesForDates(dates: string[]): Promise<Record<string, string[]>> {
+  const entries = await Promise.all(dates.map(async (date) => [date, await fetchBookedTimes(date)] as const));
+  return Object.fromEntries(entries);
 }
 
 export async function fetchAppointments(): Promise<Appointment[]> {
@@ -148,29 +163,11 @@ export async function bookAppointment(input: {
   notes?: string;
   kind?: AppointmentKind;
 }): Promise<Appointment> {
-  const { data, error } = await getAgendaSupabase().rpc('book_appointment', {
-    p_date: input.date,
-    p_start: input.start,
-    p_name: input.name,
-    p_whatsapp: input.whatsapp,
-    p_notes: input.notes ?? '',
-    p_kind: input.kind ?? 'Atendimento',
+  const result = await jsonRequest<{ appointment: Appointment }>('/api/agenda/book', {
+    method: 'POST',
+    body: JSON.stringify(input),
   });
-  if (error) throw new BookingError(error.message);
-  const row = Array.isArray(data) ? data[0] : data;
-  if (!row) throw new BookingError('Nao foi possivel concluir o agendamento.');
-  return {
-    id: row.id,
-    date: row.date,
-    start: hhmm(row.start_time),
-    end: hhmm(row.end_time),
-    name: row.name,
-    whatsapp: row.whatsapp,
-    notes: row.notes ?? '',
-    kind: (row.kind ?? 'Atendimento') as AppointmentKind,
-    status: row.status as AppointmentStatus,
-    createdAt: row.created_at,
-  };
+  return result.appointment;
 }
 
 export async function setAppointmentStatus(id: string, status: AppointmentStatus) {
@@ -257,6 +254,11 @@ export function useAppointments() {
 
 export function useBookedTimes(date: string | null) {
   return useAsyncData(() => fetchBookedTimes(date ?? ''), !!date, [date]);
+}
+
+export function useBookedTimesForDates(dates: string[]) {
+  const key = dates.join('|');
+  return useAsyncData(() => fetchBookedTimesForDates(dates), dates.length > 0, [key]);
 }
 
 export function useAgendaMutation<TArgs, TResult>(

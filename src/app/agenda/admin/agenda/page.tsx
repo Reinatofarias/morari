@@ -3,13 +3,14 @@
 import { useState } from 'react';
 
 import { AgendaButton } from '@/components/agenda/ui';
-import { useAppointments, useBlocks } from '@/lib/agenda/data';
+import { buildDaySlots, useAppointments, useAvailability, useBlocks } from '@/lib/agenda/data';
 import { formatDateLong, fromDateKey, toDateKey, WEEKDAY_LABELS } from '@/lib/agenda/time';
 import { toViewer, useTimezone } from '@/lib/agenda/timezone';
 
 export default function AgendaCalendarPage() {
   const { data: appointments, isLoading } = useAppointments();
   const { data: blocks } = useBlocks();
+  const { data: availability } = useAvailability();
   const [offset, setOffset] = useState(0);
   const [view, setView] = useState<'dia' | 'semana'>('dia');
   const { zone, label: zoneName } = useTimezone();
@@ -64,14 +65,45 @@ export default function AgendaCalendarPage() {
             .filter((item) => item.date === key && item.status !== 'cancelado')
             .sort((a, b) => a.start.localeCompare(b.start));
           const dayBlocks = (blocks ?? []).filter((item) => item.date === key);
+          const booked = list.filter((item) => item.status === 'confirmado').map((item) => item.start);
+          const slots = buildDaySlots({
+            date: key,
+            availability: availability ?? [],
+            blocks: blocks ?? [],
+            booked,
+          });
+          const free = slots.filter((slot) => slot.available);
+          const unavailable = slots.filter((slot) => !slot.available);
           const weekday = WEEKDAY_LABELS[fromDateKey(key).getDay()];
           return (
             <section key={key} className="rounded-lg border border-border bg-card p-5">
               <h2 className="font-display text-lg capitalize">
                 {view === 'dia' ? formatDateLong(key) : `${weekday} - ${key.slice(8)}/${key.slice(5, 7)}`}
               </h2>
+              <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+                <div className="rounded border border-border p-2">
+                  <span className="block text-lg text-primary">{free.length}</span>
+                  <span className="text-muted-foreground">livres</span>
+                </div>
+                <div className="rounded border border-border p-2">
+                  <span className="block text-lg text-muted-foreground">{unavailable.length}</span>
+                  <span className="text-muted-foreground">indisp.</span>
+                </div>
+                <div className="rounded border border-border p-2">
+                  <span className="block text-lg text-foreground">{list.length}</span>
+                  <span className="text-muted-foreground">agend.</span>
+                </div>
+              </div>
               <div className="mt-4 space-y-2 text-sm">
-                {list.length === 0 && dayBlocks.length === 0 ? <p className="text-muted-foreground">Sem compromissos.</p> : null}
+                {slots.length === 0 ? <p className="text-muted-foreground">Dia sem disponibilidade configurada.</p> : null}
+                {free.length > 0 ? (
+                  <div className="rounded border border-emerald-500/20 bg-emerald-500/5 px-3 py-2">
+                    <span className="block text-xs uppercase tracking-[0.14em] text-emerald-300">Horarios livres</span>
+                    <span className="mt-1 block text-muted-foreground">
+                      {free.map((slot) => at(key, slot.time)).join(', ')}
+                    </span>
+                  </div>
+                ) : null}
                 {list.map((item) => (
                   <div key={item.id} className="rounded border border-border px-3 py-2">
                     <span className="text-primary">

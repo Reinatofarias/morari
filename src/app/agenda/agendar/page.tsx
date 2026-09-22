@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Check } from 'lucide-react';
 
@@ -12,6 +12,7 @@ import {
   useAgendaMutation,
   useAvailability,
   useBlocks,
+  useBookedTimesForDates,
   useBookedTimes,
 } from '@/lib/agenda/data';
 import { formatDateLong, formatDateShort, fromDateKey, toDateKey } from '@/lib/agenda/time';
@@ -92,9 +93,11 @@ export default function BookingPage() {
   const [message, setMessage] = useState<string | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
   const { zone, label: zoneName } = useTimezone();
+  const days = useMemo(() => nextDays(21), []);
 
   const { data: availability, isLoading: loadingAvailability, isError } = useAvailability();
   const { data: blocks } = useBlocks();
+  const { data: bookedByDate, isLoading: loadingDateAvailability } = useBookedTimesForDates(days);
   const { data: booked, isFetching: loadingSlots, refetch: reloadBooked } = useBookedTimes(step >= 2 ? date : null);
   const book = useAgendaMutation(() =>
     bookAppointment({ date, start: start!, name: name.trim(), whatsapp: phone, notes, kind }),
@@ -228,16 +231,16 @@ export default function BookingPage() {
           <section className="step-in mt-6">
             <h1 className="font-display text-3xl">Escolha a data</h1>
             <p className="mt-2 text-sm text-muted-foreground">{kind} - selecione o dia.</p>
-            {loadingAvailability ? (
+            {loadingAvailability || loadingDateAvailability ? (
               <p className="mt-6 text-sm text-muted-foreground">Carregando agenda...</p>
             ) : (
               <div className="mt-6 grid grid-cols-3 gap-2 sm:grid-cols-4">
-                {nextDays(21).map((key) => {
+                {days.map((key) => {
                   const free = buildSlots({
                     date: key,
                     availability: availability ?? [],
                     blocks: blocks ?? [],
-                    booked: [],
+                    booked: bookedByDate?.[key] ?? [],
                   }).length;
                   const day = fromDateKey(key);
                   return (
