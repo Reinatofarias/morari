@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
-import { getAgendaSupabase } from '@/lib/agenda/supabase-client';
 import { fromMinutes, toMinutes } from '@/lib/agenda/time';
 import { CANONICAL_ZONE, canonicalToday, zonedToUtc } from '@/lib/agenda/timezone';
 import type { Appointment, AppointmentKind, AppointmentStatus, Block, DayAvailability } from '@/lib/agenda/types';
@@ -19,8 +18,6 @@ export type AsyncState<T> = {
   error: Error | null;
   refetch: () => Promise<void>;
 };
-
-const hhmm = (value: string) => value.slice(0, 5);
 
 async function adminJson<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, {
@@ -50,39 +47,15 @@ async function read<T>(run: () => Promise<T>): Promise<T> {
 }
 
 export async function fetchAvailability(): Promise<DayAvailability[]> {
-  const { data, error } = await getAgendaSupabase()
-    .from('availability')
-    .select('weekday, enabled, start_time, end_time')
-    .order('weekday');
-  if (error) throw new BookingError(error.message);
-  return (data ?? []).map((row) => ({
-    weekday: row.weekday,
-    enabled: row.enabled,
-    start: hhmm(row.start_time),
-    end: hhmm(row.end_time),
-  }));
+  return jsonRequest<DayAvailability[]>('/api/agenda/public/availability');
 }
 
 export async function fetchBlocks(): Promise<Block[]> {
-  const { data, error } = await getAgendaSupabase()
-    .from('blocks')
-    .select('id, date, all_day, start_time, end_time, reason')
-    .order('date');
-  if (error) throw new BookingError(error.message);
-  return (data ?? []).map((row) => ({
-    id: row.id,
-    date: row.date,
-    allDay: row.all_day,
-    start: hhmm(row.start_time),
-    end: hhmm(row.end_time),
-    reason: row.reason ?? '',
-  }));
+  return jsonRequest<Block[]>('/api/agenda/public/blocks');
 }
 
 export async function fetchBookedTimes(date: string): Promise<string[]> {
-  const { data, error } = await getAgendaSupabase().rpc('booked_times', { p_date: date });
-  if (error) throw new BookingError(error.message);
-  return ((data as string[] | null) ?? []).map(hhmm);
+  return jsonRequest<string[]>(`/api/agenda/public/booked-times?date=${encodeURIComponent(date)}`);
 }
 
 export async function fetchBookedTimesForDates(dates: string[]): Promise<Record<string, string[]>> {

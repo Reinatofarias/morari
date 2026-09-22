@@ -8,8 +8,20 @@ export function cleanEnv(value: string | undefined) {
   return value?.trim().replace(/^['"]|['"]$/g, '');
 }
 
+function supabaseUrl() {
+  return cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_URL) ?? cleanEnv(process.env.SUPABASE_URL);
+}
+
+function serviceRoleKey() {
+  return (
+    cleanEnv(process.env.SUPABASE_SERVICE_ROLE_KEY) ??
+    cleanEnv(process.env.SUPABASE_SERVICE_KEY) ??
+    cleanEnv(process.env.SUPABASE_SECRET_KEY)
+  );
+}
+
 function sessionSecret() {
-  return `${cleanEnv(process.env.ADMIN_PANEL_PASSWORD) ?? ''}:${cleanEnv(process.env.SUPABASE_SERVICE_ROLE_KEY) ?? ''}`;
+  return `${cleanEnv(process.env.ADMIN_PANEL_PASSWORD) ?? ''}:${serviceRoleKey() ?? ''}`;
 }
 
 function sign(value: string) {
@@ -41,8 +53,8 @@ export async function hasAgendaAdminSession() {
 }
 
 export function getAgendaAdminClient() {
-  const url = cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_URL);
-  const key = cleanEnv(process.env.SUPABASE_SERVICE_ROLE_KEY);
+  const url = supabaseUrl();
+  const key = serviceRoleKey();
   if (!url || !key) throw new Error('missing_supabase_config');
   return createClient(url, key, {
     auth: { autoRefreshToken: false, persistSession: false },
