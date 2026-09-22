@@ -22,6 +22,15 @@ export type AsyncState<T> = {
 
 const hhmm = (value: string) => value.slice(0, 5);
 
+async function adminJson<T>(url: string, init?: RequestInit): Promise<T> {
+  const response = await fetch(url, {
+    ...init,
+    headers: { 'content-type': 'application/json', ...(init?.headers ?? {}) },
+  });
+  if (!response.ok) throw new BookingError('Sessao expirada ou operacao nao autorizada.');
+  return (await response.json()) as T;
+}
+
 async function read<T>(run: () => Promise<T>): Promise<T> {
   try {
     return await run();
@@ -67,24 +76,7 @@ export async function fetchBookedTimes(date: string): Promise<string[]> {
 }
 
 export async function fetchAppointments(): Promise<Appointment[]> {
-  const { data, error } = await getAgendaSupabase()
-    .from('appointments')
-    .select('id, date, start_time, end_time, name, whatsapp, notes, kind, status, created_at')
-    .order('date', { ascending: true })
-    .order('start_time', { ascending: true });
-  if (error) throw new BookingError(error.message);
-  return (data ?? []).map((row) => ({
-    id: row.id,
-    date: row.date,
-    start: hhmm(row.start_time),
-    end: hhmm(row.end_time),
-    name: row.name,
-    whatsapp: row.whatsapp,
-    notes: row.notes ?? '',
-    kind: (row.kind ?? 'Atendimento') as AppointmentKind,
-    status: row.status as AppointmentStatus,
-    createdAt: row.created_at,
-  }));
+  return adminJson<Appointment[]>('/api/agenda/admin/appointments');
 }
 
 export interface SlotInput {
@@ -182,55 +174,42 @@ export async function bookAppointment(input: {
 }
 
 export async function setAppointmentStatus(id: string, status: AppointmentStatus) {
-  const { error } = await getAgendaSupabase().from('appointments').update({ status }).eq('id', id);
-  if (error) throw new BookingError(error.message);
+  await adminJson('/api/agenda/admin/appointments', {
+    method: 'PATCH',
+    body: JSON.stringify({ id, status }),
+  });
 }
 
 export async function deleteAppointment(id: string) {
-  const { error } = await getAgendaSupabase().from('appointments').delete().eq('id', id);
-  if (error) throw new BookingError(error.message);
+  await adminJson(`/api/agenda/admin/appointments?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
 }
 
 export async function rescheduleAppointment(id: string, date: string, start: string) {
-  const { error } = await getAgendaSupabase().rpc('reschedule_appointment', {
-    p_id: id,
-    p_date: date,
-    p_start: start,
+  await adminJson('/api/agenda/admin/appointments/reschedule', {
+    method: 'POST',
+    body: JSON.stringify({ id, date, start }),
   });
-  if (error) throw new BookingError(error.message);
 }
 
 export async function saveAvailability(rows: DayAvailability[]) {
-  const { error } = await getAgendaSupabase().from('availability').upsert(
-    rows.map((row) => ({
-      weekday: row.weekday,
-      enabled: row.enabled,
-      start_time: row.start,
-      end_time: row.end,
-      updated_at: new Date().toISOString(),
-    })),
-    { onConflict: 'weekday' },
-  );
-  if (error) throw new BookingError(error.message);
+  await adminJson('/api/agenda/admin/availability', {
+    method: 'PUT',
+    body: JSON.stringify(rows),
+  });
 }
 
 export async function addBlock(input: Omit<Block, 'id'>) {
   if (!input.allDay && toMinutes(input.end) <= toMinutes(input.start)) {
     throw new BookingError('O horario final deve ser maior que o inicial.');
   }
-  const { error } = await getAgendaSupabase().from('blocks').insert({
-    date: input.date,
-    all_day: input.allDay,
-    start_time: input.allDay ? '00:00' : input.start,
-    end_time: input.allDay ? '23:59' : input.end,
-    reason: input.reason,
+  await adminJson('/api/agenda/admin/blocks', {
+    method: 'POST',
+    body: JSON.stringify(input),
   });
-  if (error) throw new BookingError(error.message);
 }
 
 export async function removeBlock(id: string) {
-  const { error } = await getAgendaSupabase().from('blocks').delete().eq('id', id);
-  if (error) throw new BookingError(error.message);
+  await adminJson(`/api/agenda/admin/blocks?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
 }
 
 function useAsyncData<T>(loader: () => Promise<T>, enabled: boolean, deps: readonly unknown[]): AsyncState<T> {

@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import { getAgendaSupabase } from '@/lib/agenda/supabase-client';
-
 export function useAdminSession() {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -13,27 +11,19 @@ export function useAdminSession() {
 
     async function load() {
       try {
-        const supabase = getAgendaSupabase();
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        if (!user) {
-          if (active) setIsAdmin(false);
-          return;
-        }
-        const { data, error } = await supabase.rpc('has_role', { _user_id: user.id, _role: 'admin' });
-        if (active) setIsAdmin(!error && data === true);
+        const response = await fetch('/api/agenda/admin/session', { cache: 'no-store' });
+        const data = (await response.json()) as { isAdmin?: boolean };
+        if (active) setIsAdmin(response.ok && data.isAdmin === true);
+      } catch {
+        if (active) setIsAdmin(false);
       } finally {
         if (active) setLoading(false);
       }
     }
 
     void load();
-    const { data } = getAgendaSupabase().auth.onAuthStateChange(() => void load());
-
     return () => {
       active = false;
-      data.subscription.unsubscribe();
     };
   }, []);
 
@@ -41,5 +31,5 @@ export function useAdminSession() {
 }
 
 export async function signOut() {
-  await getAgendaSupabase().auth.signOut();
+  await fetch('/api/agenda/admin/session', { method: 'DELETE' });
 }

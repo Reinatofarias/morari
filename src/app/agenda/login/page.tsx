@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 
 import { AgendaBrand, AgendaButton, AgendaInput, AgendaLabel, Message } from '@/components/agenda/ui';
-import { getAgendaSupabase } from '@/lib/agenda/supabase-client';
 import { useAdminSession } from '@/lib/agenda/auth';
 
 export default function AgendaLoginPage() {
@@ -30,34 +29,16 @@ export default function AgendaLoginPage() {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ password }),
       });
-      const result = (await response.json()) as { ok?: boolean; email?: string; tempPassword?: string; tokenHash?: string; reason?: string };
-      if (!response.ok || !result.ok || (!result.tokenHash && (!result.email || !result.tempPassword))) {
+      const result = (await response.json()) as { ok?: boolean; reason?: string };
+      if (!response.ok || !result.ok) {
         const details: Record<string, string> = {
           missing_config: 'Configuracao incompleta na Vercel.',
           wrong_password: 'Senha incorreta.',
-          invalid_supabase_url: 'A URL do Supabase esta invalida na Vercel.',
-          supabase_connection_failed: 'A Vercel nao conseguiu conectar ao Supabase.',
-          supabase_admin_key_invalid: 'A service role key do Supabase parece invalida ou de outro projeto.',
-          agenda_schema_missing: 'As tabelas da agenda ainda nao existem no Supabase configurado.',
-          create_role_failed: 'Nao foi possivel criar a permissao de admin no Supabase.',
-          create_user_failed: 'Nao foi possivel criar o usuario admin no Supabase.',
-          magiclink_failed: 'Nao foi possivel gerar a sessao de login no Supabase.',
-          temporary_password_failed: 'Nao foi possivel criar a sessao temporaria no Supabase.',
           unexpected_server_error: 'Erro inesperado no servidor da agenda.',
         };
         setMessage(result.reason ? details[result.reason] ?? result.reason : 'Senha incorreta.');
         return;
       }
-      const { error } = result.email && result.tempPassword
-        ? await getAgendaSupabase().auth.signInWithPassword({
-            email: result.email,
-            password: result.tempPassword,
-          })
-        : await getAgendaSupabase().auth.verifyOtp({
-            type: 'magiclink',
-            token_hash: result.tokenHash!,
-          });
-      if (error) throw new Error(error.message);
       router.replace('/agenda/admin');
       router.refresh();
     } catch {
