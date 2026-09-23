@@ -10,7 +10,12 @@ export async function GET(request: Request) {
     if (!date) return NextResponse.json({ error: 'invalid_date' }, { status: 400 });
 
     const { data, error } = await getAgendaPublicClient().rpc('booked_times', { p_date: date });
-    if (error) throw error;
+    if (error) {
+      return NextResponse.json(
+        { error: 'booked_times_rpc_failed', detail: describeAgendaError(error) },
+        { status: 500 },
+      );
+    }
     return NextResponse.json(((data as string[] | null) ?? []).map(hhmm));
   } catch (error) {
     console.error('[agenda-public-booked-times] GET failed', error);

@@ -91,14 +91,21 @@ export function getAgendaConfigState() {
 
 export function describeAgendaError(error: unknown) {
   if (error instanceof Error) return error.message;
+  if (typeof error === 'string') return error;
   if (error && typeof error === 'object') {
     const record = error as { message?: unknown; code?: unknown; details?: unknown; hint?: unknown };
-    return {
+    const detail = {
       message: typeof record.message === 'string' ? record.message : undefined,
       code: typeof record.code === 'string' ? record.code : undefined,
       details: typeof record.details === 'string' ? record.details : undefined,
       hint: typeof record.hint === 'string' ? record.hint : undefined,
     };
+    if (detail.message || detail.code || detail.details || detail.hint) return detail;
+    try {
+      return JSON.stringify(error);
+    } catch {
+      return 'unserializable_error';
+    }
   }
   return 'unknown_error';
 }

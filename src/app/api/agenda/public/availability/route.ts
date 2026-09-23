@@ -6,11 +6,17 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const { data, error } = await getAgendaPublicClient()
+    const client = getAgendaPublicClient();
+    const { data, error } = await client
       .from('availability')
       .select('weekday, enabled, start_time, end_time')
       .order('weekday');
-    if (error) throw error;
+    if (error) {
+      return NextResponse.json(
+        { error: 'availability_select_failed', detail: describeAgendaError(error) },
+        { status: 500 },
+      );
+    }
     return NextResponse.json(
       (data ?? []).map((row) => ({
         weekday: row.weekday,

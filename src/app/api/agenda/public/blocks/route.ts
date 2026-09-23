@@ -18,11 +18,14 @@ function block(row: any): Block {
 
 export async function GET() {
   try {
-    const { data, error } = await getAgendaPublicClient()
+    const client = getAgendaPublicClient();
+    const { data, error } = await client
       .from('blocks')
       .select('id, date, all_day, start_time, end_time, reason')
       .order('date');
-    if (error) throw error;
+    if (error) {
+      return NextResponse.json({ error: 'blocks_select_failed', detail: describeAgendaError(error) }, { status: 500 });
+    }
     return NextResponse.json((data ?? []).map(block));
   } catch (error) {
     console.error('[agenda-public-blocks] GET failed', error);
