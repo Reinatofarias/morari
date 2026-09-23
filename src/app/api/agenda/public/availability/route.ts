@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
+import { describeAgendaError, getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,9 +21,6 @@ export async function GET() {
     );
   } catch (error) {
     console.error('[agenda-public-availability] GET failed', error);
-    return NextResponse.json(
-      { error: 'availability_failed', detail: error instanceof Error ? error.message : 'unknown_error' },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: 'availability_failed', detail: describeAgendaError(error) }, { status: 500 });
   }
 }

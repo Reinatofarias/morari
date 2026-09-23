@@ -89,6 +89,20 @@ export function getAgendaConfigState() {
   };
 }
 
+export function describeAgendaError(error: unknown) {
+  if (error instanceof Error) return error.message;
+  if (error && typeof error === 'object') {
+    const record = error as { message?: unknown; code?: unknown; details?: unknown; hint?: unknown };
+    return {
+      message: typeof record.message === 'string' ? record.message : undefined,
+      code: typeof record.code === 'string' ? record.code : undefined,
+      details: typeof record.details === 'string' ? record.details : undefined,
+      hint: typeof record.hint === 'string' ? record.hint : undefined,
+    };
+  }
+  return 'unknown_error';
+}
+
 export async function requireAgendaAdmin() {
   if (!(await hasAgendaAdminSession())) {
     throw new Error('unauthorized');
