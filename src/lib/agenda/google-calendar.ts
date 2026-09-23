@@ -1,11 +1,13 @@
 import { createSign } from 'crypto';
 
 import { cleanEnv } from '@/lib/agenda/admin-server';
+import { fromDateKey, fromMinutes, toDateKey, toMinutes } from '@/lib/agenda/time';
 import type { Appointment } from '@/lib/agenda/types';
 
 const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const GOOGLE_CALENDAR_SCOPE = 'https://www.googleapis.com/auth/calendar';
 const GOOGLE_CALENDAR_TIMEZONE = 'America/Sao_Paulo';
+const SLOT_MINUTES = 60;
 
 type GoogleCredentials = {
   clientEmail: string;
@@ -131,6 +133,122 @@ async function getAccessToken() {
   }
 
   return null;
+}
+
+function nextDateKey(date: string) {
+  const next = fromDateKey(date);
+  next.setDate(next.getDate() + 1);
+  return toDateKey(next);
+}
+
+function eventDateTime(value: { date?: string; dateTime?: string } | undefined) {
+  if (!value) return null;
+  if (value.dateTime) return value.dateTime;
+  if (value.date) return `${value.date}T00:00:00${GOOGLE_CALENDAR_TIMEZONE === 'America/Sao_Paulo' ? '-03:00' : ''}`;
+  return null;
+}
+
+function zonedDateTime(instant: Date) {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: GOOGLE_CALENDAR_TIMEZONE,
+    hour12: false,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).formatToParts(instant);
+  const get = (type: string) => parts.find((part) => part.type === type)?.value ?? '00';
+  const hour = get('hour') === '24' ? '00' : get('hour');
+  return { date: `${get('year')}-${get('month')}-${get('day')}`, time: `${hour}:${get('minute')}` };
+}
+
+function minutesInsideDate(instant: Date, date: string, edge: 'start' | 'end') {
+  const local = zonedDateTime(instant);
+  if (local.date < date) return 0;
+  if (local.date > date) return 24 * 60;
+  if (edge === 'end' && local.time === '00:00') return 24 * 60;
+  return toMinutes(local.time);
+}
+
+function busyRangeToSlots(date: string, start: string, end: string) {
+  const startAt = new Date(start);
+  const endAt = new Date(end);
+  if (Number.isNaN(startAt.getTime()) || Number.isNaN(endAt.getTime())) return [];
+
+  const startMinute = minutesInsideDate(startAt, date, 'start');
+  const endMinute = minutesInsideDate(endAt, date, 'end');
+  const slots = new Set<string>();
+
+  for (let cursor = Math.floor(startMinute / SLOT_MINUTES) * SLOT_MINUTES; cursor < endMinute; cursor += SLOT_MINUTES) {
+    if (cursor >= 0 && cursor < 24 * 60) slots.add(fromMinutes(cursor));
+  }
+
+  return [...slots];
+}
+
+export async function getGoogleCalendarBusyTimes(date: string) {
+  const calendarId = cleanEnv(process.env.GOOGLE_CALENDAR_ID);
+  const token = await getAccessToken();
+
+  if (!calendarId || !token) {
+    return { configured: false, times: [] as string[] };
+  }
+
+  const params = new URLSearchParams({
+    singleEvents: 'true',
+    orderBy: 'startTime',
+    timeMin: `${date}T00:00:00-03:00`,
+    timeMax: `${nextDateKey(date)}T00:00:00-03:00`,
+    maxResults: '250',
+  });
+
+  const response = await fetch(
+    `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?${params.toString()}`,
+    { headers: { authorization: `Bearer ${token}` } },
+  );
+
+  const data = (await response.json()) as {
+    items?: Array<{
+      status?: string;
+      transparency?: string;
+      start?: { date?: string; dateTime?: string };
+      end?: { date?: string; dateTime?: string };
+    }>;
+    error?: { message?: string };
+  };
+
+  if (!response.ok) {
+    throw new Error(data.error?.message ?? 'google_calendar_busy_failed');
+  }
+
+  const times = new Set<string>();
+  for (const event of data.items ?? []) {
+    if (event.status === 'cancelled' || event.transparency === 'transparent') continue;
+    const start = eventDateTime(event.start);
+    const end = eventDateTime(event.end);
+    if (!start || !end) continue;
+    for (const slot of busyRangeToSlots(date, start, end)) {
+      times.add(slot);
+    }
+  }
+
+  return { configured: true, times: [...times].sort() };
+}
+
+export async function isGoogleCalendarSlotBusy(date: string, start: string, end: string) {
+  const busy = await getGoogleCalendarBusyTimes(date);
+  if (!busy.configured) return { configured: false, busy: false };
+  const startMinute = toMinutes(start);
+  const endMinute = toMinutes(end);
+  return {
+    configured: true,
+    busy: busy.times.some((time) => {
+      const busyStart = toMinutes(time);
+      const busyEnd = busyStart + SLOT_MINUTES;
+      return startMinute < busyEnd && busyStart < endMinute;
+    }),
+  };
 }
 
 export async function createGoogleCalendarEvent(appointment: Appointment) {

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { describeAgendaError, getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
+import { getGoogleCalendarBusyTimes } from '@/lib/agenda/google-calendar';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,7 +17,14 @@ export async function GET(request: Request) {
         { status: 500 },
       );
     }
-    return NextResponse.json(((data as string[] | null) ?? []).map(hhmm));
+    const supabaseTimes = ((data as string[] | null) ?? []).map(hhmm);
+    let google = { times: [] as string[] };
+    try {
+      google = await getGoogleCalendarBusyTimes(date);
+    } catch (googleError) {
+      console.error('[agenda-public-booked-times] Google Calendar busy lookup failed', googleError);
+    }
+    return NextResponse.json([...new Set([...supabaseTimes, ...google.times])].sort());
   } catch (error) {
     console.error('[agenda-public-booked-times] GET failed', error);
     return NextResponse.json({ error: 'booked_times_failed', detail: describeAgendaError(error) }, { status: 500 });

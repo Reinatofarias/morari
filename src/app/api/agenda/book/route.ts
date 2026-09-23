@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 
 import { getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
-import { createGoogleCalendarEvent } from '@/lib/agenda/google-calendar';
+import { createGoogleCalendarEvent, isGoogleCalendarSlotBusy } from '@/lib/agenda/google-calendar';
+import { fromMinutes, toMinutes } from '@/lib/agenda/time';
 import type { Appointment, AppointmentKind, AppointmentStatus } from '@/lib/agenda/types';
 
 export const runtime = 'nodejs';
@@ -34,6 +35,11 @@ export async function POST(request: Request) {
 
     if (!input.date || !input.start || !input.name || !input.whatsapp) {
       return NextResponse.json({ error: 'invalid_input' }, { status: 400 });
+    }
+
+    const googleSlot = await isGoogleCalendarSlotBusy(input.date, input.start, fromMinutes(toMinutes(input.start) + 60));
+    if (googleSlot.configured && googleSlot.busy) {
+      return NextResponse.json({ error: 'calendar_slot_busy' }, { status: 409 });
     }
 
     const { data, error } = await getAgendaPublicClient().rpc('book_appointment', {
