@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getAgendaAdminClient, hhmm } from '@/lib/agenda/admin-server';
+import { getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
 import { createGoogleCalendarEvent } from '@/lib/agenda/google-calendar';
 import type { Appointment, AppointmentKind, AppointmentStatus } from '@/lib/agenda/types';
 
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'invalid_input' }, { status: 400 });
     }
 
-    const { data, error } = await getAgendaAdminClient().rpc('book_appointment', {
+    const { data, error } = await getAgendaPublicClient().rpc('book_appointment', {
       p_date: input.date,
       p_start: input.start,
       p_name: input.name,

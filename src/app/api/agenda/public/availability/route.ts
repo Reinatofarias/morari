@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 
-import { getAgendaAdminClient, hhmm } from '@/lib/agenda/admin-server';
+import { getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const { data, error } = await getAgendaAdminClient()
+    const { data, error } = await getAgendaPublicClient()
       .from('availability')
       .select('weekday, enabled, start_time, end_time')
       .order('weekday');

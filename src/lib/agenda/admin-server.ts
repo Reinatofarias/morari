@@ -20,6 +20,17 @@ function serviceRoleKey() {
   );
 }
 
+function publishableKey() {
+  return (
+    cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) ??
+    cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) ??
+    cleanEnv(process.env.SUPABASE_PUBLISHABLE_KEY) ??
+    cleanEnv(process.env.SUPABASE_ANON_KEY) ??
+    cleanEnv(process.env.VITE_SUPABASE_PUBLISHABLE_KEY) ??
+    cleanEnv(process.env.VITE_SUPABASE_ANON_KEY)
+  );
+}
+
 function sessionSecret() {
   return `${cleanEnv(process.env.ADMIN_PANEL_PASSWORD) ?? ''}:${serviceRoleKey() ?? ''}`;
 }
@@ -56,6 +67,15 @@ export function getAgendaAdminClient() {
   const url = supabaseUrl();
   const key = serviceRoleKey();
   if (!url || !key) throw new Error('missing_supabase_config');
+  return createClient(url, key, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}
+
+export function getAgendaPublicClient() {
+  const url = supabaseUrl();
+  const key = publishableKey() ?? serviceRoleKey();
+  if (!url || !key) throw new Error('missing_supabase_public_config');
   return createClient(url, key, {
     auth: { autoRefreshToken: false, persistSession: false },
   });

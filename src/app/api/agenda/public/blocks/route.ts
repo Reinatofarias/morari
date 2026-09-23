@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getAgendaAdminClient, hhmm } from '@/lib/agenda/admin-server';
+import { getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
 import type { Block } from '@/lib/agenda/types';
 
 export const dynamic = 'force-dynamic';
@@ -18,7 +18,7 @@ function block(row: any): Block {
 
 export async function GET() {
   try {
-    const { data, error } = await getAgendaAdminClient()
+    const { data, error } = await getAgendaPublicClient()
       .from('blocks')
       .select('id, date, all_day, start_time, end_time, reason')
       .order('date');
