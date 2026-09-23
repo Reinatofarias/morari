@@ -8,8 +8,14 @@ export function cleanEnv(value: string | undefined) {
   return value?.trim().replace(/^['"]|['"]$/g, '');
 }
 
+function cleanSupabaseUrl(value: string | undefined) {
+  const url = cleanEnv(value);
+  if (!url) return undefined;
+  return url.replace(/\/rest\/v1\/?$/i, '').replace(/\/+$/, '');
+}
+
 function supabaseUrl() {
-  return cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_URL) ?? cleanEnv(process.env.SUPABASE_URL);
+  return cleanSupabaseUrl(process.env.NEXT_PUBLIC_SUPABASE_URL) ?? cleanSupabaseUrl(process.env.SUPABASE_URL);
 }
 
 function serviceRoleKey() {
