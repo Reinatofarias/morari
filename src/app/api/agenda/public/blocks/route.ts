@@ -26,6 +26,9 @@ export async function GET() {
     return NextResponse.json((data ?? []).map(block));
   } catch (error) {
     console.error('[agenda-public-blocks] GET failed', error);
-    return NextResponse.json({ error: 'blocks_failed' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'blocks_failed', detail: error instanceof Error ? error.message : 'unknown_error' },
+      { status: 500 },
+    );
   }
 }

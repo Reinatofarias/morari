@@ -81,6 +81,14 @@ export function getAgendaPublicClient() {
   });
 }
 
+export function getAgendaConfigState() {
+  return {
+    hasSupabaseUrl: !!supabaseUrl(),
+    hasPublishableKey: !!publishableKey(),
+    hasServiceRoleKey: !!serviceRoleKey(),
+  };
+}
+
 export async function requireAgendaAdmin() {
   if (!(await hasAgendaAdminSession())) {
     throw new Error('unauthorized');

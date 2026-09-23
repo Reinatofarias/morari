@@ -14,6 +14,9 @@ export async function GET(request: Request) {
     return NextResponse.json(((data as string[] | null) ?? []).map(hhmm));
   } catch (error) {
     console.error('[agenda-public-booked-times] GET failed', error);
-    return NextResponse.json({ error: 'booked_times_failed' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'booked_times_failed', detail: error instanceof Error ? error.message : 'unknown_error' },
+      { status: 500 },
+    );
   }
 }

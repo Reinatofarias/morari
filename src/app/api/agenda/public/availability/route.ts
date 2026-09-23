@@ -21,6 +21,9 @@ export async function GET() {
     );
   } catch (error) {
     console.error('[agenda-public-availability] GET failed', error);
-    return NextResponse.json({ error: 'availability_failed' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'availability_failed', detail: error instanceof Error ? error.message : 'unknown_error' },
+      { status: 500 },
+    );
   }
 }
