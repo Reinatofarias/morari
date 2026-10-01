@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
+import { describeAgendaError, getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
 import { createGoogleCalendarEvent, isGoogleCalendarSlotBusy } from '@/lib/agenda/google-calendar';
 import { fromMinutes, toMinutes } from '@/lib/agenda/time';
 import type { Appointment, AppointmentKind, AppointmentStatus } from '@/lib/agenda/types';
@@ -37,9 +37,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'invalid_input' }, { status: 400 });
     }
 
-    const googleSlot = await isGoogleCalendarSlotBusy(input.date, input.start, fromMinutes(toMinutes(input.start) + 60));
-    if (googleSlot.configured && googleSlot.busy) {
-      return NextResponse.json({ error: 'calendar_slot_busy' }, { status: 409 });
+    try {
+      const googleSlot = await isGoogleCalendarSlotBusy(input.date, input.start, fromMinutes(toMinutes(input.start) + 60));
+      if (googleSlot.configured && googleSlot.busy) {
+        return NextResponse.json({ error: 'calendar_slot_busy' }, { status: 409 });
+      }
+    } catch (calendarError) {
+      console.error('[agenda-book] Google Calendar busy lookup failed', describeAgendaError(calendarError));
     }
 
     const { data, error } = await getAgendaPublicClient().rpc('book_appointment', {

@@ -157,7 +157,7 @@ export default function BookingPage() {
       },
       onError: (error) => {
         const text = error.message;
-        if (/ocupado|reserv|unique|duplic/i.test(text)) {
+        if (/ocupado|reserv|unique|duplic|calendar_slot_busy/i.test(text)) {
           setMessage('Este horario acabou de ser reservado. Escolha outro.');
           setStart(null);
           setStep(2);
