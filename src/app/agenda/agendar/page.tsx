@@ -164,6 +164,10 @@ export default function BookingPage() {
           void reloadBooked();
           return;
         }
+        if (/google_calendar/i.test(text)) {
+          setMessage('Nao foi possivel sincronizar com o Google Agenda. Tente novamente em instantes.');
+          return;
+        }
         setMessage('Nao foi possivel concluir o agendamento. Tente novamente.');
       },
     });

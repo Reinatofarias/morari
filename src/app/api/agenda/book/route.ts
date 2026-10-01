@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { describeAgendaError, getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
+import { describeAgendaError, getAgendaAdminClient, getAgendaPublicClient, hhmm } from '@/lib/agenda/admin-server';
 import { createGoogleCalendarEvent, isGoogleCalendarSlotBusy } from '@/lib/agenda/google-calendar';
 import { fromMinutes, toMinutes } from '@/lib/agenda/time';
 import type { Appointment, AppointmentKind, AppointmentStatus } from '@/lib/agenda/types';
@@ -20,6 +20,17 @@ function appointmentFromRow(row: any): Appointment {
     status: row.status as AppointmentStatus,
     createdAt: row.created_at,
   };
+}
+
+async function removeAppointmentAfterCalendarFailure(id: string) {
+  try {
+    const { error } = await getAgendaAdminClient().from('appointments').delete().eq('id', id);
+    if (error) {
+      console.error('[agenda-book] failed to rollback appointment after calendar sync failure', describeAgendaError(error));
+    }
+  } catch (error) {
+    console.error('[agenda-book] rollback exception after calendar sync failure', describeAgendaError(error));
+  }
 }
 
 export async function POST(request: Request) {
@@ -65,15 +76,27 @@ export async function POST(request: Request) {
     }
 
     const appointment = appointmentFromRow(row);
-    let calendar = { configured: false, created: false };
 
     try {
-      calendar = await createGoogleCalendarEvent(appointment);
-    } catch (calendarError) {
-      console.error('[agenda-book] Google Calendar sync failed', calendarError);
-    }
+      const calendar = await createGoogleCalendarEvent(appointment);
+      if (!calendar.configured || !calendar.created) {
+        await removeAppointmentAfterCalendarFailure(appointment.id);
+        return NextResponse.json({ error: 'google_calendar_not_configured', appointmentRolledBack: true }, { status: 503 });
+      }
 
-    return NextResponse.json({ appointment, calendar });
+      return NextResponse.json({ appointment, calendar });
+    } catch (calendarError) {
+      console.error('[agenda-book] Google Calendar sync failed', describeAgendaError(calendarError));
+      await removeAppointmentAfterCalendarFailure(appointment.id);
+      return NextResponse.json(
+        {
+          error: 'google_calendar_sync_failed',
+          reason: describeAgendaError(calendarError),
+          appointmentRolledBack: true,
+        },
+        { status: 502 },
+      );
+    }
   } catch (error) {
     console.error('[agenda-book] failed', error);
     return NextResponse.json({ error: 'booking_failed' }, { status: 500 });
