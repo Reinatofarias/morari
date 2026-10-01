@@ -21,6 +21,14 @@ type GoogleOAuthCredentials = {
   refreshToken: string;
 };
 
+type GoogleApiError = {
+  error?: {
+    code?: number;
+    message?: string;
+    status?: string;
+  };
+};
+
 function base64url(input: string | Buffer) {
   return Buffer.from(input)
     .toString('base64')
@@ -133,6 +141,104 @@ async function getAccessToken() {
   }
 
   return null;
+}
+
+export function getGoogleCalendarConfigState() {
+  return {
+    hasCalendarId: !!cleanEnv(process.env.GOOGLE_CALENDAR_ID),
+    hasOAuthCredentials: !!readOAuthCredentials(),
+    hasServiceAccountCredentials: !!readServiceAccountCredentials(),
+  };
+}
+
+export async function getGoogleCalendarDiagnostics() {
+  const calendarId = cleanEnv(process.env.GOOGLE_CALENDAR_ID);
+  const config = getGoogleCalendarConfigState();
+
+  if (!calendarId) {
+    return {
+      ok: false,
+      config,
+      error: 'missing_google_calendar_id',
+    };
+  }
+
+  let token: string | null = null;
+  try {
+    token = await getAccessToken();
+  } catch (error) {
+    return {
+      ok: false,
+      config,
+      token: { ok: false, error: error instanceof Error ? error.message : 'google_token_failed' },
+    };
+  }
+
+  if (!token) {
+    return {
+      ok: false,
+      config,
+      token: { ok: false, error: 'missing_google_credentials' },
+    };
+  }
+
+  let scopes: string[] = [];
+  try {
+    const tokenInfoResponse = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${encodeURIComponent(token)}`);
+    const tokenInfo = (await tokenInfoResponse.json()) as { scope?: string; error_description?: string; error?: string };
+    if (tokenInfoResponse.ok) {
+      scopes = tokenInfo.scope?.split(/\s+/).filter(Boolean) ?? [];
+    } else {
+      return {
+        ok: false,
+        config,
+        token: { ok: false, error: tokenInfo.error_description ?? tokenInfo.error ?? 'google_tokeninfo_failed' },
+      };
+    }
+  } catch (error) {
+    return {
+      ok: false,
+      config,
+      token: { ok: false, error: error instanceof Error ? error.message : 'google_tokeninfo_failed' },
+    };
+  }
+
+  const canWriteEvents =
+    scopes.includes('https://www.googleapis.com/auth/calendar') ||
+    scopes.includes('https://www.googleapis.com/auth/calendar.events');
+
+  const params = new URLSearchParams({
+    singleEvents: 'true',
+    maxResults: '1',
+    timeMin: new Date().toISOString(),
+  });
+
+  const response = await fetch(
+    `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?${params.toString()}`,
+    { headers: { authorization: `Bearer ${token}` } },
+  );
+  const data = (await response.json()) as GoogleApiError;
+
+  if (!response.ok) {
+    return {
+      ok: false,
+      config,
+      token: { ok: true, scopes, canWriteEvents },
+      calendar: {
+        ok: false,
+        status: response.status,
+        error: data.error?.message ?? 'google_calendar_access_failed',
+      },
+    };
+  }
+
+  return {
+    ok: canWriteEvents,
+    config,
+    token: { ok: true, scopes, canWriteEvents },
+    calendar: { ok: true },
+    error: canWriteEvents ? undefined : 'missing_calendar_write_scope',
+  };
 }
 
 function nextDateKey(date: string) {
