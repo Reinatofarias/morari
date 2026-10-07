@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAdminAuthenticated } from '@/lib/admin-auth';
+import { getAdminEmail, isAdminAuthenticated } from '@/lib/admin-auth';
 import { redirect } from 'next/navigation';
 import { AdminHeader } from '@/components/admin/AdminHeader';
 import {
@@ -20,6 +20,9 @@ export default async function SettingsAdminPage() {
   if (!authenticated) {
     redirect('/admin/login');
   }
+
+  const adminEmail = getAdminEmail();
+  const hasSessionSecret = !!process.env.ADMIN_SESSION_SECRET?.trim();
 
   const currentGaId = process.env.NEXT_PUBLIC_GA_ID || '';
   const currentPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || '';
@@ -50,7 +53,7 @@ export default async function SettingsAdminPage() {
             <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
               <div>
                 <span className="text-slate-500 block text-[10px] uppercase font-sans">E-mail Cadastrado</span>
-                <span className="text-amber-400 font-bold">admin@matheusmorari.com.br</span>
+                <span className="text-amber-400 font-bold">{adminEmail}</span>
               </div>
               <CheckCircle className="w-4 h-4 text-emerald-400" />
             </div>
@@ -58,7 +61,10 @@ export default async function SettingsAdminPage() {
             <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
               <div>
                 <span className="text-slate-500 block text-[10px] uppercase font-sans">Senha de Acesso</span>
-                <span className="text-amber-400 font-bold">matheus@2026</span>
+                <span className="text-amber-400 font-bold font-sans">Definida em ADMIN_PASSWORD (Vercel)</span>
+                {!hasSessionSecret && (
+                  <span className="block text-[10px] text-slate-500 font-sans mt-1">Recomendado: definir também ADMIN_SESSION_SECRET.</span>
+                )}
               </div>
               <CheckCircle className="w-4 h-4 text-emerald-400" />
             </div>

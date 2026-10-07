@@ -1,19 +1,35 @@
 import { NextResponse } from 'next/server';
-import { ADMIN_CREDENTIALS, SESSION_COOKIE_NAME, createSessionToken } from '@/lib/admin-auth';
+import {
+  SESSION_COOKIE_NAME,
+  SESSION_MAX_AGE_SECONDS,
+  checkAdminCredentials,
+  createSessionToken,
+  getAdminEmail,
+  isAdminLoginConfigured,
+} from '@/lib/admin-auth';
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { email, password } = body;
+    if (!isAdminLoginConfigured()) {
+      return NextResponse.json(
+        { success: false, error: 'Login não configurado. Defina ADMIN_PASSWORD nas variáveis de ambiente da Vercel.' },
+        { status: 503 }
+      );
+    }
 
-    if (email !== ADMIN_CREDENTIALS.email || password !== ADMIN_CREDENTIALS.password) {
+    const body = await request.json().catch(() => ({}));
+    const { email, password } = body as { email?: unknown; password?: unknown };
+
+    if (!checkAdminCredentials(email, password)) {
+      // Pequeno atraso para dificultar tentativas em massa.
+      await new Promise((resolve) => setTimeout(resolve, 600));
       return NextResponse.json(
         { success: false, error: 'E-mail ou senha incorretos' },
         { status: 401 }
       );
     }
 
-    const token = await createSessionToken(email);
+    const token = createSessionToken(getAdminEmail());
 
     const response = NextResponse.json({ success: true, message: 'Autenticado com sucesso' });
 
@@ -23,7 +39,7 @@ export async function POST(request: Request) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60, // 7 dias
+      maxAge: SESSION_MAX_AGE_SECONDS,
       path: '/',
     });
 
