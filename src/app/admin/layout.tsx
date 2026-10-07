@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAdminAuthenticated } from '@/lib/admin-auth';
+import { getAdminEmail, isAdminAuthenticated } from '@/lib/admin-auth';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
@@ -28,7 +28,7 @@ export default async function AdminLayout({
     <div className="min-h-screen bg-slate-950 text-slate-100 flex font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
       {authenticated ? (
         <>
-          <AdminSidebar />
+          <AdminSidebar adminEmail={getAdminEmail()} />
           <main className="flex-1 min-w-0 bg-slate-950 flex flex-col min-h-screen">
             {children}
           </main>

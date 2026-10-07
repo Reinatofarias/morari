@@ -13,6 +13,10 @@ import {
   LogOut,
   ShieldCheck,
   ChevronRight,
+  KanbanSquare,
+  Crosshair,
+  Users,
+  FileSpreadsheet,
 } from 'lucide-react';
 
 type AdminMenuItem = {
@@ -22,6 +26,13 @@ type AdminMenuItem = {
   badge?: string;
   prefetch?: boolean;
 };
+
+const crmItems: AdminMenuItem[] = [
+  { name: 'Funil de Vendas', href: '/admin/crm', icon: KanbanSquare, badge: 'CRM' },
+  { name: 'Prospecção', href: '/admin/crm/prospeccao', icon: Crosshair },
+  { name: 'Leads', href: '/admin/crm/leads', icon: Users },
+  { name: 'Importar Lista', href: '/admin/crm/importar', icon: FileSpreadsheet },
+];
 
 const menuItems: AdminMenuItem[] = [
   {
@@ -59,7 +70,7 @@ const menuItems: AdminMenuItem[] = [
   },
 ];
 
-export function AdminSidebar() {
+export function AdminSidebar({ adminEmail }: { adminEmail: string }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = React.useState(false);
@@ -99,42 +110,18 @@ export function AdminSidebar() {
           Relatórios & Métricas
         </div>
 
-        {menuItems.map((item) => {
-          const isActive = pathname === item.href;
-          const Icon = item.icon;
+        {menuItems.map((item) => renderItem(item, pathname === item.href))}
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              prefetch={item.prefetch}
-              className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${
-                isActive
-                  ? 'bg-amber-500 text-slate-950 font-semibold shadow-md shadow-amber-500/20'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <Icon className={`w-4 h-4 ${isActive ? 'text-slate-950' : 'text-slate-400'}`} />
-                <span>{item.name}</span>
-              </div>
+        <div className="px-3 pt-6 pb-2 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+          CRM & Gestão de Leads
+        </div>
 
-              {item.badge ? (
-                <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
-                    isActive
-                      ? 'bg-slate-950/20 text-slate-950'
-                      : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                  }`}
-                >
-                  {item.badge}
-                </span>
-              ) : (
-                isActive && <ChevronRight className="w-4 h-4 text-slate-950" />
-              )}
-            </Link>
-          );
-        })}
+        {crmItems.map((item) =>
+          renderItem(
+            item,
+            item.href === '/admin/crm' ? pathname === item.href : pathname.startsWith(item.href)
+          )
+        )}
       </nav>
 
       {/* User Footer / Logout */}
@@ -142,7 +129,7 @@ export function AdminSidebar() {
         <div className="flex items-center justify-between mb-3 px-2">
           <div className="text-xs">
             <p className="text-slate-200 font-medium truncate max-w-[140px]">
-              admin@matheusmorari.com.br
+              {adminEmail}
             </p>
             <p className="text-slate-500 text-[10px]">Sessão Ativa</p>
           </div>
@@ -158,5 +145,41 @@ export function AdminSidebar() {
         </button>
       </div>
     </aside>
+  );
+}
+
+function renderItem(item: AdminMenuItem, isActive: boolean) {
+  const Icon = item.icon;
+
+  return (
+    <Link
+      key={item.href}
+      href={item.href}
+      prefetch={item.prefetch}
+      className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${
+        isActive
+          ? 'bg-amber-500 text-slate-950 font-semibold shadow-md shadow-amber-500/20'
+          : 'text-slate-400 hover:text-white hover:bg-slate-900'
+      }`}
+    >
+      <div className="flex items-center gap-3">
+        <Icon className={`w-4 h-4 ${isActive ? 'text-slate-950' : 'text-slate-400'}`} />
+        <span>{item.name}</span>
+      </div>
+
+      {item.badge ? (
+        <span
+          className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
+            isActive
+              ? 'bg-slate-950/20 text-slate-950'
+              : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+          }`}
+        >
+          {item.badge}
+        </span>
+      ) : (
+        isActive && <ChevronRight className="w-4 h-4 text-slate-950" />
+      )}
+    </Link>
   );
 }
