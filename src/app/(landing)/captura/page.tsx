@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ShieldCheck, Lock, ArrowRight, Loader2, Sparkles, CheckCircle2 } from 'lucide-react';
 import { YouTubeEmbed } from '@/components/ui/YouTubeEmbed';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function CapturaPage() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [nome, setNome] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [perfil, setPerfil] = useState('');
@@ -17,8 +18,18 @@ export default function CapturaPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [redirectWaUrl, setRedirectWaUrl] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const getWhatsappUrl = () => {
+    const rawMsg = `Olá Dr. Matheus, acabei de preencher o diagnóstico no site e quero garantir minha sessão de triagem. Meu nome é ${nome.trim()}, atuo como ${perfil} e meu maior desafio hoje é: ${desafio.trim() || 'Melhorar governo interno'}.`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
+  };
+
+  const isReadyForWhatsappLink = !!nome.trim() && !!whatsapp.trim() && !!perfil;
+  const whatsappUrl = getWhatsappUrl();
+  const submitLinkHref = isReadyForWhatsappLink ? whatsappUrl : '#captura-form';
+
+  const handleSubmit = async (e: React.FormEvent | React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    if (formRef.current && !formRef.current.reportValidity()) return;
     if (!nome.trim() || !whatsapp.trim() || !perfil) return;
 
     setStatus('loading');
@@ -35,50 +46,22 @@ export default function CapturaPage() {
       "Maior dor": desafio.trim() || 'Não especificado',
     };
 
-    // Pre-filled WhatsApp message redirect URL with wa.me
-    const rawMsg = `Olá Dr. Matheus, acabei de preencher o diagnóstico no site e quero garantir minha sessão de triagem. Meu nome é ${nome.trim()}, atuo como ${perfil} e meu maior desafio hoje é: ${desafio.trim() || 'Melhorar governo interno'}.`;
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
+    const waUrl = getWhatsappUrl();
     setRedirectWaUrl(waUrl);
 
-    // Push GTM event with gtm.elementUrl set to wa.me for GTM Click URL triggers
-    if (typeof window !== 'undefined') {
+    const pushLeadSubmitEvent = (url: string) => {
+      if (typeof window === 'undefined') return;
       (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
-        event: 'gtm.linkClick',
-        'gtm.elementUrl': waUrl,
-        click_url: waUrl,
-        target_url: waUrl,
-        link_url: waUrl,
-      });
       (window as any).dataLayer.push({
         event: 'whatsapp_lead_submit',
-        click_url: waUrl,
-      });
-    }
-
-    // Programmatically trigger a real anchor link click so GTM's "Clique - Apenas links" trigger fires
-    const triggerWaLinkClick = (url: string) => {
-      if (typeof window === 'undefined') return;
-
-      // Push to dataLayer
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
-        event: 'gtm.linkClick',
-        'gtm.elementUrl': url,
-        'gtm.element': { href: url },
         click_url: url,
         target_url: url,
+        link_url: url,
       });
+    };
 
-      // Create physical anchor element to satisfy GTM Link Click listener
-      const a = document.createElement('a');
-      a.href = url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+    const redirectToWhatsapp = (url: string) => {
+      if (typeof window !== 'undefined') window.location.href = url;
     };
 
     try {
@@ -93,17 +76,18 @@ export default function CapturaPage() {
       });
 
       setStatus('success');
+      pushLeadSubmitEvent(waUrl);
       
-      // Fire GTM link click listener & redirect
       setTimeout(() => {
-        triggerWaLinkClick(waUrl);
+        redirectToWhatsapp(waUrl);
       }, 500);
 
     } catch (err) {
       console.error('Error submitting lead:', err);
       setStatus('success');
+      pushLeadSubmitEvent(waUrl);
       setTimeout(() => {
-        triggerWaLinkClick(waUrl);
+        redirectToWhatsapp(waUrl);
       }, 500);
     }
   };
@@ -235,7 +219,7 @@ export default function CapturaPage() {
                   </a>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form ref={formRef} id="captura-form" onSubmit={handleSubmit} className="space-y-5">
                   {/* Input: Nome */}
                   <div className="space-y-1.5">
                     <label htmlFor="nome" className="text-xs font-semibold uppercase tracking-wider text-muted-light">
@@ -324,11 +308,17 @@ export default function CapturaPage() {
                     </p>
                   )}
 
-                  {/* Button */}
-                  <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="w-full flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-background font-semibold text-sm px-6 py-4 rounded-lg shadow-lg hover:shadow-gold/10 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer disabled:opacity-50"
+                  {/* Link CTA intentionally matches GTM's "Clique - Apenas links" trigger. */}
+                  <a
+                    id="captura-whatsapp-submit"
+                    href={submitLinkHref}
+                    data-gtm="captura-whatsapp-submit"
+                    data-gtm-target="whatsapp"
+                    aria-disabled={status === 'loading'}
+                    onClick={status === 'loading' ? (event) => event.preventDefault() : handleSubmit}
+                    className={`w-full flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-background font-semibold text-sm px-6 py-4 rounded-lg shadow-lg hover:shadow-gold/10 hover:scale-[1.01] active:scale-[0.99] transition-all ${
+                      status === 'loading' ? 'pointer-events-none opacity-50' : 'cursor-pointer'
+                    }`}
                   >
                     {status === 'loading' ? (
                       <>
@@ -341,7 +331,7 @@ export default function CapturaPage() {
                         <ArrowRight size={16} />
                       </>
                     )}
-                  </button>
+                  </a>
 
                   <div className="flex items-center justify-center gap-2 text-muted text-[10px] sm:text-xs pt-2">
                     <ShieldCheck size={14} className="text-gold" />
