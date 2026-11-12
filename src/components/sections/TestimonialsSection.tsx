@@ -195,7 +195,8 @@ function TestimonialCard({ testimonial, onClick }: TestimonialCardProps) {
         <video
           ref={videoRef}
           src={testimonial.src}
-          preload="metadata"
+          poster={testimonial.src.replace(/\.mp4$/, '.jpg')}
+          preload="none"
           loop
           muted
           playsInline

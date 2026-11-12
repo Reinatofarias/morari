@@ -64,6 +64,16 @@ export default function CapturaPage() {
       if (typeof window !== 'undefined') window.location.href = url;
     };
 
+    // Cópia para o CRM do /admin. Não espera resposta e não interfere no envio ao Make.
+    try {
+      fetch('/api/leads/captura', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome: nome.trim(), whatsapp: whatsapp.trim(), perfil, desafio: desafio.trim() }),
+        keepalive: true,
+      }).catch(() => {});
+    } catch {}
+
     try {
       const webhookUrl = process.env.NEXT_PUBLIC_LEAD_WEBHOOK_URL || 'https://hook.us2.make.com/v5sidsdvt1ccp5nd9w6mdi284ydxr416';
       
