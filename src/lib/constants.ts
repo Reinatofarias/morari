@@ -8,7 +8,7 @@ export const WHATSAPP_MESSAGE = 'Olá, vim pelo site e gostaria de saber mais so
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export const INSTAGRAM_URL = 'https://instagram.com/dr.matheusmorari';
-export const CRP = 'CRP XX/XXXXX';
+export const CRP = 'CRP 24/03569';
 
 // Navigation sublinks for dropdowns
 export const ATENDIMENTOS_SUB_LINKS = [
