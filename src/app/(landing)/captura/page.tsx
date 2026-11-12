@@ -51,8 +51,9 @@ export default function CapturaPage() {
 
     const pushLeadSubmitEvent = (url: string) => {
       if (typeof window === 'undefined') return;
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
+      const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
         event: 'whatsapp_lead_submit',
         click_url: url,
         target_url: url,
@@ -147,7 +148,7 @@ export default function CapturaPage() {
             Você está vencendo fora, mas <span className="text-gold">perdendo o governo</span> de si mesmo?
           </h1>
           <p className="text-muted-light text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-            Sem receitas mágicas. Sem autoajuda. Assista ao vídeo de 5 minutos abaixo para entender exatamente como eu atendo, o que eu entrego e o que eu espero de você.
+            Neste vídeo de 5 minutos eu explico como atendo, para quem é e o que espero de você. Se fizer sentido, a gente conversa.
           </p>
         </div>
 
@@ -165,18 +166,18 @@ export default function CapturaPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               {[
                 {
-                  title: '100% Confidencial',
-                  desc: 'Sigilo ético e profissional absoluto garantido em todas as etapas da triagem.',
+                  title: 'Sigilo total',
+                  desc: 'Tudo o que você contar fica entre nós, desde a primeira conversa.',
                   icon: <ShieldCheck className="text-gold flex-shrink-0" size={16} />,
                 },
                 {
-                  title: 'Foco em Solução',
-                  desc: 'Abordagem direta e técnica, sem teorias vazias ou fórmulas mágicas de autoajuda.',
+                  title: 'Direto ao ponto',
+                  desc: 'Trabalho técnico e objetivo, sem fórmula pronta e sem autoajuda.',
                   icon: <Sparkles className="text-gold flex-shrink-0" size={16} />,
                 },
                 {
-                  title: 'Presença e Governo',
-                  desc: 'Construa autodomínio para liderar seus negócios e resgatar a presença na família.',
+                  title: 'Empresa, família e você',
+                  desc: 'Para quem dá conta de tudo lá fora e quer voltar a estar inteiro em casa.',
                   icon: <CheckCircle2 className="text-gold flex-shrink-0" size={16} />,
                 },
               ].map((item) => (
@@ -199,10 +200,10 @@ export default function CapturaPage() {
             <div className="bg-surface border border-surface-soft/60 rounded-2xl p-6 sm:p-8 shadow-2xl relative w-full">
               <div className="text-center space-y-2 mb-6">
                 <h3 className="font-display font-bold text-ice text-xl">
-                  Garanta sua Sessão de Triagem
+                  Agende sua sessão de triagem
                 </h3>
                 <p className="text-muted text-xs sm:text-sm">
-                  Preencha seus dados abaixo para validar o diagnóstico e ser redirecionado para o WhatsApp.
+                  Uma conversa online comigo para entender o seu momento e ver se eu sou a pessoa certa para te ajudar.
                 </p>
               </div>
 
@@ -212,10 +213,10 @@ export default function CapturaPage() {
                     <CheckCircle2 size={24} />
                   </div>
                   <h4 className="font-display font-bold text-ice text-lg">
-                    Diagnóstico Concluído!
+                    Recebi seus dados
                   </h4>
                   <p className="text-muted-light text-sm max-w-xs mx-auto mb-4">
-                    Redirecionando você para o WhatsApp oficial em alguns instantes para iniciar sua triagem...
+                    Estou te levando para o WhatsApp para a gente marcar o horário da triagem.
                   </p>
 
                   <a
@@ -338,7 +339,7 @@ export default function CapturaPage() {
                     {status === 'loading' ? (
                       <>
                         <Loader2 className="animate-spin" size={16} />
-                        <span>Enviando Diagnóstico...</span>
+                        <span>Enviando...</span>
                       </>
                     ) : (
                       <>
@@ -366,11 +367,11 @@ export default function CapturaPage() {
         {/* Objection Handling / Why trust Section */}
         <div className="max-w-2xl mx-auto space-y-6 pt-6">
           <h4 className="font-display font-bold text-ice text-lg text-center">
-            Perguntas Frequentes & Objeções
+            Antes de você preencher
           </h4>
           <div className="grid grid-cols-1 gap-4">
             <div className="p-4 rounded-xl bg-surface/50 border border-surface-soft/60">
-              <h5 className="font-semibold text-gold text-sm mb-1">Vocês vão tentar me vender algo na triagem?</h5>
+              <h5 className="font-semibold text-gold text-sm mb-1">Você vai tentar me vender algo na triagem?</h5>
               <p className="text-muted-light text-xs sm:text-sm leading-relaxed">
                 Sim, mas apenas se ficar claro que o meu método faz sentido para o seu momento e que eu realmente posso te ajudar. Se eu perceber que não posso ajudar, serei o primeiro a te dizer isso de forma ética e profissional.
               </p>
@@ -378,7 +379,7 @@ export default function CapturaPage() {
             <div className="p-4 rounded-xl bg-surface/50 border border-surface-soft/60">
               <h5 className="font-semibold text-gold text-sm mb-1">Como funciona a triagem?</h5>
               <p className="text-muted-light text-xs sm:text-sm leading-relaxed">
-                Ao clicar no botão e enviar o formulário, seus dados de contato chegam ao meu painel e você é direcionado ao WhatsApp. Nossa equipe validará o seu perfil e agendará sua conversa inicial rápida de avaliação de forma 100% online.
+                Você preenche o formulário e cai direto no meu WhatsApp. Por lá a gente combina o melhor horário para uma conversa inicial, 100% online.
               </p>
             </div>
           </div>
