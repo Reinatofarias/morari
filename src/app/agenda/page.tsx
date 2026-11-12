@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { CRP } from '@/lib/constants';
 
 import { AgendaLinkButton } from '@/components/agenda/ui';
 
@@ -55,6 +56,9 @@ export default function AgendaHomePage() {
             >
               Acesso interno - ver clientes agendados
             </Link>
+            <p className="mt-4 text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+              Dr. Matheus Morari · Psicólogo · {CRP}
+            </p>
           </div>
         </div>
       </main>

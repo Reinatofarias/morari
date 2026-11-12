@@ -1,5 +1,6 @@
 import { ConversionButton } from '@/components/ui/ConversionButton';
 import { Play } from 'lucide-react';
+import { CRP } from '@/lib/constants';
 
 export default function VSLPage() {
   return (
@@ -31,6 +32,9 @@ export default function VSLPage() {
           />
         </div>
       </section>
+      <footer className="py-6 text-center text-xs text-muted">
+        Dr. Matheus Morari · Psicólogo · {CRP}
+      </footer>
     </main>
   );
 }
