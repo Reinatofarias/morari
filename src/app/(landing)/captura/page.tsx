@@ -239,6 +239,7 @@ export default function CapturaPage() {
                       type="text"
                       id="nome"
                       required
+                      autoComplete="name"
                       placeholder="Ex: Matheus Morari"
                       value={nome}
                       onChange={(e) => setNome(e.target.value)}
@@ -256,6 +257,10 @@ export default function CapturaPage() {
                       type="tel"
                       id="whatsapp"
                       required
+                      inputMode="tel"
+                      autoComplete="tel-national"
+                      pattern="^\D*(\d\D*){10,13}$"
+                      title="Informe o WhatsApp com DDD, por exemplo (69) 99840-2480"
                       placeholder="Ex: (69) 99840-2480"
                       value={whatsapp}
                       onChange={(e) => setWhatsapp(e.target.value)}
@@ -263,7 +268,7 @@ export default function CapturaPage() {
                       disabled={status === 'loading'}
                     />
                     <span className="text-[10px] text-muted block">
-                      Utilize o formato com DDD. Ex: (69) 998402480
+                      Com DDD. Ex: (69) 99840-2480
                     </span>
                   </div>
 
