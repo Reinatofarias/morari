@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/constants';
 import { PRODUCTS } from '@/lib/products';
+import { ARTICLE_SLUGS, articles } from '@/lib/articles';
 import { portraitAssets } from '@/lib/visual-assets';
 
 const staticRoutes = [
@@ -32,14 +33,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     image: product.coverImage,
   }));
 
-  const productLandingRoutes = PRODUCTS.map((product) => ({
-    path: `/lp/${product.slug}`,
-    priority: 0.9,
+  // As /lp/* são páginas de anúncio com noindex, por isso ficam fora do sitemap.
+  const articleRoutes = ARTICLE_SLUGS.map((slug) => ({
+    path: `/conteudos/${slug}`,
+    priority: 0.7,
     changeFrequency: 'monthly' as const,
-    image: product.coverImage,
+    image: articles[slug].cover?.src,
   }));
 
-  return [...staticRoutes, ...productRoutes, ...productLandingRoutes].map((route) => ({
+  return [...staticRoutes, ...productRoutes, ...articleRoutes].map((route) => ({
     url: `${SITE_URL}${route.path}`,
     lastModified,
     changeFrequency: route.changeFrequency,
