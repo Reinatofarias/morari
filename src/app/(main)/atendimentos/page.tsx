@@ -45,31 +45,23 @@ export default function AtendimentosPage() {
 
       {/* Formato */}
       <section className="py-20 bg-surface/50">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-display font-bold text-ice text-2xl sm:text-3xl mb-6">Como funciona</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10">
-            <div className="text-center">
-              <div className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-gold font-display font-bold text-xl">1</span>
-              </div>
-              <h3 className="font-display font-semibold text-ice mb-2">Primeiro contato</h3>
-              <p className="text-muted text-sm">Você preenche o formulário ou entra em contato pelo WhatsApp.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-gold font-display font-bold text-xl">2</span>
-              </div>
-              <h3 className="font-display font-semibold text-ice mb-2">Conversa inicial</h3>
-              <p className="text-muted text-sm">Uma conversa para entender sua situação e definir se faz sentido para ambos.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-gold font-display font-bold text-xl">3</span>
-              </div>
-              <h3 className="font-display font-semibold text-ice mb-2">Acompanhamento</h3>
-              <p className="text-muted text-sm">Sessões online, com profundidade, técnica e direção. No seu ritmo.</p>
-            </div>
-          </div>
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="font-display font-bold text-ice text-2xl sm:text-3xl">Como funciona</h2>
+          <ol className="grid grid-cols-1 sm:grid-cols-3 gap-x-10 mt-8">
+            {[
+              { title: 'Primeiro contato', desc: 'Você preenche o formulário ou chama no WhatsApp.' },
+              { title: 'Sessão de diagnóstico', desc: 'Uma conversa para entender a sua situação e definir o acompanhamento indicado para você.' },
+              { title: 'Acompanhamento', desc: 'Sessões online, com profundidade, técnica e direção.' },
+            ].map((item, i) => (
+              <li key={item.title} className="flex gap-4 py-5 border-t border-surface-soft/70">
+                <span className="font-display text-gold text-2xl leading-none w-8 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 className="font-display font-semibold text-ice">{item.title}</h3>
+                  <p className="text-muted-light text-sm leading-relaxed mt-1">{item.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 

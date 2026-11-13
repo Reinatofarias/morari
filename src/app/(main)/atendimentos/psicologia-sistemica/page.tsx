@@ -50,7 +50,7 @@ export default function PsicologiaSistemicaPage() {
               Fundamentos Teóricos e Autores Principais
             </h3>
             <p className="text-muted-light text-sm leading-relaxed">
-              A abordagem sistêmica integra contribuições de pesquisadores como **Gregory Bateson** (cibernética e comunicação), **Don Jackson e Jay Haley** (dinâmicas familiares), **Paul Watzlawick** (pragmática da comunicação), **Virginia Satir** (comunicação congruente), **Mara Selvini Palazzoli** (paradoxo e prescrição), **Murray Bowen** (diferenciação do self e transgeracionalidade), **Monica McGoldrick** (ciclo de vida familiar), e seus sucessores — **Michael Kerr, Philip Guerin, Stefano Cirillo** e outros — que expandiram e refinaram esses conceitos de forma clínica e ética.
+              A abordagem sistêmica integra contribuições de pesquisadores como <strong className="text-ice">Gregory Bateson</strong> (cibernética e comunicação), <strong className="text-ice">Don Jackson e Jay Haley</strong> (dinâmicas familiares), <strong className="text-ice">Paul Watzlawick</strong> (pragmática da comunicação), <strong className="text-ice">Virginia Satir</strong> (comunicação congruente), <strong className="text-ice">Mara Selvini Palazzoli</strong> (paradoxo e prescrição), <strong className="text-ice">Murray Bowen</strong> (diferenciação do self e transgeracionalidade), <strong className="text-ice">Monica McGoldrick</strong> (ciclo de vida familiar), e seus sucessores — <strong className="text-ice">Michael Kerr, Philip Guerin, Stefano Cirillo</strong> e outros — que expandiram e refinaram esses conceitos de forma clínica e ética.
             </p>
           </div>
         </div>
