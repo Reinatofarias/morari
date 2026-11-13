@@ -1,11 +1,8 @@
 import { Metadata } from 'next';
 import { HeroSection } from '@/components/sections/HeroSection';
-import { SectionHeader } from '@/components/sections/SectionHeader';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { CTASection } from '@/components/sections/CTASection';
-import { HouseNavigation } from '@/components/sections/HouseNavigation';
-import { EditorialQuote } from '@/components/ui/EditorialQuote';
-import { PainCard } from '@/components/cards/PainCard';
-import { PathCard } from '@/components/cards/PathCard';
 import { GoldenDivider } from '@/components/ui/GoldenDivider';
 import { PAIN_POINTS, METHOD_STEPS, HOUSE_ROOMS } from '@/lib/constants';
 import { portraitAssets } from '@/lib/visual-assets';
@@ -35,86 +32,53 @@ export default function HomePage() {
         imagePresentation="cutout"
       />
 
-      {/* 2. Diagnóstico da dor */}
+      {/* 2. Diagnóstico da dor + sinais */}
       <section className="py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-6">
-          <SectionHeader
-            label="Diagnóstico"
-            title="Você está vencendo fora, mas perdendo algo dentro?"
-            highlightWord="perdendo algo dentro"
-            description="Você responde por pessoas, decisões, dinheiro, família e futuro. Mas ninguém vê o peso que você carrega quando a porta fecha."
-            alignment="center"
-          />
-        </div>
-      </section>
-
-      {/* 3. Sinais de alerta */}
-      <section className="py-16 bg-surface/50">
-        <div className="max-w-6xl mx-auto px-6">
-          <SectionHeader
-            label="Sinais de alerta"
-            title="Reconheça os sinais antes que eles virem sintomas."
-            alignment="center"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-5">
+            <h2 className="font-display font-bold text-ice text-2xl sm:text-3xl leading-tight">
+              Você está vencendo fora, mas <span className="text-gold">perdendo algo dentro</span>?
+            </h2>
+            <p className="text-muted-light leading-relaxed mt-5">
+              Você responde por pessoas, decisões, dinheiro, família e futuro. Mas ninguém vê o peso que você carrega quando a porta fecha.
+            </p>
+            <p className="font-display text-ice text-lg mt-8 border-l-2 border-gold/60 pl-4">
+              Não é vitória se o preço for sua sanidade.
+            </p>
+          </div>
+          <ul className="lg:col-span-7 divide-y divide-surface-soft/70 border-y border-surface-soft/70">
             {PAIN_POINTS.map((pain) => (
-              <PainCard
-                key={pain.title}
-                icon={pain.icon}
-                title={pain.title}
-                description={pain.description}
-              />
+              <li key={pain.title} className="py-4">
+                <h3 className="font-display font-semibold text-ice text-base">{pain.title}</h3>
+                <p className="text-muted text-sm mt-1 leading-relaxed">{pain.description}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* 4. A falsa vitória */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6">
-          <EditorialQuote
-            quote="Não é vitória se o preço for sua sanidade."
-          />
-        </div>
-      </section>
-
-      {/* 5. O método / caminho */}
+      {/* 3. O método / caminho */}
       <section className="py-20 md:py-28 bg-surface/30">
-        <div className="max-w-6xl mx-auto px-6">
-          <SectionHeader
-            label="O Caminho"
-            title="O caminho não é aguentar mais. É governar melhor."
-            highlightWord="governar melhor"
-            description="Quatro pilares para sair do automático e reconstruir presença, sanidade e liderança integral."
-            alignment="center"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="font-display font-bold text-ice text-2xl sm:text-3xl leading-tight max-w-2xl">
+            O caminho não é aguentar mais. É <span className="text-gold">governar melhor</span>.
+          </h2>
+          <p className="text-muted-light leading-relaxed mt-4 max-w-2xl">
+            Quatro etapas para sair do automático e reconstruir presença, sanidade e liderança.
+          </p>
+          <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 mt-10">
             {METHOD_STEPS.map((step) => (
-              <PathCard
-                key={step.step}
-                step={step.step}
-                title={step.title}
-                description={step.description}
-                icon={step.icon}
-              />
+              <li key={step.step} className="flex gap-5 py-5 border-t border-surface-soft/70">
+                <span className="font-display text-gold text-2xl leading-none w-8 shrink-0">
+                  {String(step.step).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 className="font-display font-bold text-ice text-lg">{step.title}</h3>
+                  <p className="text-muted-light text-sm leading-relaxed mt-1">{step.description}</p>
+                </div>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. A casa digital */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-6">
-          <SectionHeader
-            label="Ecossistema"
-            title="Cada cômodo desta casa foi pensado para você."
-            highlightWord="para você"
-            description="Explore os ambientes e encontre o caminho que faz sentido para o momento que você está vivendo."
-            alignment="center"
-          />
-          <div className="mt-12">
-            <HouseNavigation rooms={HOUSE_ROOMS} />
-          </div>
+          </ol>
         </div>
       </section>
 
@@ -172,6 +136,26 @@ export default function HomePage() {
 
       {/* 7.5. Depoimentos / Histórias de Transformação */}
       <TestimonialsSection limit={3} />
+
+      {/* 7.6. Por onde seguir */}
+      <section className="py-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="font-display font-bold text-ice text-xl sm:text-2xl">Por onde seguir</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 mt-6">
+            {HOUSE_ROOMS.map((room) => (
+              <li key={room.href} className="border-t border-surface-soft/70">
+                <Link href={room.href} className="group flex items-baseline justify-between gap-4 py-4">
+                  <span>
+                    <span className="block font-display text-ice group-hover:text-gold transition-colors">{room.title}</span>
+                    <span className="block text-muted text-sm mt-0.5">{room.description}</span>
+                  </span>
+                  <ArrowRight size={16} className="text-gold/60 group-hover:text-gold shrink-0 transition-colors" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* 8. CTA final */}
       <CTASection

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { CheckCircle2 } from 'lucide-react';
+import { CRP } from '@/lib/constants';
 import { ConversionButton } from '@/components/ui/ConversionButton';
 import { EditorialImage } from '@/components/ui/EditorialImage';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
@@ -281,6 +282,9 @@ export default async function ProductLandingPage({ params }: Props) {
           </div>
         </div>
       </section>
+      <footer className="py-6 text-center text-xs text-muted">
+        Dr. Matheus Morari · Psicólogo · {CRP}
+      </footer>
     </main>
   );
 }
