@@ -136,7 +136,7 @@ export function Footer() {
 
       {/* Emergency Notice */}
       <div className="bg-surface-soft/50 border-t border-surface-soft">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-6 pt-4 pb-24 sm:pb-4">
           <p className="text-muted text-[11px] text-center leading-relaxed">
             Se você está em situação de crise ou risco imediato: CVV — Ligue 188 (24h) | SAMU — Ligue 192 | Busque o pronto-socorro mais próximo.
           </p>

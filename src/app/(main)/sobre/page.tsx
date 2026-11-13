@@ -40,7 +40,7 @@ export default function SobrePage() {
                 Levo meus papéis com máxima seriedade: como filho, honro minhas origens; como marido, zelo pelo meu casamento; como pai, educo pelo exemplo diário. Minha fé católica e consagração a Nossa Senhora são a base da minha missão de vida, assim como a disciplina do jiu-jitsu, esporte no qual sou faixa preta.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                No aspecto prático, sou um homem de 1,90m e mais de 100kg, com barba, cabelos pretos e óculos. O fato de ser neurodivergente (diagnósticos de autismo, TDAH e AH/SD — Altas Habilidades / Superdotação) molda a minha forma de pensar: confere-me a capacidade de gerenciar crises, resolver problemas complexos com assertividade e pensar fora da caixa. Reúno dons práticos que vão da comunicação estratégica e da música (saxofone) à habilidade de lidar com momentos de forte pressão emocional, mantendo o autodomínio para apaziguar corações em conflito e promover a cura.
+                O fato de ser neurodivergente (diagnósticos de autismo, TDAH e AH/SD — Altas Habilidades / Superdotação) molda a minha forma de pensar: confere-me a capacidade de gerenciar crises, resolver problemas complexos com assertividade e pensar fora da caixa. Reúno dons práticos que vão da comunicação estratégica e da música (saxofone) à habilidade de lidar com momentos de forte pressão emocional, mantendo o autodomínio para apaziguar corações em conflito e promover a cura.
               </p>
             </div>
             <div className="md:col-span-5 relative flex justify-center mt-6 md:mt-0">
@@ -98,7 +98,7 @@ export default function SobrePage() {
                 Não há como compreender meu trabalho sem conhecer a história da minha escolha profissional. No terceiro ano do ensino médio, eu já me preparava para cursar Medicina Veterinária na UNIR em Rolim de Moura, seguindo um sonho de infância que contava com o apoio de toda a família.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
-                A reviravolta aconteceu nas férias do meio do ano. Em uma tarde, enquanto confeccionava terços e rezava em meu quarto, veio um clarão em minha mente com a palavra **Psicologia**. Sendo alguém com forte perfil de antecipação e de opiniões firmes, questionei aquela mudança súbita. A resposta que se fez presente em meu íntimo foi clara: o chamado divino era para cuidar de pessoas, *&ldquo;cuidar de gente e dos filhos de Deus&rdquo;*, e não de animais.
+                A reviravolta aconteceu nas férias do meio do ano. Em uma tarde, enquanto confeccionava terços e rezava em meu quarto, veio um clarão em minha mente com a palavra <strong className="text-ice">Psicologia</strong>. Sendo alguém com forte perfil de antecipação e de opiniões firmes, questionei aquela mudança súbita. A resposta que se fez presente em meu íntimo foi clara: o chamado divino era para cuidar de pessoas, <em>&ldquo;cuidar de gente e dos filhos de Deus&rdquo;</em>, e não de animais.
               </p>
               <p className="text-muted-light leading-relaxed text-sm sm:text-base">
                 Aquilo ressoou imediatamente como uma missão de vida. O significado da psicologia (&ldquo;o estudo da alma&rdquo;) traduzia a inclinação que eu já tinha de orientar, ouvir e acolher os jovens da igreja e meus colegas de escola. Desde então, tomei posse dessa vocação. Busquei a melhor técnica, me responsabilizei e corro atrás do aperfeiçoamento contínuo para unir dons pessoais, rigor científico e ética clínica, ajudando pessoas a se reconstruírem de dentro para fora.
@@ -129,19 +129,19 @@ export default function SobrePage() {
           {/* 4. Princípios */}
           <div>
             <SectionHeader label="Princípios" title="O que eu acredito" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-12">
               {[
                 { title: 'Verdade', desc: 'O trabalho começa quando o homem para de mentir para si mesmo e assume a realidade.' },
                 { title: 'Responsabilidade', desc: 'Você não é vítima das circunstâncias. Você é o agente de mudança de sua própria história.' },
                 { title: 'Profundidade', desc: 'Não existem atalhos ou fórmulas mágicas para a saúde emocional. Existe processo e técnica.' },
                 { title: 'Governo', desc: 'Liderar equipes, empresas e famílias começa obrigatoriamente por governar a si mesmo.' },
               ].map((item) => (
-                <div key={item.title} className="p-5 rounded-xl bg-surface border border-surface-soft">
-                  <h3 className="font-display font-semibold text-gold text-lg mb-2">{item.title}</h3>
-                  <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
+                <div key={item.title} className="py-5 border-t border-surface-soft/70">
+                  <dt className="font-display font-semibold text-gold text-lg">{item.title}</dt>
+                  <dd className="text-muted-light text-sm leading-relaxed mt-1">{item.desc}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
 
         </div>
